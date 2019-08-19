@@ -13,14 +13,13 @@ namespace UTW_Project.Controllers
         private DBManager db = new DBManager();
         public ActionResult Login()
         {
-
             return View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Login(string username, string password)
-        {            
+        {
 
             if (username!="" && password!="")
             {
@@ -29,18 +28,17 @@ namespace UTW_Project.Controllers
                 if (user==null)
                 {
                     ViewBag.error = "Wrong username or password";
-                   
                 }
                 else
                 {
 
                     if (user.EmailConfirmed == false)
                     {
-                        ViewBag.error = "Wrong username or password";
+                        ViewBag.error = "You didn't confirm your Email yet.";
                         return View();
                     }
 
-                    if (user.LoginTrials > 3)
+                    if (user.Blocked)
                     {
                         ViewBag.error = "You are blocked";
                         return View();
@@ -69,7 +67,6 @@ namespace UTW_Project.Controllers
 
                 }
 
-
             }
             else
             {
@@ -81,6 +78,7 @@ namespace UTW_Project.Controllers
 
         public ActionResult Register()
         {
+            ViewBag.QuestionID = db.GetQuestions();
             return View();
         }
 
@@ -89,56 +87,73 @@ namespace UTW_Project.Controllers
         public ActionResult Register(User user)
         {
 
-            bool c = db.UserExists(user.Username);
-
-            bool e = db.HasAccount(user.Email);
-
-            
-
-            if (c == false && !e && ModelState.IsValid)
-            {
-
-                user.Q_ID = 1;
-                user.Admin = false;
-                user.Blocked = false;
-                user.EmailConfirmed = false;
-                user.LoginTrials = 0;
-                user.Wallet = 1000;
-                user.Password = user.MD5Hash(user.Password);
-                db.Add(user);
-
-            }
-            else if (ModelState.IsValid && c==true)
-            {
-                ViewBag.error = "Username Taken";
-                return View();
-            }
-            else if (ModelState.IsValid && e)
-            {
-                ViewBag.error = "Email has been used to create another account";
-                return View();
-            }
-
             if (ModelState.IsValid)
-                return RedirectToAction("AccountPage");
+            {
+                bool usernameExists = db.UserExists(user.Username);
 
+                bool emailExists = db.HasAccount(user.Email);
+           
+                if(!usernameExists && !emailExists)
+                {
+                    user.Admin = false;
+                    user.Blocked = false;
+                    user.EmailConfirmed = false;
+                    user.LoginTrials = 0;
+                    user.Wallet = 1000;
+                    user.Password = user.MD5Hash(user.Password);
+
+                    try
+                    {
+                        string url = Url.Action("ConfirmEmail", "Account", new { user.Username }, Request.Url.Scheme);
+                        EmailManager.SendConfirmationEmailEN(user, url);
+                    }
+                    catch(Exception e)
+                    {
+                        ViewBag.error = e.Message;
+                        return View();                    
+                    }
+                    db.Add(user);
+                    return RedirectToAction("AccountPage");
+                }
+                else if (usernameExists)
+                {
+                    ViewBag.error = "Username Taken";
+                    return View();
+                }
+                else if (emailExists)
+                {
+                    ViewBag.error = "Email has been used to create another account";
+                    return View();
+                }
+            }
+            ViewBag.QuestionID = db.GetQuestions();
             return View();
         }
 
-        public ActionResult ConfirmEmail()
+        public ActionResult ConfirmEmail(string username)
         {
+            if(db.EmailConfirm(username))
+            { 
+                ViewBag.Message = "Confirmed Successfully";
+            }
+            else
+            {
+                ViewBag.Message = "Error Confirming";
+            }
             return View();
         }
 
-        public ActionResult ForgetPassword()
+        public ActionResult ForgetPassword(string username)
         {
-            return View();
+            User user = db.GetUser(username);
+            return View(user);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult ForgetPassword(string newPassword, string answer)
+        public ActionResult ForgetPassword(string username, string newPassword, string answer)
         {
+            db.ResetPassword(username, newPassword, answer);
             return View();
         }
 

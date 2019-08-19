@@ -48,6 +48,31 @@ namespace UTW_Project.Classes
                 return false;
             return true;
         }
+        public bool EmailConfirm(string username)
+        {
+            User user = GetUser(username);
+            if (user != null)
+            {
+                user.EmailConfirmed = true;
+                Db.SaveChanges();
+                return true;
+            }
+            return false;
+        }
 
+        public void ResetPassword(string username, string newPassword, string answer)
+        {
+            User user = GetUser(username);
+            if (user.MD5Hash(answer) == user.Answer)
+            {
+                user.Password = user.MD5Hash(newPassword);
+                Db.SaveChanges();
+            }
+        }
+
+        public List<Question> GetQuestions()
+        {
+            return Db.Questions.ToList();
+        }
     }
 }

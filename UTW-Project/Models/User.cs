@@ -22,13 +22,14 @@ namespace UTW_Project.Models
         {
             this.Orders = new HashSet<Order>();
         }
-    
+
         public int ID { get; set; }
         [RequiredAttribute]
         public string Username { get; set; }
         [RequiredAttribute]
         public string Password { get; set; }
         [RequiredAttribute]
+        [EmailAddress]
         public string Email { get; set; }
         [RequiredAttribute]
         public string FirstNameEN { get; set; }
@@ -38,7 +39,7 @@ namespace UTW_Project.Models
         public string FirstNameAR { get; set; }
         [RequiredAttribute]
         public string LastNameAR { get; set; }
-        
+
         public string Phone { get; set; }
 
         public int Q_ID { get; set; }
@@ -49,7 +50,7 @@ namespace UTW_Project.Models
         public bool Blocked { get; set; }
         public int LoginTrials { get; set; }
         public bool Admin { get; set; }
-    
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Order> Orders { get; set; }
         public virtual Question Question { get; set; }

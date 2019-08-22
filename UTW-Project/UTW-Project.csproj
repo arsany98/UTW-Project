@@ -13,7 +13,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>UTW_Project</RootNamespace>
     <AssemblyName>UTW-Project</AssemblyName>
-    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <UseIISExpress>true</UseIISExpress>
     <Use64BitIISExpress />
     <IISExpressSSLPort>44308</IISExpressSSLPort>
@@ -23,6 +23,7 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -158,6 +159,31 @@
     <Content Include="Front\images\icons\favicon.ico" />
     <Content Include="Front\images\icons\icon-google.png" />
     <Content Include="Front\images\icons\map-marker.png" />
+    <Content Include="Front\inc\class-tgm-plugin-activation.php" />
+    <Content Include="Front\inc\css\bootstrap.css" />
+    <Content Include="Front\inc\css\bootstrap.min.css" />
+    <Content Include="Front\inc\css\font-awesome.min.css" />
+    <Content Include="Front\inc\custom-header.php" />
+    <Content Include="Front\inc\customizer.php" />
+    <Content Include="Front\inc\extras.php" />
+    <Content Include="Front\inc\fonts\fontawesome-webfont.svg" />
+    <Content Include="Front\inc\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Front\inc\jetpack.php" />
+    <Content Include="Front\inc\js\bootstrap.min.js" />
+    <Content Include="Front\inc\js\customizer.js" />
+    <Content Include="Front\inc\js\dev\bootstrap.js" />
+    <Content Include="Front\inc\js\dev\main.js" />
+    <Content Include="Front\inc\js\html5shiv.min.js" />
+    <Content Include="Front\inc\js\main.js" />
+    <Content Include="Front\inc\js\main.min.js" />
+    <Content Include="Front\inc\js\respond.min.js" />
+    <Content Include="Front\inc\metaboxes.php" />
+    <Content Include="Front\inc\navwalker.php" />
+    <Content Include="Front\inc\socialnav.php" />
+    <Content Include="Front\inc\template-tags.php" />
+    <Content Include="Front\inc\widgets\popular-posts-widget.php" />
+    <Content Include="Front\inc\widgets\widget-social.php" />
+    <Content Include="Front\inc\wpcom.php" />
     <Content Include="Front\index.html" />
     <Content Include="Front\js\main.js" />
     <Content Include="Front\js\map-custom.js" />
@@ -202,6 +228,49 @@
       <DependentUpon>UTWProjectModel.edmx</DependentUpon>
       <LastGenOutput>UTWProjectModel.cs</LastGenOutput>
     </Content>
+    <Content Include="UsersFront2\css\bootstrap.css" />
+    <Content Include="UsersFront2\css\bootstrap.min.css" />
+    <Content Include="UsersFront2\css\font-awesome.min.css" />
+    <Content Include="UsersFront2\fonts\fontawesome-webfont.svg" />
+    <Content Include="UsersFront2\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="UsersFront2\js\bootstrap.min.js" />
+    <Content Include="UsersFront2\js\customizer.js" />
+    <Content Include="UsersFront2\js\dev\bootstrap.js" />
+    <Content Include="UsersFront2\js\dev\main.js" />
+    <Content Include="UsersFront2\js\html5shiv.min.js" />
+    <Content Include="UsersFront2\js\main.js" />
+    <Content Include="UsersFront2\js\main.min.js" />
+    <Content Include="UsersFront2\js\respond.min.js" />
+    <Content Include="UsersFront2\widgets\popular-posts-widget.php" />
+    <Content Include="UsersFront2\widgets\widget-social.php" />
+    <Content Include="UsersFront\css\main.css" />
+    <Content Include="UsersFront\css\util.css" />
+    <Content Include="UsersFront\fonts\font-awesome-4.7.0\css\font-awesome.css" />
+    <Content Include="UsersFront\fonts\font-awesome-4.7.0\css\font-awesome.min.css" />
+    <Content Include="UsersFront\fonts\font-awesome-4.7.0\fonts\fontawesome-webfont.svg" />
+    <Content Include="UsersFront\fonts\font-awesome-4.7.0\HELP-US-OUT.txt" />
+    <Content Include="UsersFront\images\icons\favicon.ico" />
+    <Content Include="UsersFront\index.html" />
+    <Content Include="UsersFront\js\main.js" />
+    <Content Include="UsersFront\vendor\animate\animate.css" />
+    <Content Include="UsersFront\vendor\bootstrap\css\bootstrap-grid.css" />
+    <Content Include="UsersFront\vendor\bootstrap\css\bootstrap-grid.min.css" />
+    <Content Include="UsersFront\vendor\bootstrap\css\bootstrap-reboot.css" />
+    <Content Include="UsersFront\vendor\bootstrap\css\bootstrap-reboot.min.css" />
+    <Content Include="UsersFront\vendor\bootstrap\css\bootstrap.css" />
+    <Content Include="UsersFront\vendor\bootstrap\css\bootstrap.min.css" />
+    <Content Include="UsersFront\vendor\bootstrap\js\bootstrap.js" />
+    <Content Include="UsersFront\vendor\bootstrap\js\bootstrap.min.js" />
+    <Content Include="UsersFront\vendor\bootstrap\js\popper.js" />
+    <Content Include="UsersFront\vendor\bootstrap\js\popper.min.js" />
+    <Content Include="UsersFront\vendor\bootstrap\js\tooltip.js" />
+    <Content Include="UsersFront\vendor\jquery\jquery-3.2.1.min.js" />
+    <Content Include="UsersFront\vendor\perfect-scrollbar\perfect-scrollbar.css" />
+    <Content Include="UsersFront\vendor\perfect-scrollbar\perfect-scrollbar.min.js" />
+    <Content Include="UsersFront\vendor\select2\select2.css" />
+    <Content Include="UsersFront\vendor\select2\select2.js" />
+    <Content Include="UsersFront\vendor\select2\select2.min.css" />
+    <Content Include="UsersFront\vendor\select2\select2.min.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -209,6 +278,7 @@
     <Compile Include="Classes\DBManager.cs" />
     <Compile Include="Classes\EmailManager.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -380,6 +450,14 @@
     <Content Include="Models\UTWProjectModel.edmx.diagram">
       <DependentUpon>UTWProjectModel.edmx</DependentUpon>
     </Content>
+    <Content Include="Front\inc\fonts\fontawesome-webfont.eot" />
+    <Content Include="Front\inc\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Front\inc\fonts\fontawesome-webfont.woff" />
+    <Content Include="Front\inc\fonts\FontAwesome.otf" />
+    <Content Include="Front\inc\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Front\inc\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Front\inc\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Front\inc\fonts\glyphicons-halflings-regular.woff2" />
     <None Include="packages.config" />
     <Content Include="Views\Account\AccountPage.cshtml" />
     <Content Include="Views\Account\ConfirmEmail.cshtml" />
@@ -390,6 +468,85 @@
     <Content Include="Views\Shared\_AdminLayout.cshtml" />
     <Content Include="Views\Shared\_UserLayout.cshtml" />
     <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\User\Display.cshtml" />
+    <Content Include="UsersFront\fonts\font-awesome-4.7.0\fonts\fontawesome-webfont.eot" />
+    <Content Include="UsersFront\fonts\font-awesome-4.7.0\fonts\fontawesome-webfont.ttf" />
+    <Content Include="UsersFront\fonts\font-awesome-4.7.0\fonts\fontawesome-webfont.woff" />
+    <Content Include="UsersFront\fonts\font-awesome-4.7.0\fonts\fontawesome-webfont.woff2" />
+    <Content Include="UsersFront\fonts\font-awesome-4.7.0\fonts\FontAwesome.otf" />
+    <Content Include="UsersFront\fonts\font-awesome-4.7.0\less\animated.less" />
+    <Content Include="UsersFront\fonts\font-awesome-4.7.0\less\bordered-pulled.less" />
+    <Content Include="UsersFront\fonts\font-awesome-4.7.0\less\core.less" />
+    <Content Include="UsersFront\fonts\font-awesome-4.7.0\less\fixed-width.less" />
+    <Content Include="UsersFront\fonts\font-awesome-4.7.0\less\font-awesome.less" />
+    <Content Include="UsersFront\fonts\font-awesome-4.7.0\less\icons.less" />
+    <Content Include="UsersFront\fonts\font-awesome-4.7.0\less\larger.less" />
+    <Content Include="UsersFront\fonts\font-awesome-4.7.0\less\list.less" />
+    <Content Include="UsersFront\fonts\font-awesome-4.7.0\less\mixins.less" />
+    <Content Include="UsersFront\fonts\font-awesome-4.7.0\less\path.less" />
+    <Content Include="UsersFront\fonts\font-awesome-4.7.0\less\rotated-flipped.less" />
+    <Content Include="UsersFront\fonts\font-awesome-4.7.0\less\screen-reader.less" />
+    <Content Include="UsersFront\fonts\font-awesome-4.7.0\less\stacked.less" />
+    <Content Include="UsersFront\fonts\font-awesome-4.7.0\less\variables.less" />
+    <Content Include="UsersFront\fonts\font-awesome-4.7.0\scss\font-awesome.scss" />
+    <Content Include="UsersFront\fonts\font-awesome-4.7.0\scss\_animated.scss" />
+    <Content Include="UsersFront\fonts\font-awesome-4.7.0\scss\_bordered-pulled.scss" />
+    <Content Include="UsersFront\fonts\font-awesome-4.7.0\scss\_core.scss" />
+    <Content Include="UsersFront\fonts\font-awesome-4.7.0\scss\_fixed-width.scss" />
+    <Content Include="UsersFront\fonts\font-awesome-4.7.0\scss\_icons.scss" />
+    <Content Include="UsersFront\fonts\font-awesome-4.7.0\scss\_larger.scss" />
+    <Content Include="UsersFront\fonts\font-awesome-4.7.0\scss\_list.scss" />
+    <Content Include="UsersFront\fonts\font-awesome-4.7.0\scss\_mixins.scss" />
+    <Content Include="UsersFront\fonts\font-awesome-4.7.0\scss\_path.scss" />
+    <Content Include="UsersFront\fonts\font-awesome-4.7.0\scss\_rotated-flipped.scss" />
+    <Content Include="UsersFront\fonts\font-awesome-4.7.0\scss\_screen-reader.scss" />
+    <Content Include="UsersFront\fonts\font-awesome-4.7.0\scss\_stacked.scss" />
+    <Content Include="UsersFront\fonts\font-awesome-4.7.0\scss\_variables.scss" />
+    <Content Include="UsersFront\fonts\OpenSans\OpenSans-Bold.ttf" />
+    <Content Include="UsersFront\fonts\OpenSans\OpenSans-BoldItalic.ttf" />
+    <Content Include="UsersFront\fonts\OpenSans\OpenSans-ExtraBold.ttf" />
+    <Content Include="UsersFront\fonts\OpenSans\OpenSans-ExtraBoldItalic.ttf" />
+    <Content Include="UsersFront\fonts\OpenSans\OpenSans-Italic.ttf" />
+    <Content Include="UsersFront\fonts\OpenSans\OpenSans-Light.ttf" />
+    <Content Include="UsersFront\fonts\OpenSans\OpenSans-LightItalic.ttf" />
+    <Content Include="UsersFront\fonts\OpenSans\OpenSans-Regular.otf" />
+    <Content Include="UsersFront\fonts\OpenSans\OpenSans-Regular.ttf" />
+    <Content Include="UsersFront\fonts\OpenSans\OpenSans-SemiBold.ttf" />
+    <Content Include="UsersFront\fonts\OpenSans\OpenSans-SemiBoldItalic.ttf" />
+    <Content Include="UsersFront\fonts\poppins\Poppins-Black.ttf" />
+    <Content Include="UsersFront\fonts\poppins\Poppins-BlackItalic.ttf" />
+    <Content Include="UsersFront\fonts\poppins\Poppins-Bold.ttf" />
+    <Content Include="UsersFront\fonts\poppins\Poppins-BoldItalic.ttf" />
+    <Content Include="UsersFront\fonts\poppins\Poppins-ExtraBold.ttf" />
+    <Content Include="UsersFront\fonts\poppins\Poppins-ExtraBoldItalic.ttf" />
+    <Content Include="UsersFront\fonts\poppins\Poppins-ExtraLight.ttf" />
+    <Content Include="UsersFront\fonts\poppins\Poppins-ExtraLightItalic.ttf" />
+    <Content Include="UsersFront\fonts\poppins\Poppins-Italic.ttf" />
+    <Content Include="UsersFront\fonts\poppins\Poppins-Light.ttf" />
+    <Content Include="UsersFront\fonts\poppins\Poppins-LightItalic.ttf" />
+    <Content Include="UsersFront\fonts\poppins\Poppins-Medium.ttf" />
+    <Content Include="UsersFront\fonts\poppins\Poppins-MediumItalic.ttf" />
+    <Content Include="UsersFront\fonts\poppins\Poppins-Regular.ttf" />
+    <Content Include="UsersFront\fonts\poppins\Poppins-SemiBold.ttf" />
+    <Content Include="UsersFront\fonts\poppins\Poppins-SemiBoldItalic.ttf" />
+    <Content Include="UsersFront\fonts\poppins\Poppins-Thin.ttf" />
+    <Content Include="UsersFront\fonts\poppins\Poppins-ThinItalic.ttf" />
+    <Content Include="UsersFront\vendor\bootstrap\css\bootstrap-grid.css.map" />
+    <Content Include="UsersFront\vendor\bootstrap\css\bootstrap-grid.min.css.map" />
+    <Content Include="UsersFront\vendor\bootstrap\css\bootstrap-reboot.css.map" />
+    <Content Include="UsersFront\vendor\bootstrap\css\bootstrap-reboot.min.css.map" />
+    <Content Include="UsersFront\vendor\bootstrap\css\bootstrap.css.map" />
+    <Content Include="UsersFront\vendor\bootstrap\css\bootstrap.min.css.map" />
+    <Content Include="UsersFront2\fonts\fontawesome-webfont.eot" />
+    <Content Include="UsersFront2\fonts\fontawesome-webfont.ttf" />
+    <Content Include="UsersFront2\fonts\fontawesome-webfont.woff" />
+    <Content Include="UsersFront2\fonts\FontAwesome.otf" />
+    <Content Include="UsersFront2\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="UsersFront2\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="UsersFront2\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="UsersFront2\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="Views\Account\ForgetPassword.cshtml" />
+    <Content Include="Views\Account\ResetPassword.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

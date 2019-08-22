@@ -161,10 +161,25 @@ namespace UTW_Project.Controllers
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
+        [ValidateAntiForgeryToken] 
         public ActionResult ForgetPassword(string username, string newPassword, string answer)
         {
             db.ResetPassword(username, newPassword, answer);
+            return View();
+        }
+
+
+        public ActionResult ResetPassword(string username)
+        {
+
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult ResetPassword(string username, string newPassword, string answer)
+        {
+            
             return View();
         }
 
@@ -173,7 +188,6 @@ namespace UTW_Project.Controllers
         {
             return View();
         }
-
 
     }
 }

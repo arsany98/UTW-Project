@@ -24,22 +24,32 @@ namespace UTW_Project.Models
         }
 
         public int ID { get; set; }
+
         [RequiredAttribute]
         public string Username { get; set; }
+
         [RequiredAttribute]
+        [MinLength(8, ErrorMessage ="Password must be atleast 8 characters")]
+        [RegularExpression(@"^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,20}$", ErrorMessage = "Password must contain: Minimum 8 characters atleast 1 Alphabet and 1 Number")]
         public string Password { get; set; }
+
         [RequiredAttribute]
         [EmailAddress]
         public string Email { get; set; }
-        [RequiredAttribute]
+
+        [RequiredAttribute(ErrorMessage ="First name in English is Required")]
         public string FirstNameEN { get; set; }
-        [RequiredAttribute]
+
+        [RequiredAttribute(ErrorMessage = "Last name in English is Required")]
         public string LastNameEN { get; set; }
-        [RequiredAttribute]
+
+        [RequiredAttribute(ErrorMessage = "First name in Arabic is Required")]
         public string FirstNameAR { get; set; }
-        [RequiredAttribute]
+
+        [RequiredAttribute(ErrorMessage = "Last name in Arabic is Required")]
         public string LastNameAR { get; set; }
 
+        [MaxLength(11, ErrorMessage ="Phone must be 11 numbers")]
         public string Phone { get; set; }
 
         public int Q_ID { get; set; }

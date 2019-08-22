@@ -4,6 +4,9 @@
     Layout = "~/Views/Shared/_AccountLayout.cshtml";
 }
 
+@using CaptchaMvc.HtmlHelpers;
+
+
 
 @using (Html.BeginForm())
 {
@@ -33,7 +36,8 @@
     <link rel="stylesheet" type="text/css" href="~/Front/css/main.css">
 
 
-    <div class="container-login100" style="background-image: url('../../Front/images/bg-01.jpg');">
+
+    <div class="container-login100" style="background-image: url('../../Front/images/bg-01.jpg');" onLoad="ChangeCaptcha()">
 
         <div class="wrap-login100 p-l-55 p-r-55 p-t-80 p-b-30">
             <form class="login100-form validate-form">
@@ -55,12 +59,33 @@
                     <span class="focus-input100"></span>
                 </div>
 
+
+
+                <span>&nbsp;</span>
+                <div class="wrap-input100">
+                    @if (ViewBag.ShowCaptcha == 1)
+                    {
+
+                        @Html.Captcha(5)
+
+                        <br />
+                        <span class="focus-input100"></span>
+                        <span class="focus-input100"></span>
+                        <span class="focus-input100"></span>
+                    }
+                </div>
+
+
+
+
                 <div>
                     @if (ViewBag.error != null)
                     {
                         <label style="font-size:15px;color:black;border-bottom:double;border-color:red">@ViewBag.error</label>
                     }
                 </div>
+ 
+
                 <div class="container-login100-form-btn">
                     <button class="login100-form-btn">
                         Sign In
@@ -110,6 +135,7 @@
     <script src="~/Front/vendor/countdowntime/countdowntime.js"></script>
     <!--===============================================================================================-->
     <script src="~/Front/js/main.js"></script>
+
 
 
 

@@ -59,10 +59,11 @@
                     </div>
 
                     <div class="wrap-input100 validate-input" data-validate="Password is required">
-                        <span class="label-input100">Password</span>
-                        @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "input100" } })
+                        <span class="label-input100">Password</span><br /><br />
+                        @Html.PasswordFor(model => model.Password, new { htmlAttributes = new { @class = "input100" } })  <br />
                         @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
                         <span class="focus-input100"></span>
+
                     </div>
 
                     <div class="wrap-input100 validate-input" data-validate="Valid email is required: ex@abc.xyz">

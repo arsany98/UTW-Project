@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using UTW_Project.Models;
 using UTW_Project.Classes;
+using CaptchaMvc.HtmlHelpers;
 namespace UTW_Project.Controllers
 {
     public class AccountController : Controller
@@ -45,15 +46,24 @@ namespace UTW_Project.Controllers
                     }
 
 
+                    if (user.LoginTrials>3 && user.LoginTrials<=5)
+                    {
+                        ViewBag.ShowCaptcha = 1;
+                    }
+                    else
+                    {
+                        ViewBag.ShowCaptcha = 0;
+                    }
+
                     string EncryptedPassword = user.MD5Hash(password);
-                    if (EncryptedPassword!=user.Password)
+                    if ((EncryptedPassword!=user.Password) || (!this.IsCaptchaValid("") && (user.LoginTrials > 3 && user.LoginTrials <= 6)))
                     {
                         ViewBag.error = "Wrong username or password";
-                        if (user.LoginTrials < 3)
+                        if (user.LoginTrials <= 5)
                         {
                             db.UpdateTrials(username);
                         }
-                        else if (user.LoginTrials == 3)
+                        else
                         {
                             user.Blocked = true;
                             db.UpdateTrials(username);
@@ -98,9 +108,10 @@ namespace UTW_Project.Controllers
                     user.Admin = false;
                     user.Blocked = false;
                     user.EmailConfirmed = false;
-                    user.LoginTrials = 0;
+                    user.LoginTrials = 2;
                     user.Wallet = 1000;
                     user.Password = user.MD5Hash(user.Password);
+                    user.Answer = user.MD5Hash(user.Answer);
 
                     try
                     {

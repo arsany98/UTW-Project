@@ -29,8 +29,8 @@ namespace UTW_Project.Models
         public string Username { get; set; }
 
         [RequiredAttribute]
-        [MinLength(8, ErrorMessage ="Password must be atleast 8 characters")]
-        [RegularExpression(@"^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,20}$", ErrorMessage = "Password must contain: Minimum 8 characters atleast 1 Alphabet and 1 Number")]
+        [MinLength(8, ErrorMessage ="Password must be at least 8 characters")]
+        //[RegularExpression(@"^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,20}$", ErrorMessage = "Password must contain: Minimum 8 characters at least 1 Alphabet and 1 Number")]
         public string Password { get; set; }
 
         [RequiredAttribute]

@@ -60,14 +60,10 @@ namespace UTW_Project.Classes
             return false;
         }
 
-        public void ResetPassword(string username, string newPassword, string answer)
+        public void ResetPassword(User user, string newPassword)
         {
-            User user = GetUser(username);
-            if (user.MD5Hash(answer) == user.Answer)
-            {
-                user.Password = user.MD5Hash(newPassword);
-                Db.SaveChanges();
-            }
+            user.Password = user.MD5Hash(newPassword);
+            Db.SaveChanges();
         }
 
         public List<Question> GetQuestions()

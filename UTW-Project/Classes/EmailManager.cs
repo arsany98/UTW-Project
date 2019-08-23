@@ -35,7 +35,7 @@ namespace UTW_Project.Classes
             smcl.Send(m);
         }
 
-        static void SendConfirmationEmailAR(User user, string Url)
+        public static void SendConfirmationEmailAR(User user, string Url)
         {
             SmtpSection section = (SmtpSection)ConfigurationManager.GetSection("system.net/mailSettings/smtp");
             string companyEmail = section.Network.UserName;
@@ -59,7 +59,7 @@ namespace UTW_Project.Classes
             smcl.EnableSsl = true;
             smcl.Send(m);
         }
-        static void SendResetPasswordEmailEN(User user, string Url)
+        public static void SendResetPasswordEmailEN(User user, string Url)
         {
             SmtpSection section = (SmtpSection)ConfigurationManager.GetSection("system.net/mailSettings/smtp");
             string companyEmail = section.Network.UserName;
@@ -82,7 +82,7 @@ namespace UTW_Project.Classes
             smcl.Send(m);
         }
 
-        static void SendResetPasswordEmailAR(User user, string Url)
+        public static void SendResetPasswordEmailAR(User user, string Url)
         {
             SmtpSection section = (SmtpSection)ConfigurationManager.GetSection("system.net/mailSettings/smtp");
             string companyEmail = section.Network.UserName;

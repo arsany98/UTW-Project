@@ -6,6 +6,8 @@ using System.Web.Mvc;
 using UTW_Project.Models;
 using UTW_Project.Classes;
 using CaptchaMvc.HtmlHelpers;
+using System.Data.Entity.Validation;
+
 namespace UTW_Project.Controllers
 {
     public class AccountController : Controller
@@ -97,6 +99,7 @@ namespace UTW_Project.Controllers
         public ActionResult Register(User user)
         {
 
+            ViewBag.QuestionID = db.GetQuestions();
             if (ModelState.IsValid)
             {
                 bool usernameExists = db.UserExists(user.Username);
@@ -115,15 +118,30 @@ namespace UTW_Project.Controllers
 
                     try
                     {
+                        db.Add(user);
                         string url = Url.Action("ConfirmEmail", "Account", new { user.Username }, Request.Url.Scheme);
                         EmailManager.SendConfirmationEmailEN(user, url);
+                    }
+                    catch(DbEntityValidationException e)
+                    {
+                        foreach (var eve in e.EntityValidationErrors)
+                        {
+                            ViewBag.error += string.Format("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
+                                eve.Entry.Entity.GetType().Name, eve.Entry.State);
+                            foreach (var ve in eve.ValidationErrors)
+                            {
+                                ViewBag.error += string.Format("- Property: \"{0}\", Error: \"{1}\"",
+                                    ve.PropertyName, ve.ErrorMessage);
+                            }
+                        }
+                        
+                        return View();                    
                     }
                     catch(Exception e)
                     {
                         ViewBag.error = e.Message;
-                        return View();                    
+                        return View();
                     }
-                    db.Add(user);
                     return RedirectToAction("AccountPage");
                 }
                 else if (usernameExists)
@@ -137,7 +155,6 @@ namespace UTW_Project.Controllers
                     return View();
                 }
             }
-            ViewBag.QuestionID = db.GetQuestions();
             return View();
         }
 
@@ -154,33 +171,58 @@ namespace UTW_Project.Controllers
             return View();
         }
 
-        public ActionResult ForgetPassword(string username)
+        public ActionResult ForgetPassword()
         {
-            User user = db.GetUser(username);
-            return View(user);
+            return View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken] 
-        public ActionResult ForgetPassword(string username, string newPassword, string answer)
+        public ActionResult ForgetPassword(string username)
         {
-            db.ResetPassword(username, newPassword, answer);
+            if(db.UserExists(username))
+            {
+                User user = db.GetUser(username);
+                if (user.EmailConfirmed == false)
+                {
+                    ViewBag.message = "You didn't confirm your Email yet.";
+                }
+                else
+                {
+                    string url = Url.Action("ResetPassword", "Account", new { user.Username }, Request.Url.Scheme);
+                    EmailManager.SendResetPasswordEmailEN(user, url);
+                    ViewBag.message = "An email has been sent to you to reset your password.";
+                }
+            }
+            else
+            {
+                ViewBag.message = "username not found.";
+            }
             return View();
         }
 
 
         public ActionResult ResetPassword(string username)
         {
-
-            return View();
+            User user = db.GetUser(username);
+            return View(user);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult ResetPassword(string username, string newPassword, string answer)
         {
-            
-            return View();
+            User user = db.GetUser(username);
+            if (user.MD5Hash(answer) == user.Answer)
+            {
+                db.ResetPassword(user, newPassword);
+                ViewBag.error = "Password reset successfully.";
+            }
+            else
+            {
+                ViewBag.error = "Wrong answer.";
+            }
+            return View(user);
         }
 
 

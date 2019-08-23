@@ -6,9 +6,9 @@ using System.Web.Mvc;
 
 namespace UTW_Project.Controllers
 {
-    public class UserController : Controller
+    public class AdminController : Controller
     {
-        // GET: User
+        // GET: Admin
         public ActionResult Dashboard()
         {
             return View();
@@ -23,5 +23,9 @@ namespace UTW_Project.Controllers
             return View();
         }
 
+        public ActionResult Users()
+        {
+            return View();
+        }
     }
 }

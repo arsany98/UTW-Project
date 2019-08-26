@@ -7,6 +7,8 @@ using UTW_Project.Models;
 using UTW_Project.Classes;
 using CaptchaMvc.HtmlHelpers;
 using System.Data.Entity.Validation;
+using System.Web.Security;
+
 
 namespace UTW_Project.Controllers
 {
@@ -14,6 +16,7 @@ namespace UTW_Project.Controllers
     {
 
         private DBManager db = new DBManager();
+        [AllowAnonymous]
         public ActionResult Login()
         {
             return View();
@@ -21,6 +24,7 @@ namespace UTW_Project.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AllowAnonymous]
         public ActionResult Login(string username, string password)
         {
 
@@ -75,6 +79,7 @@ namespace UTW_Project.Controllers
                     else
                     {
                         db.ActivateUser(username);
+                        FormsAuthentication.SetAuthCookie(username,false);
                         return RedirectToAction("AccountPage");
                     }
 
@@ -89,6 +94,7 @@ namespace UTW_Project.Controllers
             return View();
         }
 
+        [AllowAnonymous]
         public ActionResult Register()
         {
             ViewBag.QuestionID = db.GetQuestions();
@@ -97,6 +103,7 @@ namespace UTW_Project.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AllowAnonymous]
         public ActionResult Register(User user)
         {
            
@@ -113,7 +120,7 @@ namespace UTW_Project.Controllers
                     user.Blocked = false;
                     user.EmailConfirmed = false;
                     user.LoginTrials = 2;
-                    user.Wallet = 1000;
+                    user.Wallet = 1000; /////////
                     user.Password = user.MD5Hash(user.Password);
                     user.Answer = user.MD5Hash(user.Answer);
 
@@ -159,6 +166,7 @@ namespace UTW_Project.Controllers
             return View();
         }
 
+        [AllowAnonymous]
         public ActionResult ConfirmEmail(string username)
         {
             if(db.EmailConfirm(username))
@@ -172,13 +180,15 @@ namespace UTW_Project.Controllers
             return View();
         }
 
+        [AllowAnonymous]
         public ActionResult ForgetPassword()
         {
             return View();
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken] 
+        [ValidateAntiForgeryToken]
+        [AllowAnonymous]
         public ActionResult ForgetPassword(string username)
         {
             if(db.UserExists(username))
@@ -202,7 +212,7 @@ namespace UTW_Project.Controllers
             return View();
         }
 
-
+        [AllowAnonymous]
         public ActionResult ResetPassword(string username)
         {
             User user = db.GetUser(username);
@@ -211,6 +221,7 @@ namespace UTW_Project.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AllowAnonymous]
         public ActionResult ResetPassword(string username, string newPassword, string answer)
         {
             User user = db.GetUser(username);
@@ -226,7 +237,7 @@ namespace UTW_Project.Controllers
             return View(user);
         }
 
-
+        [Authorize]
         public ActionResult AccountPage()
         {
             return View();

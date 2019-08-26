@@ -4,9 +4,12 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using UTW_Project.Classes;
+using System.Web.Security;
+
 
 namespace UTW_Project.Controllers
 {
+    [Authorize]
     public class AdminController : Controller
     {
         private DBManager db = new DBManager();

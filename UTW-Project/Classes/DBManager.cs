@@ -41,6 +41,14 @@ namespace UTW_Project.Classes
             }
         }
 
+        public void ActivateUser(string username)
+        {
+            User user = GetUser(username);
+            user.Blocked = false;
+            user.LoginTrials = 2;
+            Db.SaveChanges();
+        }
+
         public bool HasAccount(string email)
         {
             var query = from u in Db.Users where u.Email == email select u;
@@ -69,6 +77,11 @@ namespace UTW_Project.Classes
         public List<Question> GetQuestions()
         {
             return Db.Questions.ToList();
+        }
+
+        public List<User> GetUsersList()
+        {
+            return Db.Users.ToList();
         }
     }
 }

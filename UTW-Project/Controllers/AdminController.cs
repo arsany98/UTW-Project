@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using UTW_Project.Classes;
 
 namespace UTW_Project.Controllers
 {
     public class AdminController : Controller
     {
-        // GET: Admin
+        private DBManager db = new DBManager();
+
         public ActionResult Dashboard()
         {
             return View();
@@ -25,7 +27,14 @@ namespace UTW_Project.Controllers
 
         public ActionResult Users()
         {
-            return View();
+            var users = db.GetUsersList();
+            return View(users);
+        }
+
+        public ActionResult Activate(string username)
+        {
+            db.ActivateUser(username);
+            return RedirectToAction("Users");
         }
     }
 }

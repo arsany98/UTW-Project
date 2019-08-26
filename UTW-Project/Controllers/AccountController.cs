@@ -74,6 +74,7 @@ namespace UTW_Project.Controllers
                     }
                     else
                     {
+                        db.ActivateUser(username);
                         return RedirectToAction("AccountPage");
                     }
 
@@ -98,7 +99,7 @@ namespace UTW_Project.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Register(User user)
         {
-
+           
             ViewBag.QuestionID = db.GetQuestions();
             if (ModelState.IsValid)
             {

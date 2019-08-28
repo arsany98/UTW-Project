@@ -83,5 +83,23 @@ namespace UTW_Project.Classes
         {
             return Db.Users.ToList();
         }
+
+        public List<User> SelectByStatues(bool value)
+        {
+            var query = from u in Db.Users where u.Blocked == value select u;
+            return query.ToList();
+        }
+
+        public User SelectByEmail(string value)
+        {
+            var query = from u in Db.Users where u.Email == value select u;
+            return query.FirstOrDefault();
+        }
+
+        public User SelectByUsername(string value)
+        {
+            return GetUser(value);
+        }
+
     }
 }

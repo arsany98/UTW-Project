@@ -18,12 +18,32 @@ namespace UTW_Project.Classes
             Db.SaveChanges();
         }
 
+        public void AddURL(string urlString, Guid guid, User user)
+        {
+            URL url = new URL();
+            url.Date = DateTime.Now;
+            url.GUID = guid;
+            url.URL1 = urlString;
+
+            url = Db.URLs.Add(url);
+            user.URL_ID = url.ID;
+            Db.SaveChanges();
+        }
         public User GetUser(string username)
         {
             var query = from u in Db.Users where u.Username == username select u;
             return query.FirstOrDefault();
         }
 
+        public User GetUrlUser(Guid guid)
+        {
+            var query = from u in Db.Users where u.URL.GUID == guid select u;
+            User user = query.FirstOrDefault();
+            if (DateTime.Now > user.URL.Date.AddDays(1))
+                user.URL.Expired = true;
+            Db.SaveChanges();
+            return user;
+        }
         public bool UserExists(string username)
         {
            if (GetUser(username) == null)
@@ -56,12 +76,13 @@ namespace UTW_Project.Classes
                 return false;
             return true;
         }
-        public bool EmailConfirm(string username)
+        public bool EmailConfirm(User user)
         {
-            User user = GetUser(username);
+            
             if (user != null)
             {
                 user.EmailConfirmed = true;
+                user.URL.Expired = true;
                 Db.SaveChanges();
                 return true;
             }
@@ -70,6 +91,7 @@ namespace UTW_Project.Classes
 
         public void ResetPassword(User user, string newPassword)
         {
+            user.URL.Expired = true;
             user.Password = user.MD5Hash(newPassword);
             Db.SaveChanges();
         }

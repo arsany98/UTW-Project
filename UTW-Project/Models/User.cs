@@ -29,7 +29,7 @@ namespace UTW_Project.Models
         public string Username { get; set; }
 
         [RequiredAttribute]
-        [MinLength(8, ErrorMessage ="Password must be at least 8 characters")]
+        [MinLength(8, ErrorMessage = "Password must be at least 8 characters")]
         //[RegularExpression(@"^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,20}$", ErrorMessage = "Password must contain: Minimum 8 characters at least 1 Alphabet and 1 Number")]
         public string Password { get; set; }
 
@@ -37,7 +37,7 @@ namespace UTW_Project.Models
         [EmailAddress]
         public string Email { get; set; }
 
-        [RequiredAttribute(ErrorMessage ="First name in English is Required")]
+        [RequiredAttribute(ErrorMessage = "First name in English is Required")]
         public string FirstNameEN { get; set; }
 
         [RequiredAttribute(ErrorMessage = "Last name in English is Required")]
@@ -49,7 +49,7 @@ namespace UTW_Project.Models
         [RequiredAttribute(ErrorMessage = "Last name in Arabic is Required")]
         public string LastNameAR { get; set; }
 
-        [MaxLength(11, ErrorMessage ="Phone must be 11 numbers")]
+        [MaxLength(11, ErrorMessage = "Phone must be 11 numbers")]
         public string Phone { get; set; }
 
         public int Q_ID { get; set; }
@@ -60,10 +60,11 @@ namespace UTW_Project.Models
         public bool Blocked { get; set; }
         public int LoginTrials { get; set; }
         public bool Admin { get; set; }
-
+        public Nullable<int> URL_ID { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Order> Orders { get; set; }
         public virtual Question Question { get; set; }
+        public virtual URL URL { get; set; }
 
 
         public string MD5Hash(string text)

@@ -80,7 +80,7 @@ namespace UTW_Project.Controllers
                     {
                         db.ActivateUser(username);
                         FormsAuthentication.SetAuthCookie(username,false);
-                        return RedirectToAction("AccountPage");
+                        return RedirectToAction("Dashboard", "User");
                     }
 
                 }
@@ -127,8 +127,10 @@ namespace UTW_Project.Controllers
                     try
                     {
                         db.Add(user);
-                        string url = Url.Action("ConfirmEmail", "Account", new { user.Username }, Request.Url.Scheme);
-                        EmailManager.SendConfirmationEmailEN(user, url);
+                        Guid guid = Guid.NewGuid();
+                        string url = Url.Action("ConfirmEmail", "Account", new { guid }, Request.Url.Scheme);
+                        db.AddURL(url, guid, user);
+                        EmailManager.SendConfirmationEmailEN(user);
                     }
                     catch(DbEntityValidationException e)
                     {
@@ -167,9 +169,14 @@ namespace UTW_Project.Controllers
         }
 
         [AllowAnonymous]
-        public ActionResult ConfirmEmail(string username)
+        public ActionResult ConfirmEmail(Guid guid)
         {
-            if(db.EmailConfirm(username))
+            User user = db.GetUrlUser(guid);
+            if (user.URL.Expired)
+            {
+                ViewBag.message = "Url is expired.";
+            }
+            else if (db.EmailConfirm(user))
             { 
                 ViewBag.Message = "Confirmed Successfully";
             }
@@ -200,8 +207,10 @@ namespace UTW_Project.Controllers
                 }
                 else
                 {
-                    string url = Url.Action("ResetPassword", "Account", new { user.Username }, Request.Url.Scheme);
-                    EmailManager.SendResetPasswordEmailEN(user, url);
+                    Guid guid = Guid.NewGuid();
+                    string url = Url.Action("ResetPassword", "Account", new { guid }, Request.Url.Scheme);
+                    db.AddURL(url, guid, user);
+                    EmailManager.SendResetPasswordEmailEN(user);
                     ViewBag.message = "An email has been sent to you to reset your password.";
                 }
             }
@@ -213,22 +222,22 @@ namespace UTW_Project.Controllers
         }
 
         [AllowAnonymous]
-        public ActionResult ResetPassword(string username)
+        public ActionResult ResetPassword(Guid guid)
         {
-            User user = db.GetUser(username);
+            User user = db.GetUrlUser(guid);           
             return View(user);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         [AllowAnonymous]
-        public ActionResult ResetPassword(string username, string newPassword, string answer)
+        public ActionResult ResetPassword(Guid guid, string newPassword, string answer)
         {
-            User user = db.GetUser(username);
+            User user = db.GetUrlUser(guid);
             if (user.MD5Hash(answer) == user.Answer)
             {
                 db.ResetPassword(user, newPassword);
-                ViewBag.error = "Password reset successfully.";
+                return RedirectToAction("Login");
             }
             else
             {

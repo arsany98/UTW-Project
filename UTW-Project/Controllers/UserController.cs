@@ -26,5 +26,10 @@ namespace UTW_Project.Controllers
             return View();
         }
 
+        public ActionResult Logout()
+        {
+            FormsAuthentication.SignOut();
+            return RedirectToAction("Login", "Account");
+        }
     }
 }

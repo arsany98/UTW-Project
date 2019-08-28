@@ -71,12 +71,24 @@
                     </div>
                     <div id="navbar" class="navbar-collapse collapse">
                         <ul class="nav navbar-nav navbar-right">
-                            <li class="active"><a href="#" data-nav-section="home"><span>Home</span></a></li>
-                            <li><a href="@Url.Action("Users", "Admin")"><span>Users</span></a></li>
-                            <li><a href="#" data-nav-section="explore"><span>Portfolio</span></a></li>
-                            <li><a href="#" data-nav-section="testimony"><span>Testimony</span></a></li>
-                            <li><a href="#" data-nav-section="pricing"><span>Pricing</span></a></li>
-                            <li><a href="#" data-nav-section="blog"><span>Blog</span></a></li>
+                            @{UTW_Project.Classes.DBManager db = new UTW_Project.Classes.DBManager();} 
+                            @if (db.GetUser(User.Identity.Name).Admin)
+                            {
+                                <li><a href="@Url.Action("Dashboard", "Admin")">Dashboard</a></li>
+                                <li><a href="@Url.Action("Order", "Admin")">Order</a></li>
+                                <li><a href="@Url.Action("Monitor", "Admin")">Monitor</a></li>
+                                <li><a href="@Url.Action("Logout", "Admin")">Logout</a></li>
+                                <li><a href="@Url.Action("Users", "Admin")">Users</a></li>
+
+                            }
+                            else
+                            {
+                                <li><a href="@Url.Action("Dashboard", "User")">Dashboard</a></li>
+                                <li><a href="@Url.Action("Order", "User")">Order</a></li>
+                                <li><a href="@Url.Action("Monitor", "User")">Monitor</a></li>
+                                <li><a href="@Url.Action("Logout", "User")">Logout</a></li>
+                            }
+
                         </ul>
                     </div>
                 </nav>

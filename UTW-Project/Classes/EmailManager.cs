@@ -13,7 +13,7 @@ namespace UTW_Project.Classes
 {
     public class EmailManager
     {
-        public static void SendConfirmationEmailEN(User user, string Url)
+        public static void SendConfirmationEmailEN(User user)
         {
             SmtpSection section = (SmtpSection)ConfigurationManager.GetSection("system.net/mailSettings/smtp");
             string companyEmail = section.Network.UserName;
@@ -25,7 +25,7 @@ namespace UTW_Project.Classes
                 "<BR/> Thank you for your registration, please click on the " +
                 "below link to complete your registration:<BR/><a href =\"{1}\"" +
                 "title =\"User Email Confirm\">{1}</a>",
-                user.FirstNameEN, Url);
+                user.FirstNameEN, user.URL.URL1);
             m.IsBodyHtml = true;
             SmtpClient smcl = new SmtpClient();
             smcl.Host = section.Network.Host;
@@ -35,7 +35,7 @@ namespace UTW_Project.Classes
             smcl.Send(m);
         }
 
-        public static void SendConfirmationEmailAR(User user, string Url)
+        public static void SendConfirmationEmailAR(User user)
         {
             SmtpSection section = (SmtpSection)ConfigurationManager.GetSection("system.net/mailSettings/smtp");
             string companyEmail = section.Network.UserName;
@@ -49,7 +49,7 @@ namespace UTW_Project.Classes
                 "<BR/> Thank you for your registration, please click on the " +
                 "below link to complete your registration:<BR/><a href =\"{1}\"" +
                 "title =\"User Email Confirm\">{1}</a>",
-                user.FirstNameAR, Url);
+                user.FirstNameAR, user.URL.URL1);
             m.IsBodyHtml = true;
 
             SmtpClient smcl = new SmtpClient();
@@ -59,7 +59,7 @@ namespace UTW_Project.Classes
             smcl.EnableSsl = true;
             smcl.Send(m);
         }
-        public static void SendResetPasswordEmailEN(User user, string Url)
+        public static void SendResetPasswordEmailEN(User user)
         {
             SmtpSection section = (SmtpSection)ConfigurationManager.GetSection("system.net/mailSettings/smtp");
             string companyEmail = section.Network.UserName;
@@ -72,7 +72,7 @@ namespace UTW_Project.Classes
                 "click on the link below to reset it:<BR/><a href =\"{1}\"" +
                 "title =\"User Reset Password\">{1}</a>" +
                 "<BR/> If you didn't make this request then you can safely ignore this email.",
-                user.FirstNameEN, Url);
+                user.FirstNameEN, user.URL.URL1);
             m.IsBodyHtml = true;
             SmtpClient smcl = new SmtpClient();
             smcl.Host = section.Network.Host;
@@ -82,7 +82,7 @@ namespace UTW_Project.Classes
             smcl.Send(m);
         }
 
-        public static void SendResetPasswordEmailAR(User user, string Url)
+        public static void SendResetPasswordEmailAR(User user)
         {
             SmtpSection section = (SmtpSection)ConfigurationManager.GetSection("system.net/mailSettings/smtp");
             string companyEmail = section.Network.UserName;
@@ -95,7 +95,7 @@ namespace UTW_Project.Classes
                 "click on the link below to reset it:<BR/><a href =\"{1}\"" +
                 "title =\"User Reset Password\">{1}</a>" +
                 "<BR/> If you didn't make this request then you can safely ignore this email.",
-                user.FirstNameEN, Url);
+                user.FirstNameEN, user.URL.URL1);
             m.IsBodyHtml = true;
             SmtpClient smcl = new SmtpClient();
             smcl.Host = section.Network.Host;

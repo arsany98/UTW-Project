@@ -39,5 +39,11 @@ namespace UTW_Project.Controllers
             db.ActivateUser(username);
             return RedirectToAction("Users");
         }
+
+        public ActionResult Logout()
+        {
+            FormsAuthentication.SignOut();
+            return RedirectToAction("Login");
+        }
     }
 }

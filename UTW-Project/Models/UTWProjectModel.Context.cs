@@ -28,6 +28,7 @@ namespace UTW_Project.Models
         public virtual DbSet<Order> Orders { get; set; }
         public virtual DbSet<Question> Questions { get; set; }
         public virtual DbSet<Stock> Stocks { get; set; }
+        public virtual DbSet<URL> URLs { get; set; }
         public virtual DbSet<User> Users { get; set; }
     }
 }

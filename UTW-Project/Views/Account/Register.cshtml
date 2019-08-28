@@ -2,36 +2,44 @@
 
 @{
     ViewBag.Title = "Register";
-    Layout = "~/Views/Shared/_AccountLayout.cshtml";
+    Layout = "";
 }
+
+
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->
+<link rel="icon" type="image/png" href="~/FrontRegister/images/icons/favicon.ico" />
+<!--===============================================================================================-->
+<link rel="stylesheet" type="text/css" href="~/FrontRegister/vendor/bootstrap/css/bootstrap.min.css">
+<!--===============================================================================================-->
+<link rel="stylesheet" type="text/css" href="~/FrontRegister/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+<!--===============================================================================================-->
+<link rel="stylesheet" type="text/css" href="~/FrontRegister/fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
+<!--===============================================================================================-->
+<link rel="stylesheet" type="text/css" href="~/FrontRegister/fonts/iconic/css/material-design-iconic-font.min.css">
+<!--===============================================================================================-->
+<link rel="stylesheet" type="text/css" href="~/FrontRegister/vendor/animate/animate.css">
+<!--===============================================================================================-->
+<link rel="stylesheet" type="text/css" href="~/FrontRegister/vendor/css-hamburgers/hamburgers.min.css">
+<!--===============================================================================================-->
+<link rel="stylesheet" type="text/css" href="~/FrontRegister/vendor/animsition/css/animsition.min.css">
+<!--===============================================================================================-->
+<link rel="stylesheet" type="text/css" href="~/FrontRegister/vendor/select2/select2.min.css">
+<!--===============================================================================================-->
+<link rel="stylesheet" type="text/css" href="~/FrontRegister/vendor/daterangepicker/daterangepicker.css">
+<!--===============================================================================================-->
+<link rel="stylesheet" type="text/css" href="~/FrontRegister/css/util.css">
+<link rel="stylesheet" type="text/css" href="~/FrontRegister/css/main.css">
+
+
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
 
-    <head>
-        <!--REGISTER===============================================================================================-->
-        <link rel="icon" type="image/png" href="~/FrontRegister/images/icons/favicon.ico" />
-        <!--===============================================================================================-->
-        <link rel="stylesheet" type="text/css" href="~/FrontRegister/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
-        <!--===============================================================================================-->
-        <link rel="stylesheet" type="text/css" href="~/FrontRegister/fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
-        <!--===============================================================================================-->
-        <link rel="stylesheet" type="text/css" href="~/FrontRegister/fonts/iconic/css/material-design-iconic-font.min.css">
-        <!--===============================================================================================-->
-        <link rel="stylesheet" type="text/css" href="~/FrontRegister/vendor/animate/animate.css">
-        <!--===============================================================================================-->
-        <link rel="stylesheet" type="text/css" href="~/FrontRegister/vendor/css-hamburgers/hamburgers.min.css">
-        <!--===============================================================================================-->
-        <link rel="stylesheet" type="text/css" href="~/FrontRegister/vendor/animsition/css/animsition.min.css">
-        <!--===============================================================================================-->
-        <link rel="stylesheet" type="text/css" href="~/FrontRegister/vendor/select2/select2.min.css">
-        <!--===============================================================================================-->
-        <link rel="stylesheet" type="text/css" href="~/FrontRegister/vendor/daterangepicker/daterangepicker.css">
-        <!--===============================================================================================-->
-        <link rel="stylesheet" type="text/css" href="~/FrontRegister/css/util.css">
-        <link rel="stylesheet" type="text/css" href="~/FrontRegister/css/main.css">
-    </head>
+
 
 
     <div class="limiter">
@@ -49,7 +57,7 @@
                             <label style="font-size:15px;color:black;border-bottom:double;border-color:red">@ViewBag.error</label>
                         }
                     </div>
-                    <div class="wrap-input100 m-b-20">
+                    <div class="wrap-input100 m-b-20 validate-input" data-validate="Username is required">
                         <span class="label-input100">Username</span>
                         @Html.EditorFor(model => model.Username, new { htmlAttributes = new { @class = "input100" } })
                         @Html.ValidationMessageFor(model => model.Username, "", new { @class = "text-danger" })
@@ -144,3 +152,21 @@
         </div>
     </div>
 }
+
+
+<!--===============================================================================================-->
+<script src="~/FrontRegister/vendor/jquery/jquery-3.2.1.min.js"></script>
+<!--===============================================================================================-->
+<script src="~/FrontRegister/vendor/animsition/js/animsition.min.js"></script>
+<!--===============================================================================================-->
+<script src="~/FrontRegister/vendor/bootstrap/js/popper.js"></script>
+<script src="~/FrontRegister/vendor/bootstrap/js/bootstrap.min.js"></script>
+<!--===============================================================================================-->
+<script src="~/FrontRegister/vendor/select2/select2.min.js"></script>
+<!--===============================================================================================-->
+<script src="~/FrontRegister/vendor/daterangepicker/moment.min.js"></script>
+<script src="~/FrontRegister/vendor/daterangepicker/daterangepicker.js"></script>
+<!--===============================================================================================-->
+<script src="~/FrontRegister/vendor/countdowntime/countdowntime.js"></script>
+<!--===============================================================================================-->
+<script src="~/FrontRegister/js/main.js"></script>

@@ -2,38 +2,162 @@
 
 <html>
 <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Solid &mdash; Free Fully Responsive HTML5 Template by FREEHTML5.co</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Free HTML5 Template by FreeHTML5.co" />
+    <meta name="keywords" content="free html5, free template, free bootstrap, html5, css3, mobile first, responsive" />
+    <meta name="author" content="FreeHTML5.co" />
+    <!--
+      //////////////////////////////////////////////////////
 
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
-    <link rel="stylesheet" type="text/css" href="~/UsersFront2/css/bootstrap.min.css">
+      FREE HTML5 TEMPLATE
+      DESIGNED & DEVELOPED by FREEHTML5.CO
+
+      Website: 		http://freehtml5.co/
+      Email: 			info@freehtml5.co
+      Twitter: 		http://twitter.com/fh5co
+      Facebook: 		https://www.facebook.com/fh5co
+
+      //////////////////////////////////////////////////////
+       -->
+    <!-- Facebook and Twitter integration -->
+    <meta property="og:title" content="" />
+    <meta property="og:image" content="" />
+    <meta property="og:url" content="" />
+    <meta property="og:site_name" content="" />
+    <meta property="og:description" content="" />
+    <meta name="twitter:title" content="" />
+    <meta name="twitter:image" content="" />
+    <meta name="twitter:url" content="" />
+    <meta name="twitter:card" content="" />
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    <link rel="shortcut icon" href="favicon.ico">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Mono:300,400" rel="stylesheet">
+
+    <!-- Animate.css -->
+    <link rel="stylesheet" href="~/Template/css/animate.css">
+    <!-- Icomoon Icon Fonts-->
+    <link rel="stylesheet" href="~/Template/css/icomoon.css">
+    <!-- Simple Line Icons -->
+    <link rel="stylesheet" href="~/Template/css/simple-line-icons.css">
+    <!-- Bootstrap  -->
+    <link rel="stylesheet" href="~/Template/css/bootstrap.css">
+    <!-- Style -->
+    <link rel="stylesheet" href="~/Template/css/style.css">
+
+
+  
+
+
+
+   <!-- Modernizr JS -->
+    <script src="~/Template/js/modernizr-2.6.2.min.js"></script>
+    <!-- FOR IE9 below -->
+    <!--[if lt IE 9]>
+    <script src="~/Template/js/respond.min.js"></script>
+    <![endif]-->
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-            <div class="container">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    @Html.ActionLink("Application name", "Dashboard", "User", new { area = "" }, new { @class = "navbar-brand" })
+    <header role="banner" id="fh5co-header">
+        <div class="container">
+            <div class="row">
+                <nav class="navbar navbar-default navbar-fixed-top">
+                    <div class="navbar-header">
+                        <!-- Mobile Toggle Menu Button -->
+                        <a href="#" class="js-fh5co-nav-toggle fh5co-nav-toggle" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar"><i></i></a>
+                        <a class="navbar-brand" href="index.html">Solid.</a>
+                    </div>
+                    <div id="navbar" class="navbar-collapse collapse">
+                        <ul class="nav navbar-nav navbar-right">
+                            <li class="active"><a href="#" data-nav-section="home"><span>Home</span></a></li>
+                            <li><a href="@Url.Action("Users", "Admin")"><span>Users</span></a></li>
+                            <li><a href="#" data-nav-section="explore"><span>Portfolio</span></a></li>
+                            <li><a href="#" data-nav-section="testimony"><span>Testimony</span></a></li>
+                            <li><a href="#" data-nav-section="pricing"><span>Pricing</span></a></li>
+                            <li><a href="#" data-nav-section="blog"><span>Blog</span></a></li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </header>
+    <br /><br />
+
+    @RenderBody()
+
+    <div id="fh5co-footer" role="contentinfo">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 animate-box">
+                    <h3 class="section-title">Solid.</h3>
+                    <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics.</p>
+
                 </div>
-                <div class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav">
-                        <li>@Html.ActionLink("Login", "Login", "Account")</li>
-                        <li>@Html.ActionLink("Register", "Register", "Account")</li>
+                <div class="col-md-4 animate-box">
+                    <h3 class="section-title">Our Address</h3>
+                    <ul class="contact-info">
+                        <li><i class="icon-map"></i>198 West 21th Street, Suite 721 New York NY 10016</li>
+                        <li><i class="icon-phone"></i>+ 1235 2355 98</li>
+                        <li><i class="icon-envelope"></i><a href="#">info@yoursite.com</a></li>
+                        <li><i class="icon-globe"></i><a href="#">www.yoursite.com</a></li>
                     </ul>
+                    <h3 class="section-title">Connect with Us</h3>
+                    <ul class="social-media">
+                        <li><a href="#" class="facebook"><i class="icon-facebook"></i></a></li>
+                        <li><a href="#" class="twitter"><i class="icon-twitter"></i></a></li>
+                        <li><a href="#" class="dribbble"><i class="icon-dribbble"></i></a></li>
+                        <li><a href="#" class="github"><i class="icon-github-alt"></i></a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4 animate-box">
+                    <h3 class="section-title">Drop us a line</h3>
+                    <form class="contact-form">
+                        <div class="form-group">
+                            <label for="name" class="sr-only">Name</label>
+                            <input type="name" class="form-control" id="name" placeholder="Name">
+                        </div>
+                        <div class="form-group">
+                            <label for="email" class="sr-only">Email</label>
+                            <input type="email" class="form-control" id="email" placeholder="Email">
+                        </div>
+                        <div class="form-group">
+                            <label for="message" class="sr-only">Message</label>
+                            <textarea class="form-control" id="message" rows="7" placeholder="Message"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" id="btn-submit" class="btn btn-send-message btn-md" value="Send Message">
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <p class="copy-right">
+                        &copy; 2015 Solid Free Template. All Rights Reserved. <br>
+                        Designed by <a href="http://freehtml5.co/" target="_blank">FREEHTML5.co</a>
+                        Demo Images: <a href="http://unsplash.com/" target="_blank">Unsplash</a>
+                    </p>
                 </div>
             </div>
         </div>
-     @RenderBody()
-    <div class="container body-content">
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
     </div>
+
+    <!-- jQuery -->
+    <script src="~/Template/js/jquery.min.js"></script>
+    <!-- jQuery Easing -->
+    <script src="~/Template/js/jquery.easing.1.3.js"></script>
+    <!-- Bootstrap -->
+    <script src="~/Template/js/bootstrap.min.js"></script>
+    <!-- Waypoints -->
+    <script src="~/Template/js/jquery.waypoints.min.js"></script>
+    <!-- Stellar Parallax -->
+    <script src="~/Template/js/jquery.stellar.min.js"></script>
+    <!-- Counters -->
+    <script src="~/Template/js/jquery.countTo.js"></script>
+    <!-- Main JS (Do not remove) -->
+    <script src="~/Template/js/main.js"></script>
 
 </body>
 </html>

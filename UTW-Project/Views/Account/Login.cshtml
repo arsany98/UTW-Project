@@ -1,7 +1,10 @@
 ﻿
 @{
-    ViewBag.Title = "Login";
-    Layout = "~/Views/Shared/_AccountLayout.cshtml";
+                /**/
+
+                ViewBag.Title = "Login";
+                Layout = "";
+
 }
 
 @using CaptchaMvc.HtmlHelpers;
@@ -13,8 +16,13 @@
     @Html.AntiForgeryToken()
 
 
-    <!--SIGN IN===============================================================================================-->
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--===============================================================================================-->
     <link rel="icon" type="image/png" href="~/Front/images/icons/favicon.ico" />
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/Front/vendor/bootstrap/css/bootstrap.min.css">
     <!--===============================================================================================-->
     <link rel="stylesheet" type="text/css" href="~/Front/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
     <!--===============================================================================================-->
@@ -32,12 +40,14 @@
     <!--===============================================================================================-->
     <link rel="stylesheet" type="text/css" href="~/Front/css/util.css">
     <link rel="stylesheet" type="text/css" href="~/Front/css/main.css">
+    <!--===============================================================================================-->
 
-
+ 
 
     <div class="container-login100" style="background-image: url('../../Front/images/bg-01.jpg');" onLoad="ChangeCaptcha()">
 
         <div class="wrap-login100 p-l-55 p-r-55 p-t-80 p-b-30">
+
             <form class="login100-form validate-form">
                 <span class="login100-form-title p-b-37">
                     Sign In
@@ -90,7 +100,7 @@
                     </button>
                 </div>
 
-                
+
                 <div class="text-center">
                     <a href="../Account/ForgetPassword" class="txt2 hov1">
                         Forget Password
@@ -102,13 +112,26 @@
                         Sign Up
                     </a>
                 </div>
+
+                <div class="text-center">
+                   OR
+                </div>
+                <div class="text-center">
+                    <a href="javascript:void(0);" class="txt2 hov1" onclick="history.go(-1);">go back to previous page</a>
+                </div>
+
+
+
             </form>
 
 
         </div>
     </div>
 
-    <!--SIGN IN===============================================================================================-->
+
+
+
+    <!--===============================================================================================-->
     <script src="~/Front/vendor/jquery/jquery-3.2.1.min.js"></script>
     <!--===============================================================================================-->
     <script src="~/Front/vendor/animsition/js/animsition.min.js"></script>
@@ -124,8 +147,6 @@
     <script src="~/Front/vendor/countdowntime/countdowntime.js"></script>
     <!--===============================================================================================-->
     <script src="~/Front/js/main.js"></script>
-
-
 
 
 

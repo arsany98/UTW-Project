@@ -2,12 +2,10 @@
 
 @{
     ViewBag.Title = "Users";
-    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    Layout = "~/Views/Shared/_AccountLayout.cshtml";
 }
 
-    <div style= "background-color:lightblue;padding:10px">
-       
-        <br /><br />
+    <div>
         
         <form class="woocommerce-ordering" method="get">
             <select name="orderby" class="orderby" aria-label="Shop order">
@@ -18,7 +16,7 @@
             </select>
             <input type="hidden" name="paged" value="1">
         </form>
-        <br />
+ 
 
         <aside id="search-2" class="widget widget_search">
             <form role="search" method="get" class="search-form form-inline" action="https://colorlib.com/unite/">
@@ -122,9 +120,13 @@
                             <td class="cell">
                                 @Html.DisplayFor(modelItem => item.Question.QuestionEN)
                             </td>
-                            <td class="cell">
+
+                            @if (item.Blocked == true)
+                            {
+                             <td class="cell">
                                 @Html.ActionLink("Activate", "Activate", new { username = item.Username })
-                            </td>
+                             </td>
+                            }
                         </tr>
                     }
 

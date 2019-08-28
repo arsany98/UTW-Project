@@ -5,35 +5,46 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-    <div>
-        
-        <form class="woocommerce-ordering" method="get">
-            <select name="orderby" class="orderby" aria-label="Shop order">
-                <option value="menu_order" selected="selected">Default sorting</option>
-                <option value="popularity">Sort by Status</option>
-                <option value="rating">Sort by Email</option>
-                <option value="date">Sort by Username</option>
-            </select>
-            <input type="hidden" name="paged" value="1">
-        </form>
+
+@using (Html.BeginForm("Users", "Admin", FormMethod.Post))
+{
+
+<div>
+
  
 
-        <aside id="search-2" class="widget widget_search">
-            <form role="search" method="get" class="search-form form-inline" action="https://colorlib.com/unite/">
-                <label class="sr-only">Search for:</label>
-                <div class="input-group">
-                    <input type="search" value="" name="s" class="search-field form-control" placeholder="filter..">
-                    <span class="input-group-btn">
-                        <button type="submit" class="search-submit btn btn-primary"><span class="glyphicon glyphicon-search"></span></button>
-                    </span>
-                </div>
-            </form>
-        </aside>
+    <div class="wrap-input100">
+        <span class="label-input100">Sort by</span>
+        @Html.DropDownList("selectedMethod", new SelectList(new List<string>() { "Default sorting", "Sort by Email", "Sort by Username", "Sort by Status(active or blocked)" },
 
+                    "Default sorting")
+                   , new { @class = "input100" })
 
+        <span class="focus-input100"></span>
+    </div>
 
+   
+
+    <div class="wrap-input100">
+        <span class="label-input100">Value</span>
+
+        @Html.TextBox("filterValue", "", new { @class = "input100" })
+        <span class="focus-input100"></span>
 
     </div>
+
+    @if (ViewBag.error != null)
+    {
+        <label style="font-size:15px;color:black;border-bottom:double;border-color:red">@ViewBag.error</label><br />
+
+    }
+
+
+    <input type="submit" value="Filter" id="btnSubmit" />
+
+
+
+</div>
 
 
 
@@ -42,9 +53,7 @@
             <div>
                 <table class="table">
                     <tr class="row header btn-dark">
-                        <th class="cell">
-                            @Html.DisplayNameFor(model => model.Username)
-                        </th>
+
                         <th class="cell">
                             @Html.DisplayNameFor(model => model.Email)
                         </th>
@@ -60,33 +69,18 @@
                         <th class="cell">
                             @Html.DisplayNameFor(model => model.LastNameAR)
                         </th>
-                        <th class="cell">
-                            @Html.DisplayNameFor(model => model.Phone)
-                        </th>
-                        <th class="cell">
-                            @Html.DisplayNameFor(model => model.EmailConfirmed)
-                        </th>
-                        <th class="cell">
-                            @Html.DisplayNameFor(model => model.Wallet)
-                        </th>
+
                         <th class="cell">
                             @Html.DisplayNameFor(model => model.Blocked)
                         </th>
-                        <th class="cell">
-                            @Html.DisplayNameFor(model => model.LoginTrials)
-                        </th>
-                        <th class="cell">
-                            @Html.DisplayNameFor(model => model.Question.QuestionEN)
-                        </th>
-                        <th></th>
+
+
                     </tr>
 
                     @foreach (var item in Model)
                     {
                         <tr class="row">
-                            <td class="cell">
-                                @Html.DisplayFor(modelItem => item.Username)
-                            </td>
+
                             <td class="cell">
                                 @Html.DisplayFor(modelItem => item.Email)
                             </td>
@@ -103,29 +97,13 @@
                                 @Html.DisplayFor(modelItem => item.LastNameAR)
                             </td>
                             <td class="cell">
-                                @Html.DisplayFor(modelItem => item.Phone)
-                            </td>
-                            <td class="cell">
-                                @Html.DisplayFor(modelItem => item.EmailConfirmed)
-                            </td>
-                            <td class="cell">
-                                @Html.DisplayFor(modelItem => item.Wallet)
-                            </td>
-                            <td class="cell">
                                 @Html.DisplayFor(modelItem => item.Blocked)
                             </td>
-                            <td class="cell">
-                                @Html.DisplayFor(modelItem => item.LoginTrials)
-                            </td>
-                            <td class="cell">
-                                @Html.DisplayFor(modelItem => item.Question.QuestionEN)
-                            </td>
-
-                            @if (item.Blocked == true)
+                            @if (item !=null && item.Blocked == true)
                             {
-                             <td class="cell">
-                                @Html.ActionLink("Activate", "Activate", new { username = item.Username })
-                             </td>
+                                <td class="cell">
+                                    @Html.ActionLink("Activate", "Activate", new { username = item.Username })
+                                </td>
                             }
                         </tr>
                     }
@@ -134,3 +112,5 @@
             </div>
         </div>
     </div>
+
+}

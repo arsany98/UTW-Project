@@ -10,7 +10,7 @@ using UTW_Project.Models;
 
 namespace UTW_Project.Controllers
 {
-    [Authorize]
+    [Authorize(Users = "admin")]
     public class AdminController : Controller
     {
         private DBManager db = new DBManager();
@@ -85,7 +85,7 @@ namespace UTW_Project.Controllers
         public ActionResult Logout()
         {
             FormsAuthentication.SignOut();
-            return RedirectToAction("Login");
+            return RedirectToAction("Login", "Account");
         }
     }
 }

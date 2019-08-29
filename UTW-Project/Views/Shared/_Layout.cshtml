@@ -74,19 +74,19 @@
                             @{UTW_Project.Classes.DBManager db = new UTW_Project.Classes.DBManager();} 
                             @if (db.GetUser(User.Identity.Name).Admin)
                             {
-                                <li><a href="@Url.Action("Dashboard", "Admin")">Dashboard</a></li>
-                                <li><a href="@Url.Action("Order", "Admin")">Order</a></li>
-                                <li><a href="@Url.Action("Monitor", "Admin")">Monitor</a></li>
-                                <li><a href="@Url.Action("Logout", "Admin")">Logout</a></li>
-                                <li><a href="@Url.Action("Users", "Admin")">Users</a></li>
+                                <li><a class="external" href="@Url.Action("Dashboard", "Admin")">Dashboard</a></li>
+                                <li><a class="external" href="@Url.Action("Order", "Admin")">Order</a></li>
+                                <li><a class="external" href="@Url.Action("Monitor", "Admin")">Monitor</a></li>
+                                <li><a class="external" href="@Url.Action("Logout", "Admin")">Logout</a></li>
+                                <li><a class="external" href="@Url.Action("Users", "Admin")">Users</a></li>
 
                             }
                             else
                             {
-                                <li><a href="@Url.Action("Dashboard", "User")">Dashboard</a></li>
-                                <li><a href="@Url.Action("Order", "User")">Order</a></li>
-                                <li><a href="@Url.Action("Monitor", "User")">Monitor</a></li>
-                                <li><a href="@Url.Action("Logout", "User")">Logout</a></li>
+                                <li><a class="external" href="@Url.Action("Dashboard", "User")">Dashboard</a></li>
+                                <li><a class="external" href="@Url.Action("Order", "User")">Order</a></li>
+                                <li><a class="external" href="@Url.Action("Monitor", "User")">Monitor</a></li>
+                                <li><a class="external" href="@Url.Action("Logout", "User")">Logout</a></li>
                             }
 
                         </ul>

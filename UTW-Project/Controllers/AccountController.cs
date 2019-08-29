@@ -9,7 +9,6 @@ using CaptchaMvc.HtmlHelpers;
 using System.Data.Entity.Validation;
 using System.Web.Security;
 
-
 namespace UTW_Project.Controllers
 {
     public class AccountController : Controller
@@ -61,28 +60,40 @@ namespace UTW_Project.Controllers
                         ViewBag.ShowCaptcha = 0;
                     }
 
-                    string EncryptedPassword = user.MD5Hash(password);
-                    if ((EncryptedPassword!=user.Password) || (!this.IsCaptchaValid("") && (user.LoginTrials > 3 && user.LoginTrials <= 6)))
+                    if(user.Admin)
                     {
-                        ViewBag.error = "Wrong username or password";
-                        if (user.LoginTrials <= 5)
-                        {
-                            db.UpdateTrials(username);
-                        }
+                        if(password != user.Password)
+                            ViewBag.error = "Wrong username or password";
                         else
                         {
-                            user.Blocked = true;
-                            db.UpdateTrials(username);
+                            FormsAuthentication.SetAuthCookie(username, false);
+                            return RedirectToAction("Dashboard", "Admin");
                         }
-                  
                     }
                     else
                     {
-                        db.ActivateUser(username);
-                        FormsAuthentication.SetAuthCookie(username,false);
-                        return RedirectToAction("Dashboard", "User");
+                        string EncryptedPassword = user.MD5Hash(password);
+                        if ((EncryptedPassword!=user.Password) || (!this.IsCaptchaValid("") && (user.LoginTrials > 3 && user.LoginTrials <= 6)))
+                        {
+                            ViewBag.error = "Wrong username or password";
+                            if (user.LoginTrials <= 5)
+                            {
+                                db.UpdateTrials(username);
+                            }
+                            else
+                            {
+                                user.Blocked = true;
+                                db.UpdateTrials(username);
+                            }
+                  
+                        }
+                        else
+                        {
+                            db.ActivateUser(username);
+                            FormsAuthentication.SetAuthCookie(username,false);
+                            return RedirectToAction("Dashboard", "User");
+                        }
                     }
-
                 }
 
             }

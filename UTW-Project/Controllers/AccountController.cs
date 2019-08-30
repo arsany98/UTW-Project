@@ -3,18 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using UTW_Project.Classes;
+
 using CaptchaMvc.HtmlHelpers;
 using System.Data.Entity.Validation;
 using System.Web.Security;
 using DataAccessLayer;
+using BussinessLayer;
 
 namespace UTW_Project.Controllers
 {
     public class AccountController : Controller
     {
 
-        private DBManager db = new DBManager();
+        DBManager db = new BussinessLayer.DBManager();
+        
         [AllowAnonymous]
         public ActionResult Login()
         {

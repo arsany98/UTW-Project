@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
 using DataAccessLayer;
-using UTW_Project.Classes;
+using BussinessLayer;
 
 namespace UTW_Project.Controllers
 {
@@ -27,9 +27,39 @@ namespace UTW_Project.Controllers
             }
             return View();
         }
+
         public ActionResult Monitor()
         {
-            return View();
+            string id = this.HttpContext.User.Identity.Name;
+            int userID = Convert.ToInt32(id);
+            return View(db.getUserTransactions(userID)); //transactions for user
+        }
+
+        [HttpPost]
+        public ActionResult Monitor(DateTime startDate, DateTime endDate)
+        {
+            string id = this.HttpContext.User.Identity.Name;
+            int userID = Convert.ToInt32(id);
+
+            return View(db.getUserTransactions(userID,startDate,endDate)); //transactions for user
+        }
+
+        [HttpPost]
+        public ActionResult Monitor(DateTime startDate, DateTime endDate, string stock)
+        {
+            string id = this.HttpContext.User.Identity.Name;
+            int userID = Convert.ToInt32(id);
+
+            return View(db.getUserTransactions(userID, stock, startDate, endDate)); //transactions for user
+        }
+
+        [HttpPost]
+        public ActionResult Monitor(string stock)
+        {
+            string id = this.HttpContext.User.Identity.Name;
+            int userID = Convert.ToInt32(id);
+
+            return View(db.getUserTransactions(userID, stock)); //transactions for user
         }
 
         public ActionResult Logout()

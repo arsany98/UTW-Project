@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-
+using BussinessLayer;
 using System.Web.Security;
 using DataAccessLayer;
-using BussinessLayer;
+
 
 namespace UTW_Project.Controllers
 {
@@ -26,7 +26,56 @@ namespace UTW_Project.Controllers
         }
         public ActionResult Monitor()
         {
-            return View();
+            return View(db.getUserTransactions());
+        }
+
+        [HttpPost]
+        public ActionResult Monitor(DateTime startDate, DateTime endDate)
+        {
+      
+            return View(db.getUserTransactions(startDate, endDate)); 
+        }
+
+        [HttpPost]
+        public ActionResult Monitor(DateTime startDate, DateTime endDate, string stock)
+        {
+
+            return View(db.getUserTransactions(stock, startDate, endDate)); 
+        }
+
+        [HttpPost]
+        public ActionResult Monitor(string stock)
+        {
+
+            return View(db.getUserTransactions(stock)); 
+        }
+
+        [HttpPost]
+        public ActionResult Monitor(int userID, DateTime startDate, DateTime endDate)
+        {
+
+            return View(db.getUserTransactions(userID, startDate, endDate)); //transactions for user
+        }
+
+        [HttpPost]
+        public ActionResult Monitor(int userID, DateTime startDate, DateTime endDate, string stock)
+        {
+
+            return View(db.getUserTransactions(userID, stock, startDate, endDate)); //transactions for user
+        }
+
+        [HttpPost]
+        public ActionResult Monitor(int userID, string stock)
+        {
+
+            return View(db.getUserTransactions(userID, stock)); //transactions for user
+        }
+
+        [HttpPost]
+        public ActionResult Monitor(int userID)
+        {
+
+            return View(db.getUserTransactions(userID)); //transactions for user
         }
 
         public ActionResult Users()
@@ -87,5 +136,7 @@ namespace UTW_Project.Controllers
             FormsAuthentication.SignOut();
             return RedirectToAction("Login", "Account");
         }
+
+      
     }
 }

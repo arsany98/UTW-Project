@@ -3,20 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-
+using BussinessLayer;
 using CaptchaMvc.HtmlHelpers;
 using System.Data.Entity.Validation;
 using System.Web.Security;
 using DataAccessLayer;
-using BussinessLayer;
 
 namespace UTW_Project.Controllers
 {
     public class AccountController : Controller
     {
 
-        DBManager db = new BussinessLayer.DBManager();
-        
+        private DBManager db = new DBManager();
         [AllowAnonymous]
         public ActionResult Login()
         {
@@ -68,7 +66,7 @@ namespace UTW_Project.Controllers
                             ViewBag.error = "Wrong username or password";
                         else
                         {
-                            FormsAuthentication.SetAuthCookie(username, false);
+                            FormsAuthentication.SetAuthCookie(user.ID.ToString(), false);
                             return RedirectToAction("Dashboard", "Admin");
                         }
                     }

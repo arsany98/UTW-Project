@@ -47,6 +47,9 @@
     <Reference Include="CaptchaMvc, Version=2.5.0.0, Culture=neutral, PublicKeyToken=fe46ad421dd3b0e6, processorArchitecture=MSIL">
       <HintPath>..\packages\CaptchaMvc.Mvc5.1.5.0\lib\net45-full\CaptchaMvc.dll</HintPath>
     </Reference>
+    <Reference Include="DataAccessLayer">
+      <HintPath>..\DataAccessLayer.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -219,16 +222,6 @@
     <Content Include="Front\vendor\select2\select2.min.css" />
     <Content Include="Front\vendor\select2\select2.min.js" />
     <Content Include="Global.asax" />
-    <Content Include="Models\UTWProjectModel.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>UTWProjectModel.Context.cs</LastGenOutput>
-      <DependentUpon>UTWProjectModel.edmx</DependentUpon>
-    </Content>
-    <Content Include="Models\UTWProjectModel.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>UTWProjectModel.edmx</DependentUpon>
-      <LastGenOutput>UTWProjectModel.cs</LastGenOutput>
-    </Content>
     <Content Include="Template\css\animate.css" />
     <Content Include="Template\css\bootstrap.css" />
     <Content Include="Template\css\icomoon.css" />
@@ -286,47 +279,10 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\Order.cs">
-      <DependentUpon>UTWProjectModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Question.cs">
-      <DependentUpon>UTWProjectModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Stock.cs">
-      <DependentUpon>UTWProjectModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\URL.cs">
-      <DependentUpon>UTWProjectModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\User.cs">
-      <DependentUpon>UTWProjectModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\UTWProjectModel.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>UTWProjectModel.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\UTWProjectModel.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>UTWProjectModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\UTWProjectModel.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>UTWProjectModel.edmx</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />
-    <EntityDeploy Include="Models\UTWProjectModel.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>UTWProjectModel.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\UTWProjectModel.edmx.diagram">
-      <DependentUpon>UTWProjectModel.edmx</DependentUpon>
-    </Content>
     <Content Include="Front\fonts\font-awesome-4.7.0\fonts\fontawesome-webfont.eot" />
     <Content Include="Front\fonts\font-awesome-4.7.0\fonts\fontawesome-webfont.ttf" />
     <Content Include="Front\fonts\font-awesome-4.7.0\fonts\fontawesome-webfont.woff" />
@@ -591,6 +547,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

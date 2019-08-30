@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using UTW_Project.Models;
+using DataAccessLayer;
 
 namespace UTW_Project.Classes
 {

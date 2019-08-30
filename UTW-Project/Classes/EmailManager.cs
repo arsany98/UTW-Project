@@ -7,7 +7,7 @@ using System.Net.Configuration;
 using System.Net.Mail;
 using System.Web;
 using System.Web.Mvc;
-using UTW_Project.Models;
+using DataAccessLayer;
 
 namespace UTW_Project.Classes
 {

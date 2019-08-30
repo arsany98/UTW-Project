@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using UTW_Project.Models;
 using UTW_Project.Classes;
 using CaptchaMvc.HtmlHelpers;
 using System.Data.Entity.Validation;
 using System.Web.Security;
+using DataAccessLayer;
 
 namespace UTW_Project.Controllers
 {

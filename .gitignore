@@ -330,3 +330,4 @@ ASALocalRun/
 .mfractor/
 UTW-Project/Web.config
 UTW-Project/Models/UTWProjectModel.Designer.cs
+UTW-Project/Controllers/UserController.cs

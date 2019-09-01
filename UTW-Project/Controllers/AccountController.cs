@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using BussinessLayer;
+using UTW_Project.Models;
+using UTW_Project.Classes;
 using CaptchaMvc.HtmlHelpers;
 using System.Data.Entity.Validation;
 using System.Web.Security;
-using DataAccessLayer;
 
 namespace UTW_Project.Controllers
 {
@@ -27,11 +27,11 @@ namespace UTW_Project.Controllers
         public ActionResult Login(string username, string password)
         {
 
-            if (username!="" && password!="")
+            if (username != "" && password != "")
             {
 
                 User user = db.GetUser(username);
-                if (user==null)
+                if (user == null)
                 {
                     ViewBag.error = "Wrong username or password";
                 }
@@ -51,7 +51,7 @@ namespace UTW_Project.Controllers
                     }
 
 
-                    if (user.LoginTrials>3 && user.LoginTrials<=5)
+                    if (user.LoginTrials > 3 && user.LoginTrials <= 5)
                     {
                         ViewBag.ShowCaptcha = 1;
                     }
@@ -60,9 +60,9 @@ namespace UTW_Project.Controllers
                         ViewBag.ShowCaptcha = 0;
                     }
 
-                    if(user.Admin)
+                    if (user.Admin)
                     {
-                        if(password != user.Password)
+                        if (password != user.Password)
                             ViewBag.error = "Wrong username or password";
                         else
                         {
@@ -73,7 +73,7 @@ namespace UTW_Project.Controllers
                     else
                     {
                         string EncryptedPassword = user.MD5Hash(password);
-                        if ((EncryptedPassword!=user.Password) || (!this.IsCaptchaValid("") && (user.LoginTrials > 3 && user.LoginTrials <= 6)))
+                        if ((EncryptedPassword != user.Password) || (!this.IsCaptchaValid("") && (user.LoginTrials > 3 && user.LoginTrials <= 6)))
                         {
                             ViewBag.error = "Wrong username or password";
                             if (user.LoginTrials <= 5)
@@ -85,12 +85,12 @@ namespace UTW_Project.Controllers
                                 user.Blocked = true;
                                 db.UpdateTrials(username);
                             }
-                  
+
                         }
                         else
                         {
                             db.ActivateUser(username);
-                            FormsAuthentication.SetAuthCookie(username,false);
+                            FormsAuthentication.SetAuthCookie(username, false);
                             return RedirectToAction("Dashboard", "User");
                         }
                     }
@@ -117,15 +117,15 @@ namespace UTW_Project.Controllers
         [AllowAnonymous]
         public ActionResult Register(User user)
         {
-           
+
             ViewBag.QuestionID = db.GetQuestions();
             if (ModelState.IsValid)
             {
                 bool usernameExists = db.UserExists(user.Username);
 
                 bool emailExists = db.HasAccount(user.Email);
-           
-                if(!usernameExists && !emailExists)
+
+                if (!usernameExists && !emailExists)
                 {
                     user.Admin = false;
                     user.Blocked = false;
@@ -143,7 +143,7 @@ namespace UTW_Project.Controllers
                         db.AddURL(url, guid, user);
                         EmailManager.SendConfirmationEmailEN(user);
                     }
-                    catch(DbEntityValidationException e)
+                    catch (DbEntityValidationException e)
                     {
                         foreach (var eve in e.EntityValidationErrors)
                         {
@@ -155,10 +155,10 @@ namespace UTW_Project.Controllers
                                     ve.PropertyName, ve.ErrorMessage);
                             }
                         }
-                        
-                        return View();                    
+
+                        return View();
                     }
-                    catch(Exception e)
+                    catch (Exception e)
                     {
                         ViewBag.error = e.Message;
                         return View();
@@ -188,7 +188,7 @@ namespace UTW_Project.Controllers
                 ViewBag.message = "Url is expired.";
             }
             else if (db.EmailConfirm(user))
-            { 
+            {
                 ViewBag.Message = "Confirmed Successfully";
             }
             else
@@ -209,7 +209,7 @@ namespace UTW_Project.Controllers
         [AllowAnonymous]
         public ActionResult ForgetPassword(string username)
         {
-            if(db.UserExists(username))
+            if (db.UserExists(username))
             {
                 User user = db.GetUser(username);
                 if (user.EmailConfirmed == false)
@@ -235,7 +235,7 @@ namespace UTW_Project.Controllers
         [AllowAnonymous]
         public ActionResult ResetPassword(Guid guid)
         {
-            User user = db.GetUrlUser(guid);           
+            User user = db.GetUrlUser(guid);
             return View(user);
         }
 

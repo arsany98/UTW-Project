@@ -266,6 +266,7 @@ namespace UTW_Project.Controllers
             return View();
         }
 
+        [Authorize]
         public ActionResult Monitor()
         {
             // string id = this.HttpContext.User.Identity.Name;
@@ -279,7 +280,9 @@ namespace UTW_Project.Controllers
             return View(db.getUserTransactions(user.ID)); //transactions for user
         }
 
+        [Authorize]
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Monitor(int userID, DateTime startDate, DateTime endDate, string stock)
         {
             var user = Session["User"] as User;

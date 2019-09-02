@@ -24,61 +24,6 @@ namespace UTW_Project.Controllers
         {
             return View();
         }
-        public ActionResult Monitor()
-        {
-            return View(db.getUserTransactions());
-        }
-
-        [HttpPost]
-        public ActionResult Monitor(int userID, DateTime startDate, DateTime endDate, string stock)
-        {
-            if (userID != null && startDate != null && endDate != null && stock != null)
-            {
-                return View(db.getUserTransactions(userID, stock, startDate, endDate));
-            } //transactions for user
-            else if (userID == null && startDate != null && endDate != null && stock != null)
-            {
-                return View(db.getUserTransactions(stock, startDate, endDate));
-            }
-            ///
-            else if (userID != null && startDate == null && endDate != null && stock != null)
-            {
-                return View(db.getUserTransactions(userID, stock));
-            }
-            else if (userID != null && startDate != null && endDate == null && stock != null)
-            {
-                return View(db.getUserTransactions(userID, stock));
-            }
-            else if (userID != null && startDate != null && endDate != null && stock == null)
-            {
-                return View(db.getUserTransactions(userID, startDate, endDate));
-            }
-            else if (userID == null && startDate == null && endDate != null && stock != null)
-            {
-                return View(db.getUserTransactions(stock));
-            }
-            else if (userID != null && startDate == null && endDate == null && stock != null)
-            {
-                return View(db.getUserTransactions(userID, stock));
-            }
-            else if (userID != null && startDate != null && endDate == null && stock == null)
-            {
-                return View(db.getUserTransactions(userID));
-            }
-            else if (userID != null && startDate != null && endDate != null && stock == null)
-            {
-                return View(db.getUserTransactions(userID, startDate, endDate));
-            }
-            else if (userID == null && startDate != null && endDate != null && stock != null)
-            {
-                return View(db.getUserTransactions(stock, startDate, endDate));
-            }
-            else
-            {
-                return View(db.getUserTransactions());
-            }
-        }
-
 
         public ActionResult Users()
         {

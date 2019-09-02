@@ -10,7 +10,7 @@ using UTW_Project.Classes;
 
 namespace UTW_Project.Controllers
 {
-    [Authorize(Users = "admin")]
+    [Authorize]
     public class AdminController : Controller
     {
         private DBManager db = new DBManager();

@@ -76,6 +76,7 @@ namespace UTW_Project.Controllers
 
         public ActionResult Logout()
         {
+            Session["User"] = null;
             FormsAuthentication.SignOut();
             return RedirectToAction("Login", "Account");
         }

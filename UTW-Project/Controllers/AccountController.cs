@@ -15,6 +15,7 @@ namespace UTW_Project.Controllers
     {
 
         private DBManager db = new DBManager();
+
         [AllowAnonymous]
         public ActionResult Login()
         {
@@ -66,7 +67,8 @@ namespace UTW_Project.Controllers
                             ViewBag.error = "Wrong username or password";
                         else
                         {
-                            FormsAuthentication.SetAuthCookie(user.ID.ToString(), false);
+                            FormsAuthentication.SetAuthCookie(user.Username, false);
+                            Session["User"] = user;
                             return RedirectToAction("Dashboard", "Admin");
                         }
                     }
@@ -91,6 +93,7 @@ namespace UTW_Project.Controllers
                         {
                             db.ActivateUser(username);
                             FormsAuthentication.SetAuthCookie(username, false);
+                            Session["User"] = user;
                             return RedirectToAction("Dashboard", "User");
                         }
                     }
@@ -263,5 +266,139 @@ namespace UTW_Project.Controllers
             return View();
         }
 
+        public ActionResult Monitor()
+        {
+            // string id = this.HttpContext.User.Identity.Name;
+            // int userID = Convert.ToInt32(id);
+            var user = Session["User"] as User;
+            if(user.Admin == true)
+            {
+                return View(db.getUserTransactions());
+            }
+            else 
+            return View(db.getUserTransactions(user.ID)); //transactions for user
+        }
+
+        [HttpPost]
+        public ActionResult Monitor(int userID, DateTime startDate, DateTime endDate, string stock)
+        {
+            var user = Session["User"] as User;
+            if (user.Admin == true)
+            {
+                //no nulls
+                if (userID != 0 && startDate != null && endDate != null && stock != null)
+                {
+                    return View(db.getUserTransactions(userID, stock, startDate, endDate));
+                }
+                //one null
+                else if (userID == 0 && startDate != null && endDate != null && stock != null)
+                {
+                    return View(db.getUserTransactions(stock, startDate, endDate));
+                }
+                else if (userID != 0 && startDate == null && endDate != null && stock != null)
+                {
+                    var startD = new DateTime(1850, 1, 1);
+                    return View(db.getUserTransactions(userID,stock, startD,endDate));
+                }
+                else if (userID != 0 && startDate != null && endDate == null && stock != null)
+                {
+                    return View(db.getUserTransactions(userID, stock, startDate, DateTime.Now));
+                }
+                else if (userID != 0 && startDate != null && endDate != null && stock == null)
+                {
+                    return View(db.getUserTransactions(userID, startDate, endDate));
+                }
+                //two nulls
+                else if (userID == 0 && startDate == null && endDate != null && stock != null)
+                {
+                    var startD = new DateTime(1850, 1, 1);
+                    return View(db.getUserTransactions(stock,startD,endDate));
+                }
+                else if (userID != 0 && startDate == null && endDate == null && stock != null)
+                {
+                    return View(db.getUserTransactions(userID, stock));
+                }
+                else if (userID != 0 && startDate != null && endDate == null && stock == null)
+                {
+                    return View(db.getUserTransactions(userID,startDate,DateTime.Now));
+                }
+                else if (userID == 0 && startDate != null && endDate != null && stock == null)
+                {
+                    return View(db.getUserTransactions( startDate, endDate));//
+                }
+                else if (userID != 0 && startDate == null && endDate != null && stock == null)
+                {
+                    var startD = new DateTime(1850, 1, 1);
+                    return View(db.getUserTransactions(userID, startD, endDate));
+                }
+
+                //three nulls
+                else if (userID == 0 && startDate == null && endDate == null && stock != null)
+                {
+                    return View(db.getUserTransactions(stock));
+                }
+                else if (userID != 0 && startDate == null && endDate == null && stock == null)
+                {
+                    return View(db.getUserTransactions(userID));
+                }
+                else if (userID == 0 && startDate != null && endDate == null && stock == null)
+                {
+                    return View(db.getUserTransactions(startDate,DateTime.Now));
+                }
+                else if (userID == 0 && startDate == null && endDate != null && stock == null)
+                {
+                    var startD = new DateTime(1850, 1, 1);
+                    return View(db.getUserTransactions(startD, endDate));
+                }
+                //four nulls
+                else
+                {
+                    return View(db.getUserTransactions());
+                }
+            }
+            else 
+            {
+                //no nulls
+                if (userID != 0 && startDate != null && endDate != null && stock != null)
+                {
+                    return View(db.getUserTransactions(userID, stock, startDate, endDate));
+                }
+                //one null
+                else if (userID != 0 && startDate == null && endDate != null && stock != null)
+                {
+                    var startD = new DateTime(1850, 1, 1);
+                    return View(db.getUserTransactions(userID, stock, startD, endDate));
+                }
+                else if (userID != 0 && startDate != null && endDate == null && stock != null)
+                {
+                    return View(db.getUserTransactions(userID, stock, startDate, DateTime.Now));
+                }
+                else if (userID != 0 && startDate != null && endDate != null && stock == null)
+                {
+                    return View(db.getUserTransactions(userID, startDate, endDate));
+                }
+                //two nulls
+                
+                else if (userID != 0 && startDate == null && endDate == null && stock != null)
+                {
+                    return View(db.getUserTransactions(userID, stock));
+                }
+                else if (userID != 0 && startDate != null && endDate == null && stock == null)
+                {
+                    return View(db.getUserTransactions(userID, startDate, DateTime.Now));
+                }
+                else if (userID != 0 && startDate == null && endDate != null && stock == null)
+                {
+                    var startD = new DateTime(1850, 1, 1);
+                    return View(db.getUserTransactions(userID, startD,endDate));
+                }
+                //three nulls
+               
+                else 
+                {
+                    return View(db.getUserTransactions(userID));
+                }
+            }
+        }
     }
 }

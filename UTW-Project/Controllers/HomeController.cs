@@ -11,7 +11,7 @@ using System.Web.Security;
 
 namespace UTW_Project.Controllers
 {
-    public class AccountController : Controller
+    public class HomeController : BaseController
     {
 
         private DBManager db = new DBManager();
@@ -69,7 +69,7 @@ namespace UTW_Project.Controllers
                         {
                             FormsAuthentication.SetAuthCookie(user.Username, false);
                             Session["User"] = user;
-                            return RedirectToAction("Dashboard", "Admin");
+                            return RedirectToAction("Dashboard");
                         }
                     }
                     else
@@ -94,7 +94,7 @@ namespace UTW_Project.Controllers
                             db.ActivateUser(username);
                             FormsAuthentication.SetAuthCookie(username, false);
                             Session["User"] = user;
-                            return RedirectToAction("Dashboard", "User");
+                            return RedirectToAction("Dashboard");
                         }
                     }
                 }
@@ -142,7 +142,7 @@ namespace UTW_Project.Controllers
                     {
                         db.Add(user);
                         Guid guid = Guid.NewGuid();
-                        string url = Url.Action("ConfirmEmail", "Account", new { guid }, Request.Url.Scheme);
+                        string url = Url.Action("ConfirmEmail", "Home", new { guid }, Request.Url.Scheme);
                         db.AddURL(url, guid, user);
                         EmailManager.SendConfirmationEmailEN(user);
                     }
@@ -222,7 +222,7 @@ namespace UTW_Project.Controllers
                 else
                 {
                     Guid guid = Guid.NewGuid();
-                    string url = Url.Action("ResetPassword", "Account", new { guid }, Request.Url.Scheme);
+                    string url = Url.Action("ResetPassword", "Home", new { guid }, Request.Url.Scheme);
                     db.AddURL(url, guid, user);
                     EmailManager.SendResetPasswordEmailEN(user);
                     ViewBag.message = "An email has been sent to you to reset your password.";
@@ -259,25 +259,18 @@ namespace UTW_Project.Controllers
             }
             return View(user);
         }
-
-        [Authorize]
-        public ActionResult AccountPage()
-        { 
-            return View();
-        }
-
         [AllowAnonymous]
         public ActionResult Monitor()
         {
             // string id = this.HttpContext.User.Identity.Name;
             // int userID = Convert.ToInt32(id);
             var user = Session["User"] as User;
-            if(user.Admin == true)
+            if (user.Admin == true)
             {
                 return View(db.getUserTransactions());
             }
-            else 
-            return View(db.getUserTransactions(user.ID)); //transactions for user
+            else
+                return View(db.getUserTransactions(user.ID)); //transactions for user
         }
 
         [Authorize]
@@ -301,7 +294,7 @@ namespace UTW_Project.Controllers
                 else if (userID != 0 && startDate == null && endDate != null && stock != null)
                 {
                     var startD = new DateTime(1850, 1, 1);
-                    return View(db.getUserTransactions(userID,stock, startD,endDate));
+                    return View(db.getUserTransactions(userID, stock, startD, endDate));
                 }
                 else if (userID != 0 && startDate != null && endDate == null && stock != null)
                 {
@@ -315,7 +308,7 @@ namespace UTW_Project.Controllers
                 else if (userID == 0 && startDate == null && endDate != null && stock != null)
                 {
                     var startD = new DateTime(1850, 1, 1);
-                    return View(db.getUserTransactions(stock,startD,endDate));
+                    return View(db.getUserTransactions(stock, startD, endDate));
                 }
                 else if (userID != 0 && startDate == null && endDate == null && stock != null)
                 {
@@ -323,11 +316,11 @@ namespace UTW_Project.Controllers
                 }
                 else if (userID != 0 && startDate != null && endDate == null && stock == null)
                 {
-                    return View(db.getUserTransactions(userID,startDate,DateTime.Now));
+                    return View(db.getUserTransactions(userID, startDate, DateTime.Now));
                 }
                 else if (userID == 0 && startDate != null && endDate != null && stock == null)
                 {
-                    return View(db.getUserTransactions( startDate, endDate));//
+                    return View(db.getUserTransactions(startDate, endDate));//
                 }
                 else if (userID != 0 && startDate == null && endDate != null && stock == null)
                 {
@@ -346,7 +339,7 @@ namespace UTW_Project.Controllers
                 }
                 else if (userID == 0 && startDate != null && endDate == null && stock == null)
                 {
-                    return View(db.getUserTransactions(startDate,DateTime.Now));
+                    return View(db.getUserTransactions(startDate, DateTime.Now));
                 }
                 else if (userID == 0 && startDate == null && endDate != null && stock == null)
                 {
@@ -359,7 +352,7 @@ namespace UTW_Project.Controllers
                     return View(db.getUserTransactions());
                 }
             }
-            else 
+            else
             {
                 //no nulls
                 if (userID != 0 && startDate != null && endDate != null && stock != null)
@@ -381,7 +374,7 @@ namespace UTW_Project.Controllers
                     return View(db.getUserTransactions(userID, startDate, endDate));
                 }
                 //two nulls
-                
+
                 else if (userID != 0 && startDate == null && endDate == null && stock != null)
                 {
                     return View(db.getUserTransactions(userID, stock));
@@ -393,15 +386,98 @@ namespace UTW_Project.Controllers
                 else if (userID != 0 && startDate == null && endDate != null && stock == null)
                 {
                     var startD = new DateTime(1850, 1, 1);
-                    return View(db.getUserTransactions(userID, startD,endDate));
+                    return View(db.getUserTransactions(userID, startD, endDate));
                 }
                 //three nulls
-               
-                else 
+
+                else
                 {
                     return View(db.getUserTransactions(userID));
                 }
             }
+        }
+        [Authorize]
+        public ActionResult Dashboard()
+        {
+            return View();
+        }
+        [Authorize]
+        public ActionResult Users()
+        {
+            var users = db.GetUsersList();
+            return View(users);
+        }
+        [HttpPost]
+        [Authorize]
+        public ActionResult Users(string selectedMethod, string filterValue)
+        {
+
+            List<User> users = new List<User>();
+
+            if (filterValue == "" && selectedMethod != "Default sorting")
+            {
+                ViewBag.error = "You have to enter a value to filter with";
+                return View(users);
+            }
+
+            if (selectedMethod == "Sort by Status(active or blocked)")
+            {
+                if (filterValue == "blocked")
+                {
+                    users = db.SelectByStatues(true);
+
+                }
+                else if (filterValue == "active")
+                {
+                    users = db.SelectByStatues(false);
+                }
+
+            }
+            else if (selectedMethod == "Sort by Email")
+            {
+                users.Add(db.SelectByEmail(filterValue));
+            }
+            else if (selectedMethod == "Sort by Username")
+            {
+                users.Add(db.SelectByUsername(filterValue));
+            }
+            else
+            {
+                users = db.GetUsersList();
+            }
+
+
+            return View(users);
+        }
+
+        [Authorize]
+        public ActionResult Activate(string username)
+        {
+            db.ActivateUser(username);
+            return RedirectToAction("Users");
+        }
+        [Authorize]
+        public ActionResult Order(string username, string type, string stockName, int quantity)
+        {
+            if (!db.AddOrder(username, type, stockName, quantity))
+            {
+                ViewBag.error = "You don't have enough money!";
+            }
+            return View();
+        }
+        [Authorize]
+        public ActionResult Logout()
+        {
+            Session["User"] = null;
+            FormsAuthentication.SignOut();
+            return RedirectToAction("Login");
+        }
+        [AllowAnonymous]
+        public ActionResult SetCulture(string culture)
+        {
+            CultureManager.CurrentCulture = culture;
+            Session["CurrentCulture"] = culture;
+            return RedirectToAction("Dashboard");
         }
     }
 }

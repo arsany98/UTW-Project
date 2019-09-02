@@ -1,0 +1,179 @@
+﻿@model UTW_Project.Models.User
+
+@{
+    ViewBag.Title = "Register";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<html dir="@(UTW_Project.Classes.CultureManager.IsRightToLeft() ? "rtl" : "ltr")">
+
+    <head>
+
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!--===============================================================================================-->
+        <link rel="icon" type="image/png" href="~/FrontRegister/images/icons/favicon.ico" />
+        <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="~/FrontRegister/vendor/bootstrap/css/bootstrap.min.css">
+        <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="~/FrontRegister/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+        <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="~/FrontRegister/fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
+        <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="~/FrontRegister/fonts/iconic/css/material-design-iconic-font.min.css">
+        <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="~/FrontRegister/vendor/animate/animate.css">
+        <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="~/FrontRegister/vendor/css-hamburgers/hamburgers.min.css">
+        <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="~/FrontRegister/vendor/animsition/css/animsition.min.css">
+        <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="~/FrontRegister/vendor/select2/select2.min.css">
+        <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="~/FrontRegister/vendor/daterangepicker/daterangepicker.css">
+        <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="~/FrontRegister/css/util.css">
+        <link rel="stylesheet" type="text/css" href="~/FrontRegister/css/main.css">
+
+    </head>
+
+    <body>
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+
+
+
+            <div class="limiter">
+                <div class="container-login100">
+                    <div class="login100-more" style="background-image: url('../../FrontRegister/images/bg-01.jpg');"></div>
+
+                    <div class="wrap-login100 p-l-50 p-r-50 p-t-72 p-b-50">
+                        <form class="login100-form validate-form">
+                            <span class="login100-form-title p-b-59">
+                                Sign Up
+                            </span>
+                            <div>
+                                @if (ViewBag.error != null)
+                                {
+                                    <label style="font-size:15px;color:black;border-bottom:double;border-color:red">@ViewBag.error</label>
+                                }
+                            </div>
+                            <div class="wrap-input100 m-b-20 validate-input" data-validate="Username is required">
+                                <span class="label-input100">Username</span>
+                                @Html.EditorFor(model => model.Username, new { htmlAttributes = new { @class = "input100" } })
+                                @Html.ValidationMessageFor(model => model.Username, "", new { @class = "text-danger" })
+                                <span class="focus-input100"></span>
+                            </div>
+
+                            <div class="wrap-input100 validate-input" data-validate="Password is required">
+                                <span class="label-input100">Password</span><br /><br />
+                                @Html.PasswordFor(model => model.Password, new { htmlAttributes = new { @class = "input100" } })  <br />
+                                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                                <span class="focus-input100"></span>
+
+                            </div>
+
+                            <div class="wrap-input100 validate-input" data-validate="Valid email is required: ex@abc.xyz">
+                                <span class="label-input100">Email</span>
+                                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "input100" } })
+                                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                                <span class="focus-input100"></span>
+                            </div>
+
+                            <div class="wrap-input100 validate-input" data-validate="First Name in English is required">
+                                @Html.LabelFor(model => model.FirstNameEN, new { htmlAttributes = new { @class = "label-input100" } })
+                                @Html.EditorFor(model => model.FirstNameEN, new { htmlAttributes = new { @class = "input100" } })
+                                @Html.ValidationMessageFor(model => model.FirstNameEN, "", new { @class = "text-danger" })
+                                <span class="focus-input100"></span>
+                            </div>
+
+                            <div class="wrap-input100 validate-input" data-validate="Last Name in English is required">
+                                <span class="label-input100">Last Name in English</span>
+                                @Html.EditorFor(model => model.LastNameEN, new { htmlAttributes = new { @class = "input100" } })
+                                @Html.ValidationMessageFor(model => model.LastNameEN, "", new { @class = "text-danger" })
+                                <span class="focus-input100"></span>
+                            </div>
+                            <div class="wrap-input100 validate-input" data-validate="First Name in Arabic">
+                                <span class="label-input100">First Name in Arabic</span>
+                                @Html.EditorFor(model => model.FirstNameAR, new { htmlAttributes = new { @class = "input100" } })
+                                @Html.ValidationMessageFor(model => model.FirstNameAR, "", new { @class = "text-danger" })
+                                <span class="focus-input100"></span>
+                            </div>
+                            <div class="wrap-input100 validate-input" data-validate="Last Name in English is required">
+                                <span class="label-input100">Last Name in Arabic</span>
+                                @Html.EditorFor(model => model.LastNameAR, new { htmlAttributes = new { @class = "input100" } })
+                                @Html.ValidationMessageFor(model => model.LastNameAR, "", new { @class = "text-danger" })
+                                <span class="focus-input100"></span>
+                            </div>
+                            <div class="wrap-input100 validate-input" data-validate="Last Name in English is required">
+                                <span class="label-input100">Phone</span>
+                                @Html.EditorFor(model => model.Phone, new { htmlAttributes = new { @class = "input100" } })
+                                @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })
+                                <span class="focus-input100"></span>
+                            </div>
+
+
+                            <!--Qustions-->
+                            <div class="wrap-input100">
+                                <span class="label-input100">Question</span>
+                                @Html.ValidationMessageFor(model => model.Q_ID, "", new { @class = "text-danger" })
+                                @Html.DropDownListFor(model => model.Q_ID, (ViewBag.QuestionID as List<UTW_Project.Models.Question>).Select(item => new SelectListItem
+                                {
+                                    Value = item.ID.ToString(),
+                                    Text = item.QuestionEN,
+                                }), new { @class = "input100" })
+                                <span class="focus-input100"></span>
+                            </div>
+
+                            <div class="wrap-input100">
+                                <span class="label-input100">Answer</span>
+
+                                @Html.EditorFor(model => model.Answer, new { htmlAttributes = new { @class = "input100" } })
+                                @Html.ValidationMessageFor(model => model.Answer, "", new { @class = "text-danger" })
+                                <span class="focus-input100"></span>
+
+
+                            </div>
+
+                            <div class="container-login100-form-btn">
+                                <div class="wrap-login100-form-btn">
+                                    <div class="login100-form-bgbtn"></div>
+                                    <button class="login100-form-btn">
+                                        Sign Up
+                                    </button>
+                                </div>
+
+                                <a href="../Account/Login" class="dis-block txt3 hov1 p-r-30 p-t-10 p-b-10 p-l-30">
+                                    Sign in
+                                    <i class="fa fa-long-arrow-right m-l-5"></i>
+                                </a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        }
+
+
+        <!--===============================================================================================-->
+        <script src="~/FrontRegister/vendor/jquery/jquery-3.2.1.min.js"></script>
+        <!--===============================================================================================-->
+        <script src="~/FrontRegister/vendor/animsition/js/animsition.min.js"></script>
+        <!--===============================================================================================-->
+        <script src="~/FrontRegister/vendor/bootstrap/js/popper.js"></script>
+        <script src="~/FrontRegister/vendor/bootstrap/js/bootstrap.min.js"></script>
+        <!--===============================================================================================-->
+        <script src="~/FrontRegister/vendor/select2/select2.min.js"></script>
+        <!--===============================================================================================-->
+        <script src="~/FrontRegister/vendor/daterangepicker/moment.min.js"></script>
+        <script src="~/FrontRegister/vendor/daterangepicker/daterangepicker.js"></script>
+        <!--===============================================================================================-->
+        <script src="~/FrontRegister/vendor/countdowntime/countdowntime.js"></script>
+        <!--===============================================================================================-->
+        <script src="~/FrontRegister/js/main.js"></script>
+    </body>
+</html>

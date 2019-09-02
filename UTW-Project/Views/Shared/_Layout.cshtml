@@ -71,23 +71,21 @@
                     </div>
                     <div id="navbar" class="navbar-collapse collapse">
                         <ul class="nav navbar-nav navbar-right">
-                            @{UTW_Project.Classes.DBManager db = new UTW_Project.Classes.DBManager();} 
-                            @if (db.GetUser(User.Identity.Name).Admin)
-                            {
-                                <li><a class="external" href="@Url.Action("Dashboard", "Admin")">Dashboard</a></li>
-                                <li><a class="external" href="@Url.Action("Order", "Admin")">Order</a></li>
-                                <li><a class="external" href="@Url.Action("Monitor", "Admin")">Monitor</a></li>
-                                <li><a class="external" href="@Url.Action("Logout", "Admin")">Logout</a></li>
-                                <li><a class="external" href="@Url.Action("Users", "Admin")">Users</a></li>
 
+                            <li><a class="external" href="@Url.Action("Dashboard", "Home")">Dashboard</a></li>
+                            <li><a class="external" href="@Url.Action("Order", "Home")">Order</a></li>
+                            <li><a class="external" href="@Url.Action("Monitor", "Home")">Monitor</a></li>
+                            <li><a class="external" href="@Url.Action("Logout", "Home")">Logout</a></li>
+                            <li><a class="external" href="@Url.Action("Users", "Home")">Users</a></li>
+                            @if (System.Threading.Thread.CurrentThread.CurrentCulture.Name == "ar")
+                            {
+                                <li><a class="external" href="@Url.Action("SetCulture", "Home", new { culture = "en" }, Request.Url.Scheme)">English</a></li>
                             }
                             else
                             {
-                                <li><a class="external" href="@Url.Action("Dashboard", "User")">Dashboard</a></li>
-                                <li><a class="external" href="@Url.Action("Order", "User")">Order</a></li>
-                                <li><a class="external" href="@Url.Action("Monitor", "User")">Monitor</a></li>
-                                <li><a class="external" href="@Url.Action("Logout", "User")">Logout</a></li>
+                                <li><a class="external" href="@Url.Action("SetCulture", "Home", new { culture = "ar" }, Request.Url.Scheme)">العربية</a></li>
                             }
+
 
                         </ul>
                     </div>

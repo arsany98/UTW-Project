@@ -14,6 +14,7 @@ namespace UTW_Project.Models
     using System.Security.Cryptography;
     using System.Text;
     using System.ComponentModel.DataAnnotations;
+    using Resources;
 
     public partial class User
     {
@@ -37,7 +38,9 @@ namespace UTW_Project.Models
         [EmailAddress]
         public string Email { get; set; }
 
-        [RequiredAttribute(ErrorMessage = "First name in English is Required")]
+        [Display(Name = "FirstName", ResourceType = typeof(Resources))]
+        [RequiredAttribute(ErrorMessageResourceName = "FirstNameENRequired", 
+            ErrorMessageResourceType = typeof(Resources))]
         public string FirstNameEN { get; set; }
 
         [RequiredAttribute(ErrorMessage = "Last name in English is Required")]

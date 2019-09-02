@@ -262,11 +262,11 @@ namespace UTW_Project.Controllers
 
         [Authorize]
         public ActionResult AccountPage()
-        {
+        { 
             return View();
         }
 
-        [Authorize]
+        [AllowAnonymous]
         public ActionResult Monitor()
         {
             // string id = this.HttpContext.User.Identity.Name;

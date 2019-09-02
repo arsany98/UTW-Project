@@ -27,52 +27,7 @@ namespace UTW_Project.Controllers
             return View();
         }
 
-        public ActionResult Monitor()
-        {
-            string id = this.HttpContext.User.Identity.Name;
-            int userID = Convert.ToInt32(id);
-            return View(db.getUserTransactions(userID)); //transactions for user
-        }
-
-        [HttpPost]
-        public ActionResult Monitor(int userID, DateTime startDate, DateTime endDate, string stock)
-        {
-            if (userID != null && startDate != null && endDate != null && stock != null)
-            {
-                return View(db.getUserTransactions(userID, stock, startDate, endDate));
-            } //transactions for user
-
-            ///
-            else if (userID != null && startDate == null && endDate != null && stock != null)
-            {
-                return View(db.getUserTransactions(userID, stock));
-            }
-            else if (userID != null && startDate != null && endDate == null && stock != null)
-            {
-                return View(db.getUserTransactions(userID, stock));
-            }
-            else if (userID != null && startDate != null && endDate != null && stock == null)
-            {
-                return View(db.getUserTransactions(userID, startDate, endDate));
-            }
-
-            else if (userID != null && startDate == null && endDate == null && stock != null)
-            {
-                return View(db.getUserTransactions(userID, stock));
-            }
-            else if (userID != null && startDate != null && endDate == null && stock == null)
-            {
-                return View(db.getUserTransactions(userID));
-            }
-            else if (userID != null && startDate != null && endDate != null && stock == null)
-            {
-                return View(db.getUserTransactions(userID, startDate, endDate));
-            }
-            else
-            {
-                return View(db.getUserTransactions(userID));
-            }
-        }
+      
 
         public ActionResult Logout()
         {

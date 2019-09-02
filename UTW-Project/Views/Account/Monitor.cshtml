@@ -1,0 +1,66 @@
+﻿@model IEnumerable<UTW_Project.Models.Order>
+
+@{
+    ViewBag.Title = "Monitor";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Monitor</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Quantity)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TypeEN)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.StateEN)
+        </th>
+       
+        <th>
+            @Html.DisplayNameFor(model => model.Stock.CompanyEN)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.User.Username)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Quantity)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TypeEN)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.StateEN)
+        </td>
+    
+       
+        <td>
+            @Html.DisplayFor(modelItem => item.Stock.CompanyEN)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.User.Username)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) 
+            
+        </td>
+    </tr>
+}
+
+</table>

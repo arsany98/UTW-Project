@@ -232,6 +232,14 @@
       <DependentUpon>UTWProjectModel.edmx</DependentUpon>
       <LastGenOutput>UTWProjectModel.cs</LastGenOutput>
     </Content>
+    <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\jquery-1.10.2.js" />
+    <Content Include="Scripts\jquery-1.10.2.min.js" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Template\css\animate.css" />
     <Content Include="Template\css\bootstrap.css" />
     <Content Include="Template\css\icomoon.css" />
@@ -585,6 +593,8 @@
     <Content Include="Template\sass\_bootstrap-compass.scss" />
     <Content Include="Template\sass\_bootstrap-mincer.scss" />
     <Content Include="Template\sass\_bootstrap-sprockets.scss" />
+    <Content Include="Views\Account\Monitor.cshtml" />
+    <Content Include="Scripts\jquery-1.10.2.min.map" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

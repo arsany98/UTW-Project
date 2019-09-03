@@ -45,7 +45,7 @@
             <input type="date" name="endDate" value="@DateTime.Now">
         </div>
         <div>
-            <label>Stoke</label> <br />
+            <label>@Resources.Resources.Stock</label> <br />
 
             @Html.DropDownList("stock",
                                      new SelectList(stokeNames),
@@ -58,7 +58,7 @@
             <br />
 
             <button type="submit">
-                Filter
+                @Resources.Resources.Filter
             </button>
         </div>
 
@@ -68,22 +68,22 @@
 <table class="table">
     <tr>
         <th>
-            Username
+            @Resources.Resources.Username
         </th>
         <th>
-            Stock
+            @Resources.Resources.Stock
         </th>
         <th>
-            Quantity
+            @Resources.Resources.Quantity
         </th>
         <th>
-            Date
+            @Resources.Resources.Date
         </th>
         <th>
-            Transaction Type
+            @Resources.Resources.TransactionType
         </th>
         <th>
-            State
+            @Resources.Resources.State
         </th>
 
         <th></th>

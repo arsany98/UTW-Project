@@ -70,12 +70,18 @@
                     </div>
                     <div id="navbar" class="navbar-collapse collapse">
                         <ul class="nav navbar-nav navbar-right">
-
-                            <li><a class="external" href="@Url.Action("Dashboard", "Home")">Dashboard</a></li>
-                            <li><a class="external" href="@Url.Action("Order", "Home")">Order</a></li>
-                            <li><a class="external" href="@Url.Action("Monitor", "Home")">Monitor</a></li>
-                            <li><a class="external" href="@Url.Action("Logout", "Home")">Logout</a></li>
-                            <li><a class="external" href="@Url.Action("Users", "Home")">Users</a></li>
+                            @if(Session["User"] != null)
+                            {
+                                UTW_Project.Models.User user = Session["User"] as UTW_Project.Models.User;
+                                <li><a class="external" href="@Url.Action("Dashboard", "Home")">@Resources.Resources.Dashboard</a></li>
+                                <li><a class="external" href="@Url.Action("Order", "Home")">@Resources.Resources.Order</a></li>
+                                <li><a class="external" href="@Url.Action("Monitor", "Home")">@Resources.Resources.Monitor</a></li>
+                                if(user.Admin)
+                                {
+                                    <li><a class="external" href="@Url.Action("Users", "Home")">@Resources.Resources.Users</a></li>
+                                }
+                                <li><a class="external" href="@Url.Action("Logout", "Home")">@Resources.Resources.Logout</a></li>
+                            }
                             @if (System.Threading.Thread.CurrentThread.CurrentCulture.Name == "ar")
                             {
                                 <li><a class="external" href="@Url.Action("SetCulture", "Home", new { culture = "en" }, Request.Url.Scheme)">English</a></li>

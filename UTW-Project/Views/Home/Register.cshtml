@@ -19,7 +19,7 @@
             <div class="wrap-login100 p-l-50 p-r-50 p-t-72 p-b-50">
                 <form class="login100-form validate-form">
                     <span class="login100-form-title p-b-59">
-                        Sign Up
+                        @Resources.Resources.SignUp
                     </span>
                     <div>
                         @if (ViewBag.error != null)
@@ -27,55 +27,56 @@
                             <label style="font-size:15px;color:black;border-bottom:double;border-color:red">@ViewBag.error</label>
                         }
                     </div>
-                    <div class="wrap-input100 m-b-20 validate-input" data-validate="Username is required">
-                        <span class="label-input100">Username</span>
+                    <div class="wrap-input100 m-b-20 validate-input" data-validate="@Resources.Resources.UsernameRequired">
+                        @Html.LabelFor(model => model.Username, new { htmlAttributes = new { @class = "label-input100" } })
                         @Html.EditorFor(model => model.Username, new { htmlAttributes = new { @class = "input100" } })
                         @Html.ValidationMessageFor(model => model.Username, "", new { @class = "text-danger" })
                         <span class="focus-input100"></span>
                     </div>
 
-                    <div class="wrap-input100 validate-input" data-validate="Password is required">
-                        <span class="label-input100">Password</span><br /><br />
+                    <div class="wrap-input100 validate-input" data-validate="@Resources.Resources.PasswordRequired">
+                        @Html.LabelFor(model => model.Password, new { htmlAttributes = new { @class = "label-input100" } })
+                        <br />
                         @Html.PasswordFor(model => model.Password, new { htmlAttributes = new { @class = "input100" } })  <br />
                         @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
                         <span class="focus-input100"></span>
 
                     </div>
 
-                    <div class="wrap-input100 validate-input" data-validate="Valid email is required: ex@abc.xyz">
-                        <span class="label-input100">Email</span>
+                    <div class="wrap-input100 validate-input" data-validate="@Resources.Resources.EmailRequired">
+                        @Html.LabelFor(model => model.Email, new { htmlAttributes = new { @class = "label-input100" } })
                         @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "input100" } })
                         @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
                         <span class="focus-input100"></span>
                     </div>
 
-                    <div class="wrap-input100 validate-input" data-validate="First Name in English is required">
+                    <div class="wrap-input100 validate-input" data-validate="@Resources.Resources.FirstNameENRequired">
                         @Html.LabelFor(model => model.FirstNameEN, new { htmlAttributes = new { @class = "label-input100" } })
                         @Html.EditorFor(model => model.FirstNameEN, new { htmlAttributes = new { @class = "input100" } })
                         @Html.ValidationMessageFor(model => model.FirstNameEN, "", new { @class = "text-danger" })
                         <span class="focus-input100"></span>
                     </div>
 
-                    <div class="wrap-input100 validate-input" data-validate="Last Name in English is required">
-                        <span class="label-input100">Last Name in English</span>
+                    <div class="wrap-input100 validate-input" data-validate="@Resources.Resources.LastNameENRequired">
+                        @Html.LabelFor(model => model.LastNameEN, new { htmlAttributes = new { @class = "label-input100" } })
                         @Html.EditorFor(model => model.LastNameEN, new { htmlAttributes = new { @class = "input100" } })
                         @Html.ValidationMessageFor(model => model.LastNameEN, "", new { @class = "text-danger" })
                         <span class="focus-input100"></span>
                     </div>
-                    <div class="wrap-input100 validate-input" data-validate="First Name in Arabic">
-                        <span class="label-input100">First Name in Arabic</span>
+                    <div class="wrap-input100 validate-input" data-validate="@Resources.Resources.FirstNameARRequired">
+                        @Html.LabelFor(model => model.FirstNameAR, new { htmlAttributes = new { @class = "label-input100" } })
                         @Html.EditorFor(model => model.FirstNameAR, new { htmlAttributes = new { @class = "input100" } })
                         @Html.ValidationMessageFor(model => model.FirstNameAR, "", new { @class = "text-danger" })
                         <span class="focus-input100"></span>
                     </div>
-                    <div class="wrap-input100 validate-input" data-validate="Last Name in English is required">
-                        <span class="label-input100">Last Name in Arabic</span>
+                    <div class="wrap-input100 validate-input" data-validate="@Resources.Resources.LastNameARRequired">
+                        @Html.LabelFor(model => model.LastNameAR, new { htmlAttributes = new { @class = "label-input100" } })
                         @Html.EditorFor(model => model.LastNameAR, new { htmlAttributes = new { @class = "input100" } })
                         @Html.ValidationMessageFor(model => model.LastNameAR, "", new { @class = "text-danger" })
                         <span class="focus-input100"></span>
                     </div>
-                    <div class="wrap-input100 validate-input" data-validate="Last Name in English is required">
-                        <span class="label-input100">Phone</span>
+                    <div class="wrap-input100 validate-input" data-validate="@Resources.Resources.PhoneMaxLength">
+                        @Html.LabelFor(model => model.Phone, new { htmlAttributes = new { @class = "label-input100" } })
                         @Html.EditorFor(model => model.Phone, new { htmlAttributes = new { @class = "input100" } })
                         @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })
                         <span class="focus-input100"></span>
@@ -83,20 +84,19 @@
 
 
                     <!--Qustions-->
-                    <div class="wrap-input100">
-                        <span class="label-input100">Question</span>
+                    <div class="wrap-input100 validate-input" data-validate="@Resources.Resources.QuestionRequired">
+                        @Html.LabelFor(model => model.Q_ID, new { htmlAttributes = new { @class = "label-input100" } })
                         @Html.ValidationMessageFor(model => model.Q_ID, "", new { @class = "text-danger" })
                         @Html.DropDownListFor(model => model.Q_ID, (ViewBag.QuestionID as List<UTW_Project.Models.Question>).Select(item => new SelectListItem
                         {
                             Value = item.ID.ToString(),
-                            Text = item.QuestionEN,
+                            Text = System.Threading.Thread.CurrentThread.CurrentCulture.Name == "en"? item.QuestionEN:item.QuestionAR,
                         }), new { @class = "input100" })
                         <span class="focus-input100"></span>
                     </div>
 
-                    <div class="wrap-input100">
-                        <span class="label-input100">Answer</span>
-
+                    <div class="wrap-input100 validate-input" data-validate="@Resources.Resources.AnswerRequired">
+                        @Html.LabelFor(model => model.Answer, new { htmlAttributes = new { @class = "label-input100" } })
                         @Html.EditorFor(model => model.Answer, new { htmlAttributes = new { @class = "input100" } })
                         @Html.ValidationMessageFor(model => model.Answer, "", new { @class = "text-danger" })
                         <span class="focus-input100"></span>
@@ -108,12 +108,12 @@
                         <div class="wrap-login100-form-btn">
                             <div class="login100-form-bgbtn"></div>
                             <button class="login100-form-btn">
-                                Sign Up
+                                @Resources.Resources.SignUp
                             </button>
                         </div>
 
                         <a href="../Home/Login" class="dis-block txt3 hov1 p-r-30 p-t-10 p-b-10 p-l-30">
-                            Sign in
+                            @Resources.Resources.SignIn
                             <i class="fa fa-long-arrow-right m-l-5"></i>
                         </a>
                     </div>

@@ -20,17 +20,17 @@
 
             <form class="login100-form validate-form">
                 <span class="login100-form-title p-b-37">
-                    Sign In
+                    @Resources.Resources.SignIn
                 </span>
 
-                <span style="font-size:medium;color:gray">Username</span>
+                <span style="font-size:medium;color:gray">@Resources.Resources.Username</span>
                 <div class="wrap-input100 m-b-20">
 
                     @Html.TextBox("username", null, new { @class = "input100" })
                     <span class="focus-input100"></span>
                 </div>
 
-                <span style="font-size:medium;color:gray">Password</span>
+                <span style="font-size:medium;color:gray">@Resources.Resources.Password</span>
                 <div class="wrap-input100 m-b-25">
 
                     @Html.Password("password", null, new { @class = "input100" })
@@ -66,20 +66,20 @@
 
                 <div class="container-login100-form-btn">
                     <button class="login100-form-btn">
-                        Sign In
+                        @Resources.Resources.SignIn
                     </button>
                 </div>
 
 
                 <div class="text-center">
                     <a href="../Home/ForgetPassword" class="txt2 hov1">
-                        Forget Password
+                        @Resources.Resources.ForgetPassword
                     </a>
                 </div>
 
                 <div class="text-center">
                     <a href="../Home/Register" class="txt2 hov1">
-                        Sign Up
+                        @Resources.Resources.SignUp
                     </a>
                 </div>
 

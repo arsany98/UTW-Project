@@ -25,38 +25,51 @@ namespace UTW_Project.Models
         }
 
         public int ID { get; set; }
-
-        [RequiredAttribute]
+        [Display(Name = "Username", ResourceType = typeof(Resources))]
+        [RequiredAttribute(ErrorMessageResourceName = "UsernameRequired",
+            ErrorMessageResourceType = typeof(Resources))]
         public string Username { get; set; }
-
-        [RequiredAttribute]
-        [MinLength(8, ErrorMessage = "Password must be at least 8 characters")]
+        [Display(Name = "Password", ResourceType = typeof(Resources))]
+        [RequiredAttribute(ErrorMessageResourceName = "PasswordRequired",
+            ErrorMessageResourceType = typeof(Resources))]
+        [MinLength(8, ErrorMessageResourceName = "PasswordMinLength",
+            ErrorMessageResourceType =typeof(Resources))]
         //[RegularExpression(@"^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,20}$", ErrorMessage = "Password must contain: Minimum 8 characters at least 1 Alphabet and 1 Number")]
         public string Password { get; set; }
 
-        [RequiredAttribute]
+        [Display(Name = "Email", ResourceType = typeof(Resources))]
+        [RequiredAttribute(ErrorMessageResourceName = "EmailRequired",
+            ErrorMessageResourceType = typeof(Resources))]
         [EmailAddress]
         public string Email { get; set; }
 
-        [Display(Name = "FirstName", ResourceType = typeof(Resources))]
+        [Display(Name = "FirstNameEN", ResourceType = typeof(Resources))]
         [RequiredAttribute(ErrorMessageResourceName = "FirstNameENRequired", 
             ErrorMessageResourceType = typeof(Resources))]
         public string FirstNameEN { get; set; }
-
-        [RequiredAttribute(ErrorMessage = "Last name in English is Required")]
+        [Display(Name = "LastNameEN", ResourceType = typeof(Resources))]
+        [RequiredAttribute(ErrorMessageResourceName = "LastNameENRequired",
+            ErrorMessageResourceType = typeof(Resources))]
         public string LastNameEN { get; set; }
-
-        [RequiredAttribute(ErrorMessage = "First name in Arabic is Required")]
+        [Display(Name = "FirstNameAR", ResourceType = typeof(Resources))]
+        [RequiredAttribute(ErrorMessageResourceName = "FirstNameARRequired",
+            ErrorMessageResourceType = typeof(Resources))]
         public string FirstNameAR { get; set; }
-
-        [RequiredAttribute(ErrorMessage = "Last name in Arabic is Required")]
+        [Display(Name = "LastNameAR", ResourceType = typeof(Resources))]
+        [RequiredAttribute(ErrorMessageResourceName = "LastNameARRequired",
+            ErrorMessageResourceType = typeof(Resources))]
         public string LastNameAR { get; set; }
-
-        [MaxLength(11, ErrorMessage = "Phone must be 11 numbers")]
+        [Display(Name = "Phone", ResourceType = typeof(Resources))]
+        [MaxLength(11, ErrorMessageResourceName = "PhoneMaxLength",
+            ErrorMessageResourceType =typeof(Resources))]
         public string Phone { get; set; }
-
+        [Display(Name = "Question", ResourceType = typeof(Resources))]
+        [RequiredAttribute(ErrorMessageResourceName = "QuestionRequired",
+            ErrorMessageResourceType = typeof(Resources))]
         public int Q_ID { get; set; }
-        [RequiredAttribute]
+        [Display(Name = "Answer", ResourceType = typeof(Resources))]
+        [RequiredAttribute(ErrorMessageResourceName = "AnswerRequired",
+            ErrorMessageResourceType = typeof(Resources))]
         public string Answer { get; set; }
         public bool EmailConfirmed { get; set; }
         public decimal Wallet { get; set; }

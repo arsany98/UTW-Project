@@ -117,10 +117,130 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="FirstName" xml:space="preserve">
-    <value>الاسم الأول</value>
+  <data name="Answer" xml:space="preserve">
+    <value>الإجابة</value>
+  </data>
+  <data name="AnswerRequired" xml:space="preserve">
+    <value>ادخل الإجابة</value>
+  </data>
+  <data name="ConfirmEmail" xml:space="preserve">
+    <value>تأكيد البريد الالكتروني</value>
+  </data>
+  <data name="Dashboard" xml:space="preserve">
+    <value>الصفحة الرئيسية</value>
+  </data>
+  <data name="Date" xml:space="preserve">
+    <value>تاريخ</value>
+  </data>
+  <data name="Email" xml:space="preserve">
+    <value>البريد الالكتروني</value>
+  </data>
+  <data name="EmailRequired" xml:space="preserve">
+    <value>ادخل البريد الالكتروني</value>
+  </data>
+  <data name="ExpiredUrl" xml:space="preserve">
+    <value>هذا الرايط منتهي</value>
+  </data>
+  <data name="Filter" xml:space="preserve">
+    <value>تنقية</value>
+  </data>
+  <data name="FindAcc" xml:space="preserve">
+    <value>ابحث عن حسابك</value>
+  </data>
+  <data name="FirstNameAR" xml:space="preserve">
+    <value>الاسم الاول باللغة العربية</value>
+  </data>
+  <data name="FirstNameARRequired" xml:space="preserve">
+    <value>ادخل الاسم الاول باللغة العربية</value>
+  </data>
+  <data name="FirstNameEN" xml:space="preserve">
+    <value>الاسم الاول باللغة الانجليزية</value>
   </data>
   <data name="FirstNameENRequired" xml:space="preserve">
     <value>ادخل الاسم الأول باللغة الإنجليزية</value>
+  </data>
+  <data name="ForgetPassword" xml:space="preserve">
+    <value>نسيت كلمة المرور</value>
+  </data>
+  <data name="LastNameAR" xml:space="preserve">
+    <value>الاسم الاخير باللغة العربية</value>
+  </data>
+  <data name="LastNameARRequired" xml:space="preserve">
+    <value>ادخل الاسم الاخير باللغة العربية</value>
+  </data>
+  <data name="LastNameEN" xml:space="preserve">
+    <value>الاسم الاخير باللغة الانجليزية</value>
+  </data>
+  <data name="LastNameENRequired" xml:space="preserve">
+    <value>ادخل الاسم الاخير باللغة الانجليزية</value>
+  </data>
+  <data name="Logout" xml:space="preserve">
+    <value>تسجيل الخروج</value>
+  </data>
+  <data name="Monitor" xml:space="preserve">
+    <value>رصد</value>
+  </data>
+  <data name="NewPassword" xml:space="preserve">
+    <value>كلمة المرور الجديدة</value>
+  </data>
+  <data name="Order" xml:space="preserve">
+    <value>طلب</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>كلمة المرور</value>
+  </data>
+  <data name="PasswordMinLength" xml:space="preserve">
+    <value>يجب أن تكون كلمة المرور 8 احرف على الأقل</value>
+  </data>
+  <data name="PasswordRequired" xml:space="preserve">
+    <value>ادخل كلمة المرور</value>
+  </data>
+  <data name="Phone" xml:space="preserve">
+    <value>الهاتف</value>
+  </data>
+  <data name="PhoneMaxLength" xml:space="preserve">
+    <value>يجب ان يكون الهاتف 11 رقم </value>
+  </data>
+  <data name="Quantity" xml:space="preserve">
+    <value>كمية</value>
+  </data>
+  <data name="Question" xml:space="preserve">
+    <value>السؤال</value>
+  </data>
+  <data name="QuestionRequired" xml:space="preserve">
+    <value>اختر السؤال</value>
+  </data>
+  <data name="Reset" xml:space="preserve">
+    <value>اعادة الضبط</value>
+  </data>
+  <data name="ResetPassword" xml:space="preserve">
+    <value>اعادة ضبط كلمة المرور</value>
+  </data>
+  <data name="Search" xml:space="preserve">
+    <value>بحث</value>
+  </data>
+  <data name="SignIn" xml:space="preserve">
+    <value>تسجيل الدخول</value>
+  </data>
+  <data name="SignUp" xml:space="preserve">
+    <value>التسجيل</value>
+  </data>
+  <data name="State" xml:space="preserve">
+    <value>الحالة</value>
+  </data>
+  <data name="Stock" xml:space="preserve">
+    <value>سهم</value>
+  </data>
+  <data name="TransactionType" xml:space="preserve">
+    <value>نوع العملية</value>
+  </data>
+  <data name="Username" xml:space="preserve">
+    <value>اسم المستخدم</value>
+  </data>
+  <data name="UsernameRequired" xml:space="preserve">
+    <value>ادخل اسم المستخدم</value>
+  </data>
+  <data name="Users" xml:space="preserve">
+    <value>المستخدمين</value>
   </data>
 </root>

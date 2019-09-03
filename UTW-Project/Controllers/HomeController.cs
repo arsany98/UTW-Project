@@ -259,7 +259,7 @@ namespace UTW_Project.Controllers
             }
             return View(user);
         }
-        [AllowAnonymous]
+        [Authorize]
         public ActionResult Monitor()
         {
             // string id = this.HttpContext.User.Identity.Name;
@@ -275,73 +275,74 @@ namespace UTW_Project.Controllers
 
         [Authorize]
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Monitor(int userID, DateTime startDate, DateTime endDate, string stock)
+        public ActionResult Monitor(int userID, DateTime? startDate, DateTime? endDate, string stock)
         {
             var user = Session["User"] as User;
+
+
             if (user.Admin == true)
             {
                 //no nulls
-                if (userID != 0 && startDate != null && endDate != null && stock != null)
+                if (userID != 0 && startDate != null && endDate != null && stock != "all")
                 {
                     return View(db.getUserTransactions(userID, stock, startDate, endDate));
                 }
                 //one null
-                else if (userID == 0 && startDate != null && endDate != null && stock != null)
+                else if (userID == 0 && startDate != null && endDate != null && stock != "all")
                 {
                     return View(db.getUserTransactions(stock, startDate, endDate));
                 }
-                else if (userID != 0 && startDate == null && endDate != null && stock != null)
+                else if (userID != 0 && startDate == null && endDate != null && stock != "all")
                 {
                     var startD = new DateTime(1850, 1, 1);
                     return View(db.getUserTransactions(userID, stock, startD, endDate));
                 }
-                else if (userID != 0 && startDate != null && endDate == null && stock != null)
+                else if (userID != 0 && startDate != null && endDate == null && stock != "all")
                 {
                     return View(db.getUserTransactions(userID, stock, startDate, DateTime.Now));
                 }
-                else if (userID != 0 && startDate != null && endDate != null && stock == null)
+                else if (userID != 0 && startDate != null && endDate != null && stock == "all")
                 {
                     return View(db.getUserTransactions(userID, startDate, endDate));
                 }
                 //two nulls
-                else if (userID == 0 && startDate == null && endDate != null && stock != null)
+                else if (userID == 0 && startDate == null && endDate != null && stock != "all")
                 {
                     var startD = new DateTime(1850, 1, 1);
                     return View(db.getUserTransactions(stock, startD, endDate));
                 }
-                else if (userID != 0 && startDate == null && endDate == null && stock != null)
+                else if (userID != 0 && startDate == null && endDate == null && stock != "all")
                 {
                     return View(db.getUserTransactions(userID, stock));
                 }
-                else if (userID != 0 && startDate != null && endDate == null && stock == null)
+                else if (userID != 0 && startDate != null && endDate == null && stock == "all")
                 {
                     return View(db.getUserTransactions(userID, startDate, DateTime.Now));
                 }
-                else if (userID == 0 && startDate != null && endDate != null && stock == null)
+                else if (userID == 0 && startDate != null && endDate != null && stock == "all")
                 {
                     return View(db.getUserTransactions(startDate, endDate));//
                 }
-                else if (userID != 0 && startDate == null && endDate != null && stock == null)
+                else if (userID != 0 && startDate == null && endDate != null && stock == "all")
                 {
                     var startD = new DateTime(1850, 1, 1);
                     return View(db.getUserTransactions(userID, startD, endDate));
                 }
 
                 //three nulls
-                else if (userID == 0 && startDate == null && endDate == null && stock != null)
+                else if (userID == 0 && startDate == null && endDate == null && stock != "all")
                 {
                     return View(db.getUserTransactions(stock));
                 }
-                else if (userID != 0 && startDate == null && endDate == null && stock == null)
+                else if (userID != 0 && startDate == null && endDate == null && stock == "all")
                 {
                     return View(db.getUserTransactions(userID));
                 }
-                else if (userID == 0 && startDate != null && endDate == null && stock == null)
+                else if (userID == 0 && startDate != null && endDate == null && stock == "all")
                 {
                     return View(db.getUserTransactions(startDate, DateTime.Now));
                 }
-                else if (userID == 0 && startDate == null && endDate != null && stock == null)
+                else if (userID == 0 && startDate == null && endDate != null && stock == "all")
                 {
                     var startD = new DateTime(1850, 1, 1);
                     return View(db.getUserTransactions(startD, endDate));
@@ -355,35 +356,35 @@ namespace UTW_Project.Controllers
             else
             {
                 //no nulls
-                if (userID != 0 && startDate != null && endDate != null && stock != null)
+                if (userID != 0 && startDate != null && endDate != null && stock != "all")
                 {
                     return View(db.getUserTransactions(userID, stock, startDate, endDate));
                 }
                 //one null
-                else if (userID != 0 && startDate == null && endDate != null && stock != null)
+                else if (userID != 0 && startDate == null && endDate != null && stock != "all")
                 {
                     var startD = new DateTime(1850, 1, 1);
                     return View(db.getUserTransactions(userID, stock, startD, endDate));
                 }
-                else if (userID != 0 && startDate != null && endDate == null && stock != null)
+                else if (userID != 0 && startDate != null && endDate == null && stock != "all")
                 {
                     return View(db.getUserTransactions(userID, stock, startDate, DateTime.Now));
                 }
-                else if (userID != 0 && startDate != null && endDate != null && stock == null)
+                else if (userID != 0 && startDate != null && endDate != null && stock == "all")
                 {
                     return View(db.getUserTransactions(userID, startDate, endDate));
                 }
                 //two nulls
 
-                else if (userID != 0 && startDate == null && endDate == null && stock != null)
+                else if (userID != 0 && startDate == null && endDate == null && stock != "all")
                 {
                     return View(db.getUserTransactions(userID, stock));
                 }
-                else if (userID != 0 && startDate != null && endDate == null && stock == null)
+                else if (userID != 0 && startDate != null && endDate == null && stock == "all")
                 {
                     return View(db.getUserTransactions(userID, startDate, DateTime.Now));
                 }
-                else if (userID != 0 && startDate == null && endDate != null && stock == null)
+                else if (userID != 0 && startDate == null && endDate != null && stock == "all")
                 {
                     var startD = new DateTime(1850, 1, 1);
                     return View(db.getUserTransactions(userID, startD, endDate));
@@ -396,7 +397,8 @@ namespace UTW_Project.Controllers
                 }
             }
         }
-        [Authorize]
+    
+    [Authorize]
         public ActionResult Dashboard()
         {
             return View();

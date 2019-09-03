@@ -1,5 +1,4 @@
 ﻿@model IEnumerable<UTW_Project.Models.Order>
-
 @{
     ViewBag.Title = "Monitor";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -7,60 +6,114 @@
 
 <h2>Monitor</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+@{
+    bool enableID = false;
+    var user = Session["User"] as UTW_Project.Models.User;
+    enableID = user.Admin;
+}
+
+@{
+    // will be edited after adding dll
+    var db = new UTW_Project.Classes.DBManager();
+    List<string> stokeNames = db.getStockNamesen();
+    stokeNames.Add("all");
+}
+
+
+
+@using (Html.BeginForm("Monitor", "Account"))
+{
+
+    <div style="margin-left:20px;">
+        <div>
+            <label> User ID </label> <br />
+            @{
+                string read = "readonly";
+                if (user.Admin) { read = "false"; }
+
+            }
+
+            @Html.TextBox("userID", user.ID, new { @class = "form-control", @readonly = read })
+
+        </div>
+        <div>
+            <label> From </label> <br />
+            <input type="date" name="startDate" value="1-1-1850">
+        </div>
+        <div>
+            <label> To </label> <br />
+            <input type="date" name="endDate" value="@DateTime.Now">
+        </div>
+        <div>
+            <label>Stoke</label> <br />
+
+            @Html.DropDownList("stock",
+                                     new SelectList(stokeNames),
+                                     null,
+                                     new { @class = "form-control" })
+        </div>
+
+        <div>
+            <br />
+            <br />
+
+            <button type="submit">
+                Filter
+            </button>
+        </div>
+
+    </div>
+}
+
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Quantity)
+            Username
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Date)
+            Stock
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.TypeEN)
+            Quantity
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.StateEN)
-        </th>
-       
-        <th>
-            @Html.DisplayNameFor(model => model.Stock.CompanyEN)
+            Date
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.User.Username)
+            Transaction Type
         </th>
+        <th>
+            State
+        </th>
+
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Quantity)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Date)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TypeEN)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.StateEN)
-        </td>
-    
-       
-        <td>
-            @Html.DisplayFor(modelItem => item.Stock.CompanyEN)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.User.Username)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) 
-            
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.User.Username)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Stock.CompanyEN)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Quantity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TypeEN)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StateEN)
+            </td>
+
+
+
+        </tr>
+    }
 
 </table>

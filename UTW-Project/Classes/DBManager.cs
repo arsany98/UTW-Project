@@ -181,7 +181,6 @@ namespace UTW_Project.Classes
             return true;
         }
 
-
         //User
         // Monitor Transactions: Gets Orders by specific User 
         public List<Order> getUserTransactions(int id)
@@ -192,7 +191,7 @@ namespace UTW_Project.Classes
 
         //User, Admin
         // Monitor Transactions: Gets Orders by specific User and between two dates
-        public List<Order> getUserTransactions(int id, DateTime startDate, DateTime endDate)
+        public List<Order> getUserTransactions(int id, DateTime? startDate, DateTime? endDate)
         {
             if (startDate <= endDate)
             {
@@ -209,27 +208,50 @@ namespace UTW_Project.Classes
         //Gets stock id for stock with specific name
         public int getStockID(string name)
         {
-            var query = from u in Db.Stocks where u.CompanyEN == name || u.CompanyAR == name select u.ID;
-            return query.FirstOrDefault();
+            if (name != null)
+            {
+                var query = from u in Db.Stocks where u.CompanyEN == name || u.CompanyAR == name select u.ID;
+                return query.FirstOrDefault();
+            }
+            else return 0;
         }
         //User, Admin
         // Monitor Transactions: Gets Orders by specific User and for specific stock
         public List<Order> getUserTransactions(int id, string stock)
         {
-            var query = from u in Db.Orders where u.U_ID == id && u.S_ID == getStockID(stock) select u;
+            var stockID = getStockID(stock);
+            var query = from u in Db.Orders where u.U_ID == id && u.S_ID == stockID select u;
             return query.ToList();
         }
 
         //User, Admin 
         // Monitor Transactions: Gets Orders by specific User and for specific stock
-        public List<Order> getUserTransactions(int id, string stock, DateTime startDate, DateTime endDate)
+        public List<Order> getUserTransactions(int id, string stock, DateTime? startDate, DateTime? endDate)
         {
-            if (startDate <= endDate)
+            var stockID = getStockID(stock);
+            if (startDate != null && endDate != null)
             {
-                var query = from u in Db.Orders where u.U_ID == id && u.S_ID == getStockID(stock) && (u.Date >= startDate && u.Date <= endDate) select u;
-                return query.ToList();
+                if (startDate <= endDate)
+                {
+                    var query = from u in Db.Orders where u.U_ID == id && u.S_ID == stockID && (u.Date >= startDate && u.Date <= endDate) select u;
+                    return query.ToList();
+                }
             }
-            else return getUserTransactions(id, stock);
+            else if (startDate == null && endDate != null)
+            {
+
+                var query = from u in Db.Orders where u.U_ID == id && u.S_ID == stockID && (u.Date <= endDate) select u;
+                return query.ToList();
+
+            }
+            else if (startDate != null && endDate == null)
+            {
+
+                var query = from u in Db.Orders where u.U_ID == id && u.S_ID == stockID && u.Date >= startDate select u;
+                return query.ToList();
+
+            }
+            return getUserTransactions(id, stock);
         }
 
         //Admin
@@ -242,7 +264,7 @@ namespace UTW_Project.Classes
 
         //Admin
         // Monitor Transactions: Gets Orders by all Users and between two dates
-        public List<Order> getUserTransactions(DateTime startDate, DateTime endDate)
+        public List<Order> getUserTransactions(DateTime? startDate, DateTime? endDate)
         {
             if (startDate <= endDate)
             {
@@ -260,21 +282,38 @@ namespace UTW_Project.Classes
         // Monitor Transactions: Gets Orders for specific stock
         public List<Order> getUserTransactions(string stock)
         {
-            var query = from u in Db.Orders where u.S_ID == getStockID(stock) select u;
+            var stockID = getStockID(stock);
+            var query = from u in Db.Orders where u.S_ID == stockID select u;
             return query.ToList();
         }
 
         //Admin 
         // Monitor Transactions: Gets Orders for specific stock
-        public List<Order> getUserTransactions(string stock, DateTime startDate, DateTime endDate)
+        public List<Order> getUserTransactions(string stock, DateTime? startDate, DateTime? endDate)
         {
+            var stockID = getStockID(stock);
             if (startDate <= endDate)
             {
-                var query = from u in Db.Orders where u.S_ID == getStockID(stock) && (u.Date >= startDate && u.Date <= endDate) select u;
+                var query = from u in Db.Orders where u.S_ID == stockID && (u.Date >= startDate && u.Date <= endDate) select u;
                 return query.ToList();
             }
             else return getUserTransactions(stock);
         }
 
+        //Get a list of stock names en
+        public List<string> getStockNamesen()
+        {
+            var query = from u in Db.Stocks select u.CompanyEN;
+            List<string> englishNames = query.ToList();
+            return englishNames;
+        }
+
+        //Get a list of stock names ar
+        public List<string> getStockNamesar()
+        {
+            var query = from u in Db.Stocks select u.CompanyAR;
+            List<string> arabicNames = query.ToList();
+            return arabicNames;
+        }
     }
 }

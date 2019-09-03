@@ -8,7 +8,7 @@ using UTW_Project.Classes;
 using CaptchaMvc.HtmlHelpers;
 using System.Data.Entity.Validation;
 using System.Web.Security;
-
+using System.Web;
 namespace UTW_Project.Controllers
 {
     public class HomeController : BaseController
@@ -398,11 +398,52 @@ namespace UTW_Project.Controllers
             }
         }
     
-    [Authorize]
+        [Authorize]
         public ActionResult Dashboard()
         {
+            User user = Session["User"] as User;
+            List<Order> TodaysOrders = new List<Order>();
+            List<Order> StockOrders = new List<Order>();
+            List<PieChartElement> pieChartElements = new List<PieChartElement>();
+            
+
+            if (user!=null && !user.Admin)
+            {
+                TodaysOrders = db.GetTodayOrdersForUser(user);
+
+                StockOrders = db.GetAllStocksForUser(user);
+
+                pieChartElements = db.GetChartDataForUser(user);
+
+                ViewBag.TodaysOrders = TodaysOrders;
+                ViewBag.StockOrders = StockOrders;
+
+
+
+                for(int i=0; i<pieChartElements.Count; i++)
+                {
+                    pieChartElements[i].Stock = db.GetStock(pieChartElements[i].ID);
+                }
+
+                
+
+
+
+
+                ViewBag.pieChartElements = pieChartElements;
+                
+
+            }
+            else
+            {
+               return RedirectToAction("Login", "Home");
+            }
+
+            
             return View();
         }
+
+
         [Authorize]
         public ActionResult Users()
         {
@@ -458,15 +499,21 @@ namespace UTW_Project.Controllers
             db.ActivateUser(username);
             return RedirectToAction("Users");
         }
-        [Authorize]
-        public ActionResult Order(string username, string type, string stockName, int quantity)
+        //[Authorize]
+        //public ActionResult Order(string username, string type, string stockName, int quantity)
+        //{
+        //    if (!db.AddOrder(username, type, stockName, quantity))
+        //    {
+        //        ViewBag.error = "You don't have enough money!";
+        //    }
+        //    return View();
+        //}
+
+        public ActionResult Order()
         {
-            if (!db.AddOrder(username, type, stockName, quantity))
-            {
-                ViewBag.error = "You don't have enough money!";
-            }
             return View();
         }
+
         [Authorize]
         public ActionResult Logout()
         {

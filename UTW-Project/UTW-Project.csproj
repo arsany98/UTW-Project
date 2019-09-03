@@ -16,7 +16,7 @@
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <UseIISExpress>true</UseIISExpress>
     <Use64BitIISExpress />
-    <IISExpressSSLPort>44308</IISExpressSSLPort>
+    <IISExpressSSLPort>44340</IISExpressSSLPort>
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
@@ -305,6 +305,7 @@
     <Compile Include="Classes\CultureManager.cs" />
     <Compile Include="Classes\DBManager.cs" />
     <Compile Include="Classes\EmailManager.cs" />
+    <Compile Include="Classes\PieChartElement.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Global.asax.cs">
@@ -498,7 +499,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Home\ForgetPassword.cshtml" />
     <Content Include="Views\Home\ResetPassword.cshtml" />
-    <Content Include="Views\Home\Dashboard.cshtml" />
     <Content Include="Views\Home\Order.cshtml" />
     <Content Include="Views\Home\Users.cshtml" />
     <Content Include="Template\.DS_Store" />
@@ -603,6 +603,7 @@
     <Content Include="Template\sass\_bootstrap-sprockets.scss" />
     <Content Include="Views\Home\Monitor.cshtml" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+    <Content Include="Views\Home\Dashboard.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

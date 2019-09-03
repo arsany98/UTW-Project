@@ -44,7 +44,7 @@ namespace UTW_Project.Models
         public string Email { get; set; }
 
         [Display(Name = "FirstNameEN", ResourceType = typeof(Resources))]
-        [RequiredAttribute(ErrorMessageResourceName = "FirstNameENRequired", 
+        [RequiredAttribute(ErrorMessageResourceName = "FirstNameENRequired",
             ErrorMessageResourceType = typeof(Resources))]
         public string FirstNameEN { get; set; }
         [Display(Name = "LastNameEN", ResourceType = typeof(Resources))]

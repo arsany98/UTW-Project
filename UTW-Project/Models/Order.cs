@@ -23,6 +23,7 @@ namespace UTW_Project.Models
         public string StateEN { get; set; }
         public string TypeAR { get; set; }
         public string StateAR { get; set; }
+        public decimal Price { get; set; }
     
         public virtual Stock Stock { get; set; }
         public virtual User User { get; set; }

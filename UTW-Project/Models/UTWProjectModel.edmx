@@ -18,6 +18,7 @@
           <Property Name="StateEN" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="TypeAR" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="StateAR" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Price" Type="money" Nullable="false" />
         </EntityType>
         <EntityType Name="Question">
           <Key>
@@ -181,6 +182,7 @@
           <Property Name="StateAR" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Stock" Relationship="UTWProjectModel.FK_Order_Stock" FromRole="Order" ToRole="Stock" />
           <NavigationProperty Name="User" Relationship="UTWProjectModel.FK_Order_User" FromRole="Order" ToRole="User" />
+          <Property Name="Price" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
         </EntityType>
         <EntityType Name="Question">
           <Key>
@@ -294,6 +296,7 @@
           <EntitySetMapping Name="Orders">
             <EntityTypeMapping TypeName="UTWProjectModel.Order">
               <MappingFragment StoreEntitySet="Order">
+                <ScalarProperty Name="Price" ColumnName="Price" />
                 <ScalarProperty Name="StateAR" ColumnName="StateAR" />
                 <ScalarProperty Name="TypeAR" ColumnName="TypeAR" />
                 <ScalarProperty Name="StateEN" ColumnName="StateEN" />

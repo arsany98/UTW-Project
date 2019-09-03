@@ -299,7 +299,6 @@ namespace UTW_Project.Classes
             }
             else return getUserTransactions(stock);
         }
-
         //Get a list of stock names en
         public List<string> getStockNamesen()
         {
@@ -315,5 +314,63 @@ namespace UTW_Project.Classes
             List<string> arabicNames = query.ToList();
             return arabicNames;
         }
+
+
+        //Dashboard
+        //--------------------------------------------------------------------------------------------------------//
+       
+        public List<Order> GetTodayOrdersForUser(User user)
+        {
+            List<Order> orders = new List<Order>();
+           
+            var query = from o in Db.Orders where 
+                       o.Date.Day == DateTime.Now.Day &&
+                       o.Date.Month == DateTime.Now.Month &&
+                       o.Date.Year == DateTime.Now.Year && 
+                       user.ID==o.U_ID select o;
+            orders = query.ToList();
+            return orders;
+
+        }
+
+        public List<Order> GetAllStocksForUser(User user)
+        {
+            List<Order> stockOrders = new List<Order>();
+            var query = from s in Db.Orders where s.U_ID == user.ID select s;
+            stockOrders = query.ToList();
+            return stockOrders;
+
+        }
+
+        public List<PieChartElement> GetChartDataForUser(User user)
+        {
+
+            List<PieChartElement> pieChartElements = new List<PieChartElement>();
+
+            
+            var query = from o in Db.Orders
+                        where o.U_ID == user.ID
+                        group o by o.S_ID into x
+                        select new PieChartElement
+                        {
+                            ID = x.Key,
+                            TotalQuantity = x.Select(f => f.Quantity).Sum()
+
+                        };
+
+            pieChartElements = query.ToList();
+
+
+            return pieChartElements;
+            
+        }
+
+        public Stock GetStock(int ID)
+        {
+            return Db.Stocks.Find(ID);
+        }
+
+
+
     }
 }

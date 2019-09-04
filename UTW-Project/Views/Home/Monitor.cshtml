@@ -90,6 +90,9 @@
             @Resources.Resources.Date
         </th>
         <th>
+            Stoke Price
+        </th>
+        <th>
             @Resources.Resources.TransactionType
         </th>
         <th>
@@ -101,29 +104,32 @@
 
     @foreach (var item in Model)
     {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.User.Username)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Stock.CompanyEN)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Quantity)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Date)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TypeEN)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.StateEN)
-            </td>
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.User.Username)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Stock.CompanyEN)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Quantity)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Price)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TypeEN)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.StateEN)
+        </td>
 
 
 
-        </tr>
+    </tr>
     }
 
 </table>

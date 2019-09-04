@@ -137,22 +137,64 @@ namespace UTW_Project.Classes
             return query.FirstOrDefault();
         }
 
+        public User getUserByID(int id)
+        {
+            var q = from u in Db.Users where u.ID == id select u;
+
+            return q.FirstOrDefault();
+        }
+
+        public decimal BalanceBefore(User user, Order id)
+        {
+            return 0;
+        }
+
         public void updateOrder(int id, int quantity)
         {
+            User user = getUserByID(id);
             Order order = Search(id);
+
+            user.Wallet -= (quantity - order.Quantity) * order.Price; //Casting
             order.Quantity = quantity;
             Db.SaveChanges();
 
         }
 
-        public List<Order> ValidToUpdate()
+        //Order
+        public List<Order> ValidToUpdate(User user)
         {
+
+
             var date = DateTime.Now.Date;
-            var query = from o in Db.Orders where o.Date == date select o;
+            var query = from o in Db.Orders where o.Date == date && o.U_ID == user.ID select o;
             return query.ToList();
         }
 
-        public bool AddOrder(string username, string type, string stockName, int quantity)
+        //Order
+        public bool hasStocks(string username, string stockName, int quantity)
+        {
+            User user = GetUser(username);
+            Stock stock = GetStock(stockName);
+
+            List<int> Buy = new List<int>();
+            List<int> Sell = new List<int>();
+            var q = from o in Db.Orders where o.U_ID == user.ID && o.S_ID == stock.ID && o.TypeEN == "Buy" select o.Quantity;
+            Buy = q.ToList();
+            var qu = from o in Db.Orders where o.U_ID == user.ID && o.S_ID == stock.ID && o.TypeEN == "Sell" select o.Quantity;
+            Sell = qu.ToList();
+            int B = Buy.Sum();
+            int S = Sell.Sum();
+
+            int availableStocks = B - S;
+            if (availableStocks >= quantity)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        //Order
+        public bool AddOrder(string username, string type, string stockName, int quantity, decimal price)
         {
             User user = GetUser(username);
             Stock stock = GetStock(stockName);
@@ -168,6 +210,7 @@ namespace UTW_Project.Classes
             order.Date = DateTime.Now.Date;
             order.StateEN = "A";
             order.TypeEN = type;
+            order.Price = price;
 
             if (type == "Buy")
             {
@@ -175,10 +218,28 @@ namespace UTW_Project.Classes
                 {
                     return false;
                 }
+                else
+                {
+                    user.Wallet -= quantity * stock.Price;
+                    Db.Orders.Add(order);
+                    Db.SaveChanges();
+                    return true;
+                }
             }
-            Db.Orders.Add(order);
-            Db.SaveChanges();
-            return true;
+            else if (type == "Sell")
+            {
+                if (hasStocks(username, stockName, quantity))
+                {
+                    user.Wallet += quantity * stock.Price;
+                    Db.Orders.Add(order);
+                    Db.SaveChanges();
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            return false;
         }
 
         //User
@@ -318,16 +379,18 @@ namespace UTW_Project.Classes
 
         //Dashboard
         //--------------------------------------------------------------------------------------------------------//
-       
+
         public List<Order> GetTodayOrdersForUser(User user)
         {
             List<Order> orders = new List<Order>();
-           
-            var query = from o in Db.Orders where 
-                       o.Date.Day == DateTime.Now.Day &&
-                       o.Date.Month == DateTime.Now.Month &&
-                       o.Date.Year == DateTime.Now.Year && 
-                       user.ID==o.U_ID select o;
+
+            var query = from o in Db.Orders
+                        where
+   o.Date.Day == DateTime.Now.Day &&
+   o.Date.Month == DateTime.Now.Month &&
+   o.Date.Year == DateTime.Now.Year &&
+   user.ID == o.U_ID
+                        select o;
             orders = query.ToList();
             return orders;
 
@@ -337,8 +400,7 @@ namespace UTW_Project.Classes
         {
             List<Order> stockOrders = new List<Order>();
             var query = from s in Db.Orders where s.U_ID == user.ID select s;
-            stockOrders= (query.GroupBy(o => o.S_ID).Select(g => g.FirstOrDefault())).ToList();
-            
+            stockOrders = query.ToList();
             return stockOrders;
 
         }
@@ -355,29 +417,15 @@ namespace UTW_Project.Classes
                         select new PieChartElement
                         {
                             ID = x.Key,
-                            TotalQuantity = x.Select(f => f.Quantity).Sum(),
-
-
+                            TotalQuantity = x.Select(f => f.Quantity).Sum()
 
                         };
-
-            //var query = from o in Db.Orders
-            //            where o.U_ID == user.ID
-
-            //            select new PieChartElement
-            //            {
-            //                ID = x.Key,
-            //                TotalQuantity = x.Select(f => f.Quantity).Sum(),
-
-
-
-            //            };
 
             pieChartElements = query.ToList();
 
 
             return pieChartElements;
-            
+
         }
 
         public Stock GetStock(int ID)

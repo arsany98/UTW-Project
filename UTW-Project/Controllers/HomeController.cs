@@ -505,6 +505,49 @@ namespace UTW_Project.Controllers
             db.ActivateUser(username);
             return RedirectToAction("Users");
         }
+        public ActionResult Order()
+        {
+            var user = Session["User"] as User;
+            if (user.Admin) { RedirectToAction("Monitor"); }
+            List<Order> Valid = db.ValidToUpdate(user);
+            return View(Valid);
+        }
+        [HttpPost]
+        public ActionResult Order(string username, string type, string stockName, int quantity, decimal price)
+        {
+            if (!db.AddOrder(username, type, stockName, quantity, price))
+            {
+                ViewBag.error = "You don't have enough money or stocks to complete the current transaction!";
+            }
+            var user = Session["User"] as User;
+            if (user.Admin) { RedirectToAction("Monitor"); }
+            List<Order> Valid = db.ValidToUpdate(user);
+            return View(Valid);
+        }
+        [HttpPost]
+        public ActionResult Order(int orderID)
+        {
+            Order order = db.Search(orderID);
+            List<Order> o = new List<Order>();
+            o.Add(order);
+            return View(o);
+        }
+
+        [Authorize]
+        public ActionResult UpdateOrder(int orderID)
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [Authorize]
+        public ActionResult UpdateOrder(int orderID, int quantity)
+        {
+            db.updateOrder(orderID, quantity);
+            return View();
+        }
+        [Authorize]
+ 
         //[Authorize]
         //public ActionResult Order(string username, string type, string stockName, int quantity)
         //{
@@ -515,10 +558,7 @@ namespace UTW_Project.Controllers
         //    return View();
         //}
 
-        public ActionResult Order()
-        {
-            return View();
-        }
+
 
         [Authorize]
         public ActionResult Logout()

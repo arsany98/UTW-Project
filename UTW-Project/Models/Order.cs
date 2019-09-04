@@ -24,6 +24,7 @@ namespace UTW_Project.Models
         public string TypeAR { get; set; }
         public string StateAR { get; set; }
         public decimal Price { get; set; }
+        public decimal U_Ballance { get; set; }
     
         public virtual Stock Stock { get; set; }
         public virtual User User { get; set; }

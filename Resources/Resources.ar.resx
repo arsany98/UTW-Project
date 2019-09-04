@@ -162,6 +162,9 @@
   <data name="ForgetPassword" xml:space="preserve">
     <value>نسيت كلمة المرور</value>
   </data>
+  <data name="From" xml:space="preserve">
+    <value>من</value>
+  </data>
   <data name="LastNameAR" xml:space="preserve">
     <value>الاسم الاخير باللغة العربية</value>
   </data>
@@ -230,6 +233,12 @@
   </data>
   <data name="Stock" xml:space="preserve">
     <value>سهم</value>
+  </data>
+  <data name="StockPrice" xml:space="preserve">
+    <value>سعر السهم</value>
+  </data>
+  <data name="To" xml:space="preserve">
+    <value>إلى</value>
   </data>
   <data name="TransactionType" xml:space="preserve">
     <value>نوع العملية</value>

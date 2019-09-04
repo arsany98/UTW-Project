@@ -162,6 +162,9 @@
   <data name="ForgetPassword" xml:space="preserve">
     <value>Forget Password</value>
   </data>
+  <data name="From" xml:space="preserve">
+    <value>From</value>
+  </data>
   <data name="LastNameAR" xml:space="preserve">
     <value>Last Name in Arabic</value>
   </data>
@@ -230,6 +233,12 @@
   </data>
   <data name="Stock" xml:space="preserve">
     <value>Stock</value>
+  </data>
+  <data name="StockPrice" xml:space="preserve">
+    <value>Stock Price</value>
+  </data>
+  <data name="To" xml:space="preserve">
+    <value>To</value>
   </data>
   <data name="TransactionType" xml:space="preserve">
     <value>Transaction Type</value>

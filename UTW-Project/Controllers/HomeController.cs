@@ -572,7 +572,7 @@ namespace UTW_Project.Controllers
         {
             CultureManager.CurrentCulture = culture;
             Session["CurrentCulture"] = culture;
-            return RedirectToAction("Dashboard");
+            return Redirect(Request.UrlReferrer.ToString());
         }
     }
 }

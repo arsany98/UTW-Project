@@ -9,7 +9,7 @@ namespace UTW_Project.Classes
     {
         public int ID { get; set; }
         public decimal TotalQuantity { get; set; }
-
+       
         public virtual Stock Stock { get; set; }
     }
 }

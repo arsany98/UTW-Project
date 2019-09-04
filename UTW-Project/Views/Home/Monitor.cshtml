@@ -4,7 +4,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Monitor</h2>
+
 
 @{
     bool enableID = false;
@@ -24,7 +24,8 @@
 @using (Html.BeginForm("Monitor", "Home"))
 {
 
-    <div style="margin-left:20px;">
+    <div class="col-md-4 animate-box fadeInUp animated-fast" style="background-color:#41444B;padding:20px;margin-bottom:20px">
+        <h3 class="section-title whitelabel">Monitor</h3>
         <div>
             <label> User ID </label> <br />
             @{
@@ -32,37 +33,46 @@
                 if (user.Admin) { read = "false"; }
 
             }
-
-            @Html.TextBox("userID", user.ID, new { @class = "form-control", @readonly = read })
-
+            <div class="form-group">
+                @Html.TextBox("userID", user.ID, new { @class = "form-control", @readonly = read })
+            </div>
         </div>
-        <div>
-            <label> From </label> <br />
-            <input type="date" name="startDate" value="1-1-1850">
-        </div>
-        <div>
-            <label> To </label> <br />
-            <input type="date" name="endDate" value="@DateTime.Now">
-        </div>
-        <div>
-            <label>@Resources.Resources.Stock</label> <br />
+            
+            <div>
+                <label> From </label> <br />
+                <div class="form-group">
+                     <input type="date" name="startDate" value="1-1-1850">
+                </div>
+            </div>
+            <div>
+                <label> To </label> <br />
+                <input type="date" name="endDate" value="@DateTime.Now">
+            </div>
+            <div>
+                <label>@Resources.Resources.Stock</label> <br />
+                <div class="form-group">
+                    @Html.DropDownList("stock",
+                                             new SelectList(stokeNames),
+                                             null,
+                                             new { @class = "form-control" })
+                </div>
+            </div>
 
-            @Html.DropDownList("stock",
-                                     new SelectList(stokeNames),
-                                     null,
-                                     new { @class = "form-control" })
-        </div>
+            <div>
 
-        <div>
-            <br />
-            <br />
 
-            <button type="submit">
-                @Resources.Resources.Filter
-            </button>
-        </div>
 
-    </div>
+
+                <br />
+
+
+                <button type="submit" id="btn-submit" class="btn btn-send-message btn-md button">
+                    @Resources.Resources.Filter
+                </button>
+
+            </div>
+
+            </div>
 }
 
 <table class="table">

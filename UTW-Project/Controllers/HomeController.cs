@@ -60,21 +60,21 @@ namespace UTW_Project.Controllers
                     {
                         ViewBag.ShowCaptcha = 0;
                     }
-
+                    string EncryptedPassword = user.MD5Hash(password);
                     if (user.Admin)
                     {
-                        if (password != user.Password)
+                        if (EncryptedPassword != user.Password)
                             ViewBag.error = "Wrong username or password";
                         else
                         {
                             FormsAuthentication.SetAuthCookie(user.Username, false);
                             Session["User"] = user;
-                            return RedirectToAction("Dashboard");
+                            return RedirectToAction("Dashboard", "Home");
                         }
                     }
                     else
                     {
-                        string EncryptedPassword = user.MD5Hash(password);
+                        
                         if ((EncryptedPassword != user.Password) || (!this.IsCaptchaValid("") && (user.LoginTrials > 3 && user.LoginTrials <= 6)))
                         {
                             ViewBag.error = "Wrong username or password";
@@ -166,7 +166,7 @@ namespace UTW_Project.Controllers
                         ViewBag.error = e.Message;
                         return View();
                     }
-                    return RedirectToAction("AccountPage");
+                    return RedirectToAction("Dashboard");
                 }
                 else if (usernameExists)
                 {
@@ -425,20 +425,17 @@ namespace UTW_Project.Controllers
                     pieChartElements[i].Stock = db.GetStock(pieChartElements[i].ID);
                 }
 
-                
-
-
-
-
                 ViewBag.pieChartElements = pieChartElements;
-                
-
+ 
+            }
+            else if (user != null && user.Admin)
+            {
+               return RedirectToAction("Users", "Home");
             }
             else
             {
-               return RedirectToAction("Login", "Home");
+                return RedirectToAction("Login", "Home");
             }
-
             
             return View();
         }
@@ -447,6 +444,10 @@ namespace UTW_Project.Controllers
         [Authorize]
         public ActionResult Users()
         {
+            if ((Session["User"] as User).Admin == false)
+            {
+               return Logout();
+            }
             var users = db.GetUsersList();
             return View(users);
         }
@@ -454,6 +455,11 @@ namespace UTW_Project.Controllers
         [Authorize]
         public ActionResult Users(string selectedMethod, string filterValue)
         {
+
+            if ((Session["User"] as User).Admin==false)
+            {
+                return Logout();
+            }
 
             List<User> users = new List<User>();
 
@@ -489,7 +495,7 @@ namespace UTW_Project.Controllers
                 users = db.GetUsersList();
             }
 
-
+            
             return View(users);
         }
 

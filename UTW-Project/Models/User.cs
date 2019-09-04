@@ -33,7 +33,7 @@ namespace UTW_Project.Models
         [RequiredAttribute(ErrorMessageResourceName = "PasswordRequired",
             ErrorMessageResourceType = typeof(Resources))]
         [MinLength(8, ErrorMessageResourceName = "PasswordMinLength",
-            ErrorMessageResourceType =typeof(Resources))]
+            ErrorMessageResourceType = typeof(Resources))]
         //[RegularExpression(@"^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,20}$", ErrorMessage = "Password must contain: Minimum 8 characters at least 1 Alphabet and 1 Number")]
         public string Password { get; set; }
 
@@ -61,7 +61,7 @@ namespace UTW_Project.Models
         public string LastNameAR { get; set; }
         [Display(Name = "Phone", ResourceType = typeof(Resources))]
         [MaxLength(11, ErrorMessageResourceName = "PhoneMaxLength",
-            ErrorMessageResourceType =typeof(Resources))]
+            ErrorMessageResourceType = typeof(Resources))]
         public string Phone { get; set; }
         [Display(Name = "Question", ResourceType = typeof(Resources))]
         [RequiredAttribute(ErrorMessageResourceName = "QuestionRequired",

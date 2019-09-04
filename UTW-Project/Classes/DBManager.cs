@@ -337,7 +337,8 @@ namespace UTW_Project.Classes
         {
             List<Order> stockOrders = new List<Order>();
             var query = from s in Db.Orders where s.U_ID == user.ID select s;
-            stockOrders = query.ToList();
+            stockOrders= (query.GroupBy(o => o.S_ID).Select(g => g.FirstOrDefault())).ToList();
+            
             return stockOrders;
 
         }
@@ -347,16 +348,30 @@ namespace UTW_Project.Classes
 
             List<PieChartElement> pieChartElements = new List<PieChartElement>();
 
-            
+
             var query = from o in Db.Orders
                         where o.U_ID == user.ID
                         group o by o.S_ID into x
                         select new PieChartElement
                         {
                             ID = x.Key,
-                            TotalQuantity = x.Select(f => f.Quantity).Sum()
+                            TotalQuantity = x.Select(f => f.Quantity).Sum(),
+
+
 
                         };
+
+            //var query = from o in Db.Orders
+            //            where o.U_ID == user.ID
+
+            //            select new PieChartElement
+            //            {
+            //                ID = x.Key,
+            //                TotalQuantity = x.Select(f => f.Quantity).Sum(),
+
+
+
+            //            };
 
             pieChartElements = query.ToList();
 

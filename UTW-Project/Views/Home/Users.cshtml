@@ -6,42 +6,50 @@
 }
 
 
+
+
 @using (Html.BeginForm("Users", "Home", FormMethod.Post))
 {
 
 <div>
 
- 
+    <div class="col-md-4 animate-box fadeInUp animated-fast" style="background-color:#41444B;padding:20px;margin-bottom:20px">
+        <h3 class="section-title whitelabel">Search</h3>
 
-    <div class="wrap-input100">
-        <span class="label-input100">Sort by</span>
-        @Html.DropDownList("selectedMethod", new SelectList(new List<string>() { "Default sorting", "Sort by Email", "Sort by Username", "Sort by Status(active or blocked)" },
+        <div class="form-group">
+           
 
-                    "Default sorting")
-                   , new { @class = "input100" })
+            @Html.DropDownList("selectedMethod", new SelectList(new List<string>() { "Default sorting", "Sort by Email", "Sort by Username", "Sort by Status(active or blocked)" },
 
-        <span class="focus-input100"></span>
+                        "Default sorting")
+                       , new { @class = "form-control" })
+
+
+        </div>
+
+
+
+
+
+        <div class="form-group">
+           
+            @Html.TextBox("filterValue", "", new { @class = "form-control" })
+        </div>
+
+        @if (ViewBag.error != null)
+        {
+            <label style="font-size:15px;color:black;border-bottom:double;border-color:red">@ViewBag.error</label><br />
+
+        }
+
+
+        
+        <div class="form-group">
+            <input type="submit" id="btn-submit" class="btn btn-send-message btn-md button" value="Filter">
+        </div>
+
+
     </div>
-
-   
-
-    <div class="wrap-input100">
-        <span class="label-input100">Value</span>
-
-        @Html.TextBox("filterValue", "", new { @class = "input100" })
-        <span class="focus-input100"></span>
-
-    </div>
-
-    @if (ViewBag.error != null)
-    {
-        <label style="font-size:15px;color:black;border-bottom:double;border-color:red">@ViewBag.error</label><br />
-
-    }
-
-
-    <input type="submit" value="Filter" id="btnSubmit" />
-
 
 
 </div>
@@ -97,7 +105,15 @@
                                 @Html.DisplayFor(modelItem => item.LastNameAR)
                             </td>
                             <td class="cell">
-                                @Html.DisplayFor(modelItem => item.Blocked)
+                                @if (item.Blocked == true)
+                                {
+                                    @Html.DisplayName("Yes")
+                                }
+                                else
+                                {
+                                    @Html.DisplayName("No")
+                                }
+
                             </td>
                             @if (item !=null && item.Blocked == true)
                             {

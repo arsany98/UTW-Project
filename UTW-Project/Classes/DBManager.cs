@@ -208,9 +208,13 @@ namespace UTW_Project.Classes
             order.S_ID = SID;
             order.Quantity = quantity;
             order.Date = DateTime.Now.Date;
-            order.StateEN = "A";
+            order.StateEN = "Accepted";
             order.TypeEN = type;
             order.Price = stock.Price;
+            order.StateAR = "مقبول";
+            order.TypeEN = type;
+            if (type == "Buy") order.TypeAR = "شراء"; else order.TypeAR = "بيع";
+            
 
             if (type == "Buy")
             {
@@ -220,11 +224,11 @@ namespace UTW_Project.Classes
                 }
                 else
                 {
+                    user.Wallet -= Convert.ToDecimal(quantity) * stock.Price;
                     order.U_Ballance = user.Wallet;
                     Db.Orders.Add(order);
           
-                    Db.SaveChanges();
-                    user.Wallet -= Convert.ToDecimal(quantity) * stock.Price;
+                    
                     Db.SaveChanges();
                     return true;
                 }
@@ -233,10 +237,10 @@ namespace UTW_Project.Classes
             {
                 if (hasStocks(username, stock, quantity))
                 {
+                    user.Wallet += Convert.ToDecimal(quantity) * stock.Price;
                     order.U_Ballance = user.Wallet;
                     Db.Orders.Add(order);
-                    Db.SaveChanges();
-                    user.Wallet += Convert.ToDecimal(quantity) * stock.Price;
+                    
                     Db.SaveChanges();
                 }
                 else

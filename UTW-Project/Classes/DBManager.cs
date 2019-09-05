@@ -66,7 +66,7 @@ namespace UTW_Project.Classes
         {
             User user = GetUser(username);
             user.Blocked = false;
-            user.LoginTrials = 2;
+            user.LoginTrials = 0;
             Db.SaveChanges();
         }
 
@@ -465,11 +465,10 @@ namespace UTW_Project.Classes
             List<Order> orders = new List<Order>();
 
             var query = from o in Db.Orders
-                        where
-   o.Date.Day == DateTime.Now.Day &&
-   o.Date.Month == DateTime.Now.Month &&
-   o.Date.Year == DateTime.Now.Year &&
-   user.ID == o.U_ID
+                        where o.Date.Day == DateTime.Now.Day &&
+                        o.Date.Month == DateTime.Now.Month &&
+                        o.Date.Year == DateTime.Now.Year &&
+                        user.ID == o.U_ID
                         select o;
             orders = query.ToList();
             return orders;
@@ -480,7 +479,7 @@ namespace UTW_Project.Classes
         {
             List<Order> stockOrders = new List<Order>();
             var query = from s in Db.Orders where s.U_ID == user.ID select s;
-            stockOrders = query.ToList();
+            stockOrders = (query.GroupBy(o => o.S_ID).Select(g => g.FirstOrDefault())).ToList();
             return stockOrders;
 
         }

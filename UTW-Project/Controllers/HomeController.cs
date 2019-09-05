@@ -51,7 +51,7 @@ namespace UTW_Project.Controllers
                     }
 
 
-                    if (user.LoginTrials > 3 && user.LoginTrials <= 5)
+                    if (user.LoginTrials > 1 && user.LoginTrials <= 3)
                     {
                         ViewBag.ShowCaptcha = 1;
                     }
@@ -62,10 +62,22 @@ namespace UTW_Project.Controllers
                     string EncryptedPassword = user.MD5Hash(password);
                     if (user.Admin)
                     {
-                        if (EncryptedPassword != user.Password)
+                        if (EncryptedPassword != user.Password || (!this.IsCaptchaValid("") && (user.LoginTrials > 1 && user.LoginTrials <= 4)))
+                        {
                             ViewBag.error = Resources.Resources.WrongUsernameOrPassword;
+                            if (user.LoginTrials <= 3)
+                            {
+                                db.UpdateTrials(username);
+                            }
+                            else
+                            {
+                                user.Blocked = true;
+                                db.UpdateTrials(username);
+                            }
+                        }
                         else
                         {
+                            db.ActivateUser(username);
                             FormsAuthentication.SetAuthCookie(user.Username, false);
                             Session["User"] = user;
                             return RedirectToAction("Dashboard", "Home");
@@ -74,10 +86,10 @@ namespace UTW_Project.Controllers
                     else
                     {
                         
-                        if ((EncryptedPassword != user.Password) || (!this.IsCaptchaValid("") && (user.LoginTrials > 3 && user.LoginTrials <= 6)))
+                        if ((EncryptedPassword != user.Password) || (!this.IsCaptchaValid("") && (user.LoginTrials > 1 && user.LoginTrials <= 4)))
                         {
                             ViewBag.error = Resources.Resources.WrongUsernameOrPassword;
-                            if (user.LoginTrials <= 5)
+                            if (user.LoginTrials <= 3)
                             {
                                 db.UpdateTrials(username);
                             }
@@ -132,7 +144,7 @@ namespace UTW_Project.Controllers
                     user.Admin = false;
                     user.Blocked = false;
                     user.EmailConfirmed = false;
-                    user.LoginTrials = 2;
+                    user.LoginTrials = 0;
                     user.Wallet = 1000; /////////
                     user.Password = user.MD5Hash(user.Password);
                     user.Answer = user.MD5Hash(user.Answer);
@@ -543,7 +555,7 @@ namespace UTW_Project.Controllers
         public ActionResult UpdateOrder(int id)
         {
             var user = Session["User"] as User;
-            if (user.Admin) { RedirectToAction("Monitor"); }
+            if (user.Admin) { return RedirectToAction("Monitor"); }
             Order order = db.GetOrder(id);
             return View(order);
         }
@@ -554,7 +566,7 @@ namespace UTW_Project.Controllers
         {
             User user = Session["User"] as User;
             if(!db.updateOrder(user, ID, Quantity)) { ViewBag.error = Resources.Resources.ActionNotAllowed; }
-            else { RedirectToAction("Monitor"); }
+            else { return RedirectToAction("Monitor"); }
             return View();
         }
     

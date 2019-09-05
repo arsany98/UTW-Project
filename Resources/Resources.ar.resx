@@ -120,6 +120,12 @@
   <data name="ActionNotAllowed" xml:space="preserve">
     <value>غير مسموح</value>
   </data>
+  <data name="Activate" xml:space="preserve">
+    <value>تفعيل</value>
+  </data>
+  <data name="Activated" xml:space="preserve">
+    <value>مفعل</value>
+  </data>
   <data name="AddOrderError" xml:space="preserve">
     <value>ليس لديك المال الكافي او الأسهم لإتمام هذه العملية</value>
   </data>
@@ -132,6 +138,9 @@
   <data name="BackToLogin" xml:space="preserve">
     <value>الرجوع لصفحة تسجيل الدخول</value>
   </data>
+  <data name="Blocked" xml:space="preserve">
+    <value>محظور</value>
+  </data>
   <data name="ConfirmedSuccessfully" xml:space="preserve">
     <value>تم التأكيد بنجاح</value>
   </data>
@@ -143,6 +152,9 @@
   </data>
   <data name="Date" xml:space="preserve">
     <value>تاريخ</value>
+  </data>
+  <data name="DefaultSearch" xml:space="preserve">
+    <value>البحث الافتراضي</value>
   </data>
   <data name="Edit" xml:space="preserve">
     <value>تعديل</value>
@@ -161,6 +173,9 @@
   </data>
   <data name="EmailTaken" xml:space="preserve">
     <value>البريد الالكتروني مستخدم لعمل حساب من قبل</value>
+  </data>
+  <data name="EmptyFilterValue" xml:space="preserve">
+    <value>يجب ادخال قيمة للتنقية بها</value>
   </data>
   <data name="EmptyLoginFields" xml:space="preserve">
     <value>يجب عليك ادخال اسم المستخدم وكلمة المرور</value>
@@ -261,8 +276,17 @@
   <data name="Search" xml:space="preserve">
     <value>بحث</value>
   </data>
+  <data name="SearchByEmail" xml:space="preserve">
+    <value>البحث بالبريد الالكتروني</value>
+  </data>
   <data name="SearchByID" xml:space="preserve">
     <value>ابحث برقم الطلب</value>
+  </data>
+  <data name="SearchByStatus" xml:space="preserve">
+    <value>البحث بالحالة: محظور/مفعل</value>
+  </data>
+  <data name="SearchByUsername" xml:space="preserve">
+    <value>البحث باسم المستخدم</value>
   </data>
   <data name="SignIn" xml:space="preserve">
     <value>تسجيل الدخول</value>

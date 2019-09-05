@@ -120,6 +120,12 @@
   <data name="ActionNotAllowed" xml:space="preserve">
     <value>Action not allowed</value>
   </data>
+  <data name="Activate" xml:space="preserve">
+    <value>Activate</value>
+  </data>
+  <data name="Activated" xml:space="preserve">
+    <value>Activated</value>
+  </data>
   <data name="AddOrderError" xml:space="preserve">
     <value>You don't have enough money or stocks to complete the current transaction!</value>
   </data>
@@ -132,6 +138,9 @@
   <data name="BackToLogin" xml:space="preserve">
     <value>Back To Login Page</value>
   </data>
+  <data name="Blocked" xml:space="preserve">
+    <value>Blocked</value>
+  </data>
   <data name="ConfirmedSuccessfully" xml:space="preserve">
     <value>Confirmed Successfully</value>
   </data>
@@ -143,6 +152,9 @@
   </data>
   <data name="Date" xml:space="preserve">
     <value>Date</value>
+  </data>
+  <data name="DefaultSearch" xml:space="preserve">
+    <value>Default Search</value>
   </data>
   <data name="Edit" xml:space="preserve">
     <value>Edit</value>
@@ -161,6 +173,9 @@
   </data>
   <data name="EmailTaken" xml:space="preserve">
     <value>Email has been used to create another account</value>
+  </data>
+  <data name="EmptyFilterValue" xml:space="preserve">
+    <value>You have to enter a value to filter with</value>
   </data>
   <data name="EmptyLoginFields" xml:space="preserve">
     <value>You must enter both username and password</value>
@@ -261,8 +276,17 @@
   <data name="Search" xml:space="preserve">
     <value>Search</value>
   </data>
+  <data name="SearchByEmail" xml:space="preserve">
+    <value>Search by Email</value>
+  </data>
   <data name="SearchByID" xml:space="preserve">
     <value>Search By ID</value>
+  </data>
+  <data name="SearchByStatus" xml:space="preserve">
+    <value>Search by Status: Blocked/Activated</value>
+  </data>
+  <data name="SearchByUsername" xml:space="preserve">
+    <value>Search by Username</value>
   </data>
   <data name="SignIn" xml:space="preserve">
     <value>Sign In</value>

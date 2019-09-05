@@ -11,48 +11,49 @@
 @using (Html.BeginForm("Users", "Home", FormMethod.Post))
 {
 
-<div>
+    <div>
 
-    <div class="col-md-4 animate-box fadeInUp animated-fast" style="background-color:#41444B;padding:20px;margin-bottom:20px">
-        <h3 class="section-title whitelabel">Search</h3>
+        <div class="col-md-4 animate-box fadeInUp animated-fast" style="background-color:#41444B;padding:20px;margin-bottom:20px">
+            <h3 class="section-title whitelabel">@Resources.Resources.Search</h3>
 
-        <div class="form-group">
-           
-
-            @Html.DropDownList("selectedMethod", new SelectList(new List<string>() { "Default sorting", "Sort by Email", "Sort by Username", "Sort by Status(active or blocked)" },
-
-                        "Default sorting")
-                       , new { @class = "form-control" })
+            <div class="form-group">
 
 
-        </div>
+                @Html.DropDownList("selectedMethod", new SelectList(new List<string>() { Resources.Resources.DefaultSearch,
+               Resources.Resources.SearchByEmail, Resources.Resources.SearchByUsername, Resources.Resources.SearchByStatus },
+
+                            Resources.Resources.DefaultSearch)
+                           , new { @class = "form-control" })
+
+
+            </div>
 
 
 
 
 
-        <div class="form-group">
-           
-            @Html.TextBox("filterValue", "", new { @class = "form-control" })
-        </div>
+            <div class="form-group">
 
-        @if (ViewBag.error != null)
-        {
-            <label style="font-size:15px;color:black;border-bottom:double;border-color:red">@ViewBag.error</label><br />
+                @Html.TextBox("filterValue", "", new { @class = "form-control" })
+            </div>
 
-        }
+            @if (ViewBag.error != null)
+            {
+                <label style="font-size:15px;color:black;border-bottom:double;border-color:red">@ViewBag.error</label><br />
+
+            }
 
 
-        
-        <div class="form-group">
-            <input type="submit" id="btn-submit" class="btn btn-send-message btn-md button" value="Filter">
+
+            <div class="form-group">
+                <input type="submit" id="btn-submit" class="btn btn-send-message btn-md button" value="@Resources.Resources.Filter">
+            </div>
+
+
         </div>
 
 
     </div>
-
-
-</div>
 
 
 
@@ -62,6 +63,9 @@
                 <table class="table">
                     <tr class="row header btn-dark">
 
+                        <th class="cell">
+                            @Html.DisplayNameFor(model => model.Username)
+                        </th>
                         <th class="cell">
                             @Html.DisplayNameFor(model => model.Email)
                         </th>
@@ -88,7 +92,9 @@
                     @foreach (var item in Model)
                     {
                         <tr class="row">
-
+                            <td class="cell">
+                                @Html.DisplayFor(modelItem => item.Username)
+                            </td>
                             <td class="cell">
                                 @Html.DisplayFor(modelItem => item.Email)
                             </td>
@@ -105,20 +111,20 @@
                                 @Html.DisplayFor(modelItem => item.LastNameAR)
                             </td>
                             <td class="cell">
-                                @if (item != null && item.Blocked == true)
+                                @if (item.Blocked == true)
                                 {
-                                    @Html.DisplayName("Yes")
+                                    @Html.DisplayName(System.Threading.Thread.CurrentThread.CurrentCulture.Name == "en" ? "Yes" : "نعم")
                                 }
                                 else
                                 {
-                                    @Html.DisplayName("No")
+                                    @Html.DisplayName(System.Threading.Thread.CurrentThread.CurrentCulture.Name == "en" ? "No" : "لا")
                                 }
 
                             </td>
-                            @if (item !=null && item.Blocked == true)
+                            @if (item != null && item.Blocked == true)
                             {
                                 <td class="cell">
-                                    @Html.ActionLink("Activate", "Activate", new { username = item.Username })
+                                    @Html.ActionLink(Resources.Resources.Activate, "Activate", new { username = item.Username })
                                 </td>
                             }
                         </tr>

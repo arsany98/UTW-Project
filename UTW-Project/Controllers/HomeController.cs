@@ -468,32 +468,35 @@ namespace UTW_Project.Controllers
 
             List<User> users = new List<User>();
 
-            if (filterValue == "" && selectedMethod != "Default sorting")
+            if (filterValue == "" && selectedMethod != Resources.Resources.DefaultSearch)
             {
-                ViewBag.error = "You have to enter a value to filter with";
+                ViewBag.error = Resources.Resources.EmptyFilterValue;
                 return View(users);
             }
 
-            if (selectedMethod == "Sort by Status(active or blocked)")
+            if (selectedMethod == Resources.Resources.SearchByStatus)
             {
-                if (filterValue == "blocked")
+                if (filterValue == Resources.Resources.Blocked)
                 {
                     users = db.SelectByStatues(true);
-
                 }
-                else if (filterValue == "active")
+                else if (filterValue == Resources.Resources.Activated)
                 {
                     users = db.SelectByStatues(false);
                 }
 
             }
-            else if (selectedMethod == "Sort by Email")
+            else if (selectedMethod == Resources.Resources.SearchByEmail)
             {
-                users.Add(db.SelectByEmail(filterValue));
+                User user = db.SelectByEmail(filterValue);
+                if (user!=null)
+                    users.Add(user);
             }
-            else if (selectedMethod == "Sort by Username")
+            else if (selectedMethod == Resources.Resources.SearchByUsername)
             {
-                users.Add(db.SelectByUsername(filterValue));
+                User user = db.SelectByUsername(filterValue);
+                if (user != null)
+                    users.Add(user);
             }
             else
             {

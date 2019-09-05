@@ -73,6 +73,7 @@ namespace UTW_Project.Models
         public string Answer { get; set; }
         public bool EmailConfirmed { get; set; }
         public decimal Wallet { get; set; }
+        [Display(Name = "Blocked", ResourceType = typeof(Resources))]
         public bool Blocked { get; set; }
         public int LoginTrials { get; set; }
         public bool Admin { get; set; }

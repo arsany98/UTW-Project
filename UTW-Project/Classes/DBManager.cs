@@ -144,20 +144,85 @@ namespace UTW_Project.Classes
             return q.FirstOrDefault();
         }
 
-        public decimal BalanceBefore(User user, Order id)
+        
+        public void ConfirmEdit(Order order, User user, int quantity)
         {
-            return 0;
+            
+            var prePaid = Convert.ToDecimal(order.Quantity) * order.Price;
+            var toBePaid = Convert.ToDecimal(quantity) * order.Price;
+
+            user.Wallet -= toBePaid - prePaid;
+            order.Quantity = quantity;
+            Db.SaveChanges();
         }
 
-        public void updateOrder(int id, int quantity)
+        public int getStocksBefore(User user, Order order, int id)
+        {
+            List<int> Buy = new List<int>();
+            List<int> Sell = new List<int>();
+            var q = from o in Db.Orders where o.U_ID == user.ID && o.S_ID == order.S_ID && o.TypeEN == "Buy" && order.ID<id select o.Quantity;
+            Buy = q.ToList();
+            var qu = from o in Db.Orders where o.U_ID == user.ID && o.S_ID == order.S_ID && o.TypeEN == "Sell" && order.ID < id select o.Quantity;
+            Sell = qu.ToList();
+            int B = Buy.Sum();
+            int S = Sell.Sum();
+
+            return B - S;
+        }
+
+        public int currentStocks(User user, Order order)
+        {
+            List<int> Buy = new List<int>();
+            List<int> Sell = new List<int>();
+            var q = from o in Db.Orders where o.U_ID == user.ID && o.S_ID == order.S_ID && o.TypeEN == "Buy" select o.Quantity;
+            Buy = q.ToList();
+            var qu = from o in Db.Orders where o.U_ID == user.ID && o.S_ID == order.S_ID && o.TypeEN == "Sell"  select o.Quantity;
+            Sell = qu.ToList();
+            int B = Buy.Sum();
+            int S = Sell.Sum();
+
+            return B - S;
+        }
+
+
+        public bool updateOrder(int id, int quantity)
         {
             User user = getUserByID(id);
             Order order = Search(id);
 
-            user.Wallet -= (Convert.ToDecimal(quantity) - order.Quantity) * order.Price; //Casting
-            order.Quantity = quantity;
-            Db.SaveChanges();
+            if(order.TypeEN == "Buy")
+            {
+                var balanceBefore = order.U_Ballance;
+                var prePaid = Convert.ToDecimal(order.Quantity) * order.Price;
+                var toBePaid = Convert.ToDecimal(quantity) * order.Price;
+                if(balanceBefore >= toBePaid)
+                {
+                    if(prePaid >= toBePaid) { ConfirmEdit(order, user, quantity); return true; }
+                    else
+                    {
+                        var PayDiff = toBePaid - prePaid;
+                        if(user.Wallet-PayDiff>=0) { ConfirmEdit(order, user, quantity) ; return true; }
+                        else { return false; }
+                    }
+                }
+               
+                return false;
 
+            }
+            else if(order.TypeEN == "Sell")
+            {
+                int stocksBefore = getStocksBefore(user,order,id);
+                if(order.Quantity >= quantity) { ConfirmEdit(order, user, quantity); return true; }
+                else
+                {
+                    int ownedStocks = currentStocks(user, order);
+                    int StockDiff = quantity - order.Quantity;
+                    if (ownedStocks - StockDiff >= 0) { ConfirmEdit(order, user, quantity); return true; }
+                    else return false;
+                }
+            }
+
+            return false;
         }
 
         //Order
@@ -224,8 +289,8 @@ namespace UTW_Project.Classes
                 }
                 else
                 {
-                    user.Wallet -= Convert.ToDecimal(quantity) * stock.Price;
                     order.U_Ballance = user.Wallet;
+                    user.Wallet -= Convert.ToDecimal(quantity) * stock.Price;
                     Db.Orders.Add(order);
           
                     
@@ -237,8 +302,8 @@ namespace UTW_Project.Classes
             {
                 if (hasStocks(username, stock, quantity))
                 {
-                    user.Wallet += Convert.ToDecimal(quantity) * stock.Price;
                     order.U_Ballance = user.Wallet;
+                    user.Wallet += Convert.ToDecimal(quantity) * stock.Price;
                     Db.Orders.Add(order);
                     
                     Db.SaveChanges();

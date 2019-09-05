@@ -505,6 +505,8 @@ namespace UTW_Project.Controllers
             db.ActivateUser(username);
             return RedirectToAction("Users");
         }
+
+        [Authorize]
         public ActionResult Order()
         {
             var user = Session["User"] as User;
@@ -513,7 +515,7 @@ namespace UTW_Project.Controllers
             return View(Valid);
         }
         
-
+        [Authorize]
         [HttpPost]
         public ActionResult Order(string username, string type, string stockName, int quantity = 0,  int orderID = 0)
         {
@@ -542,14 +544,17 @@ namespace UTW_Project.Controllers
         [Authorize]
         public ActionResult UpdateOrder(Order order)
         {
-            return View();
+            var user = Session["User"] as User;
+            if (user.Admin) { RedirectToAction("Monitor"); }
+            return View(order);
         }
 
         [HttpPost]
         [Authorize]
         public ActionResult UpdateOrder(int orderID, int quantity)
         {
-            db.updateOrder(orderID, quantity);
+            if(!db.updateOrder(orderID, quantity)) { ViewBag.error = "Action not allowed"; }
+            else { RedirectToAction("Monitor"); }
             return View();
         }
     

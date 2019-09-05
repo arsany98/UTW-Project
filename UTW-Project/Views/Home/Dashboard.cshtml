@@ -59,7 +59,7 @@
                 @if(System.Threading.Thread.CurrentThread.CurrentCulture.Name == "en")
                 {
                     <td class="cell">
-                        @item.StateEn
+                        @item.StateEN
                     </td>
                 }
                 else
@@ -161,12 +161,14 @@
 
         data.addRows([
             @{int count = 0;}
+            @if (System.Threading.Thread.CurrentThread.CurrentCulture.Name == "en")
+            {
 
-              @foreach (var item in ViewBag.pieChartElements)
+              foreach (var item in ViewBag.pieChartElements)
               {
-                  if(count>0)
+                  if (count > 0)
                   {
-                      @Html.Raw(",['" + ViewBag.pieChartElements[count].Stock.CompanyEN + "'," + ViewBag.pieChartElements[count].TotalQuantity* ViewBag.pieChartElements[count].Stock.Price + "]");
+                      @Html.Raw(",['" + ViewBag.pieChartElements[count].Stock.CompanyEN + "'," + ViewBag.pieChartElements[count].TotalQuantity * ViewBag.pieChartElements[count].Stock.Price + "]");
 
                   }
                   else
@@ -176,18 +178,35 @@
                   count++;
 
               }
+            }
+            else
+            {
+                  foreach (var item in ViewBag.pieChartElements)
+                  {
+                      if (count > 0)
+                      {
+                      @Html.Raw(",['" + ViewBag.pieChartElements[count].Stock.CompanyAR + "'," + ViewBag.pieChartElements[count].TotalQuantity * ViewBag.pieChartElements[count].Stock.Price + "]");
 
+                      }
+                      else
+                      {
+                      @Html.Raw("['" + ViewBag.pieChartElements[count].Stock.CompanyAR + "'," + ViewBag.pieChartElements[count].TotalQuantity * ViewBag.pieChartElements[count].Stock.Price + "]");
+                      }
+                      count++;
+
+                  }
+            }
         ]);
 
-        var options = {
+            var options = {
             title: 'Stocks',
             width: '200%',
             height: '1000px'
-        };
+            };
 
-            var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+                var chart = new google.visualization.PieChart(document.getElementById('piechart'));
 
-            chart.draw(data, options);
+                chart.draw(data, options);
     }
 </script>
 

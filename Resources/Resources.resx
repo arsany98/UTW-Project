@@ -285,6 +285,9 @@
   <data name="TransactionType" xml:space="preserve">
     <value>Transaction Type</value>
   </data>
+  <data name="UpdateOrder" xml:space="preserve">
+    <value>Update Order</value>
+  </data>
   <data name="UserID" xml:space="preserve">
     <value>User ID</value>
   </data>

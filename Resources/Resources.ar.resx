@@ -285,6 +285,9 @@
   <data name="TransactionType" xml:space="preserve">
     <value>نوع العملية</value>
   </data>
+  <data name="UpdateOrder" xml:space="preserve">
+    <value>تعديل الطلب</value>
+  </data>
   <data name="UserID" xml:space="preserve">
     <value>رقم المستخدم</value>
   </data>

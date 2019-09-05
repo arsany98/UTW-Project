@@ -1,26 +1,29 @@
-﻿
+﻿@model UTW_Project.Models.Order
+
 @{
     ViewBag.Title = "UpdateOrder";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("UpdateOrder", "Home"))
 {
 
     <div class="col-md-4 animate-box fadeInUp animated-fast" style="background-color:#41444B;padding:20px;margin-bottom:20px">
-        <h3 class="section-title whitelabel">Update Order</h3>
-
-        <div class="form-group">
-            @*@Html.TextBox("orderID", , new { @class = "form-control", @readonly = read })*@
+        <h3 class="section-title whitelabel">@Resources.Resources.UpdateOrder</h3>
+        @Html.HiddenFor(model => model.ID)
+        <div>
+            <label>
+                @Resources.Resources.Quantity
+            </label><br />
+            <div class="form-group">
+                @Html.EditorFor(model => model.Quantity, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
         </div>
-
-        <div class="form-group">
-            @Html.TextBox("quantity", "", new { @class = "form-control" })
+        <div>
+            <br />
+            <button type="submit" id="btn-submit" class="btn btn-send-message btn-md button">
+                @Resources.Resources.Edit
+            </button>
         </div>
-
-        <button type="submit" id="btn-submit" class="btn btn-send-message btn-md button">
-            Submit
-        </button>
-
     </div>
 }

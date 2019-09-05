@@ -375,7 +375,6 @@
     <Content Include="Template\fonts\source-sans-pro\SourceSansPro-SemiBold.ttf" />
     <Content Include="Template\fonts\source-sans-pro\SourceSansPro-SemiBoldItalic.ttf" />
     <Content Include="Views\Home\Order.cshtml" />
-    <Content Include="Views\Home\UpdateOrder.cshtml" />
     <Content Include="Template\sass\.DS_Store" />
     <Content Include="Template\sass\bootstrap.scss" />
     <Content Include="Template\sass\bootstrap\mixins\_alerts.scss" />
@@ -452,6 +451,7 @@
     <Content Include="Template\sass\_bootstrap-compass.scss" />
     <Content Include="Template\sass\_bootstrap-mincer.scss" />
     <Content Include="Template\sass\_bootstrap-sprockets.scss" />
+    <Content Include="Views\Home\UpdateOrder.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

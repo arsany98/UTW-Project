@@ -8,7 +8,7 @@ using UTW_Project.Classes;
 using CaptchaMvc.HtmlHelpers;
 using System.Data.Entity.Validation;
 using System.Web.Security;
-using System.Web;
+
 namespace UTW_Project.Controllers
 {
     public class HomeController : BaseController
@@ -510,43 +510,50 @@ namespace UTW_Project.Controllers
         
         [Authorize]
         [HttpPost]
-        public ActionResult Order(string username, string type, int stockID, int quantity = 0,  int orderID = 0)
+        public ActionResult Order(string type, int stockID = 0, int quantity = 0,  int orderID = 0)
         {
+            var user = Session["User"] as User;
             if (orderID != 0)
             {
-                Order order = db.Search(orderID);
+                Order order = db.SearchUserOrders(user.Username, orderID);
                 List<Order> o = new List<Order>();
-                o.Add(order);
+                if(order != null)
+                    o.Add(order);
                 return View(o);
             }
-            else
+            else if(type!= null && stockID != 0 && quantity!=0)
             {
                 var stock = db.GetStock(stockID);
-                if (!db.AddOrder(username, type, stock, quantity))
+                if (!db.AddOrder(user.Username, type, stock, quantity))
                 {
                     ViewBag.error = Resources.Resources.AddOrderError;
                 }
                 if(type == "Buy") { ViewBag.Message = Resources.Resources.You_llBeCharged + " " + stock.Price * quantity + " " + Resources.Resources.EGP; }
-                var user = Session["User"] as User;
                 if (user.Admin) { RedirectToAction("Monitor"); }
                 List<Order> Valid = db.ValidToUpdate(user);
                 return View(Valid);
             }
+            else
+            {
+                return RedirectToAction("Order");
+            }
         }
 
         [Authorize]
-        public ActionResult UpdateOrder(Order order)
+        public ActionResult UpdateOrder(int id)
         {
             var user = Session["User"] as User;
             if (user.Admin) { RedirectToAction("Monitor"); }
+            Order order = db.GetOrder(id);
             return View(order);
         }
 
         [HttpPost]
         [Authorize]
-        public ActionResult UpdateOrder(int orderID, int quantity)
+        public ActionResult UpdateOrder(int ID, int Quantity)
         {
-            if(!db.updateOrder(orderID, quantity)) { ViewBag.error = Resources.Resources.ActionNotAllowed; }
+            User user = Session["User"] as User;
+            if(!db.updateOrder(user, ID, Quantity)) { ViewBag.error = Resources.Resources.ActionNotAllowed; }
             else { RedirectToAction("Monitor"); }
             return View();
         }

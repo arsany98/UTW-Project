@@ -8,7 +8,7 @@ using UTW_Project.Classes;
 using CaptchaMvc.HtmlHelpers;
 using System.Data.Entity.Validation;
 using System.Web.Security;
-using System.Web;
+
 namespace UTW_Project.Controllers
 {
     public class HomeController : BaseController
@@ -512,29 +512,47 @@ namespace UTW_Project.Controllers
             List<Order> Valid = db.ValidToUpdate(user);
             return View(Valid);
         }
+        
+        [Authorize]
         [HttpPost]
-        public ActionResult Order(string username, string type, string stockName, int quantity, decimal price)
+        public ActionResult Order(string username, string type, string stockName, int quantity)
         {
-            if (!db.AddOrder(username, type, stockName, quantity, price))
-            {
-                ViewBag.error = "You don't have enough money or stocks to complete the current transaction!";
-            }
-            var user = Session["User"] as User;
-            if (user.Admin) { RedirectToAction("Monitor"); }
-            List<Order> Valid = db.ValidToUpdate(user);
-            return View(Valid);
-        }
-        [HttpPost]
-        public ActionResult Order(int orderID)
-        {
-            Order order = db.Search(orderID);
-            List<Order> o = new List<Order>();
-            o.Add(order);
-            return View(o);
+            
+                var stock = db.GetStock(stockName);
+                if (!db.AddOrder(username, type, stock, quantity))
+                {
+                    ViewBag.error = "You don't have enough money or stocks to complete the current transaction!";
+                }
+                if(type == "Buy") { ViewBag.Message = "You'll be charged " + stock.Price * quantity + " EGP"; }
+                var user = Session["User"] as User;
+                if (user.Admin) { RedirectToAction("Monitor"); }
+                List<Order> Valid = db.ValidToUpdate(user);
+                return View(Valid);
+            
         }
 
         [Authorize]
-        public ActionResult UpdateOrder(int orderID)
+        [HttpPost]
+        public ActionResult Order(int orderID)
+        {
+            if (orderID != 0)
+            {
+                Order order = db.Search(orderID);
+                List<Order> o = new List<Order>();
+                o.Add(order);
+                return View(o);
+            }
+            else
+            {
+                var user = Session["User"] as User;
+                if (user.Admin) { RedirectToAction("Monitor"); }
+                List<Order> Valid = db.ValidToUpdate(user);
+                return View(Valid);
+            }
+        }
+
+        [Authorize]
+        public ActionResult UpdateOrder(Order order)
         {
             return View();
         }
@@ -546,8 +564,7 @@ namespace UTW_Project.Controllers
             db.updateOrder(orderID, quantity);
             return View();
         }
-        [Authorize]
- 
+    
         //[Authorize]
         //public ActionResult Order(string username, string type, string stockName, int quantity)
         //{

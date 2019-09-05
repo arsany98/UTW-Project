@@ -1,8 +1,166 @@
-﻿
+﻿@model IEnumerable<UTW_Project.Models.Order>
+
 @{
     ViewBag.Title = "Order";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-    <h2>@Resources.Resources.Order</h2>
+@{
 
+    var user = Session["User"] as UTW_Project.Models.User;
+    string Name = user.Username;
+
+}
+
+@{
+    // will be edited after adding dll
+    var db = new UTW_Project.Classes.DBManager();
+    List<string> stokeNames = db.getStockNamesen();
+
+}
+
+@{
+    List<string> TType = new List<string>();
+    TType.Add("Buy");
+    TType.Add("Sell");
+}
+
+@using (Html.BeginForm("Order", "Home"))
+{
+
+    <div class="col-md-4 animate-box fadeInUp animated-fast" style="background-color:#41444B;padding:20px;margin-bottom:20px">
+        <h3 class="section-title whitelabel">Order</h3>
+        <div>
+            <label> Username </label> <br />
+
+            <div class="form-group">
+                @Html.TextBox("username", Name, new { @class = "form-control", @readonly = "readonly" })
+            </div>
+        </div>
+
+
+        <div>
+            <label>@Resources.Resources.Stock</label> <br />
+            <div class="form-group">
+                @Html.DropDownList("stockName",
+                                  new SelectList(stokeNames),
+                                  null,
+                                  new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div>
+            <label>@Resources.Resources.Stock</label> <br />
+            <div class="form-group">
+                @Html.DropDownList("type",
+                                  new SelectList(TType),
+                                  null,
+                                  new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div>
+            <label>Quantity</label> <br />
+            <div class="form-group">
+                @Html.TextBox("quantity", "0", new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div>
+            <br />
+            <button type="submit" id="btn-submit" class="btn btn-send-message btn-md button">
+                Order
+            </button>
+        </div>
+        <div>
+            @ViewBag.error
+            @ViewBag.Message
+        </div>
+
+    </div>
+
+}
+
+
+@using (Html.BeginForm("Order", "Home"))
+{
+    <div class="col-md-4 animate-box fadeInUp animated-fast" style="background-color:#41444B;padding:20px;margin-bottom:20px">
+        <h3 class="section-title whitelabel">Search by ID</h3><div>
+    <header>
+        Search orders by ID
+    </header>
+    <br />
+    <div class="form-group">
+        @Html.TextBox("orderID", 0 , new { @class = "form-control" })
+    </div>
+    <button type="submit" id="btn-submit" class="btn btn-send-message btn-md button">
+        Search
+    </button>
+        </div>
+</div>
+          
+
+ }
+        <table class="table">
+            <tr>
+                <th>
+                    @Resources.Resources.Username
+                </th>
+                <th>
+                    @Resources.Resources.Stock
+                </th>
+                <th>
+                    @Resources.Resources.Quantity
+                </th>
+                <th>
+                    @Resources.Resources.Date
+                </th>
+                <th>
+                    @Resources.Resources.StockPrice
+                </th>
+                <th>
+                    @Resources.Resources.TransactionType
+                </th>
+                <th>
+                    @Resources.Resources.State
+                </th>
+                <th>
+
+                </th>
+
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.User.Username)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Stock.CompanyEN)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Quantity)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Date)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Price)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TypeEN)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.StateEN)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "UpdateOrder", "Home", new { order = item }, null)
+                    </td>
+
+
+                </tr>
+            }
+
+        </table>

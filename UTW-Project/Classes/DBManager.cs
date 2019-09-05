@@ -171,10 +171,10 @@ namespace UTW_Project.Classes
         }
 
         //Order
-        public bool hasStocks(string username, string stockName, int quantity)
+        public bool hasStocks(string username, Stock stock, int quantity)
         {
             User user = GetUser(username);
-            Stock stock = GetStock(stockName);
+           
 
             List<int> Buy = new List<int>();
             List<int> Sell = new List<int>();
@@ -194,10 +194,10 @@ namespace UTW_Project.Classes
         }
 
         //Order
-        public bool AddOrder(string username, string type, string stockName, int quantity, decimal price)
+        public bool AddOrder(string username, string type, Stock stock, int quantity)
         {
             User user = GetUser(username);
-            Stock stock = GetStock(stockName);
+           
 
             int UID = user.ID;
             int SID = stock.ID;
@@ -210,7 +210,7 @@ namespace UTW_Project.Classes
             order.Date = DateTime.Now.Date;
             order.StateEN = "A";
             order.TypeEN = type;
-            order.Price = price;
+            order.Price = stock.Price;
 
             if (type == "Buy")
             {
@@ -221,6 +221,7 @@ namespace UTW_Project.Classes
                 else
                 {
                     user.Wallet -= quantity * stock.Price;
+                    order.U_Ballance = user.Wallet;
                     Db.Orders.Add(order);
                     Db.SaveChanges();
                     return true;
@@ -228,9 +229,10 @@ namespace UTW_Project.Classes
             }
             else if (type == "Sell")
             {
-                if (hasStocks(username, stockName, quantity))
+                if (hasStocks(username, stock, quantity))
                 {
                     user.Wallet += quantity * stock.Price;
+                    order.U_Ballance = user.Wallet;
                     Db.Orders.Add(order);
                     Db.SaveChanges();
                 }

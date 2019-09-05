@@ -451,6 +451,7 @@
     <Content Include="Template\fonts\source-sans-pro\SourceSansPro-SemiBold.ttf" />
     <Content Include="Template\fonts\source-sans-pro\SourceSansPro-SemiBoldItalic.ttf" />
     <Content Include="Views\Home\Order.cshtml" />
+    <Content Include="Views\Home\UpdateOrder.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

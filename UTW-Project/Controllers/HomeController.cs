@@ -517,7 +517,8 @@ namespace UTW_Project.Controllers
             {
                 Order order = db.SearchUserOrders(user.Username, orderID);
                 List<Order> o = new List<Order>();
-                o.Add(order);
+                if(order != null)
+                    o.Add(order);
                 return View(o);
             }
             else if(type!= null && stockID != 0 && quantity!=0)

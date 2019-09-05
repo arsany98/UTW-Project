@@ -111,7 +111,7 @@
                                 @Html.DisplayFor(modelItem => item.LastNameAR)
                             </td>
                             <td class="cell">
-                                @if (item.Blocked == true)
+                                @if (item != null && item.Blocked == true)
                                 {
                                     @Html.DisplayName(System.Threading.Thread.CurrentThread.CurrentCulture.Name == "en" ? "Yes" : "نعم")
                                 }

@@ -70,6 +70,24 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Activate.
+        /// </summary>
+        public static string Activate {
+            get {
+                return ResourceManager.GetString("Activate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Activated.
+        /// </summary>
+        public static string Activated {
+            get {
+                return ResourceManager.GetString("Activated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to You don&apos;t have enough money or stocks to complete the current transaction!.
         /// </summary>
         public static string AddOrderError {
@@ -106,6 +124,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Blocked.
+        /// </summary>
+        public static string Blocked {
+            get {
+                return ResourceManager.GetString("Blocked", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Confirmed Successfully.
         /// </summary>
         public static string ConfirmedSuccessfully {
@@ -138,6 +165,15 @@ namespace Resources {
         public static string Date {
             get {
                 return ResourceManager.GetString("Date", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Default Search.
+        /// </summary>
+        public static string DefaultSearch {
+            get {
+                return ResourceManager.GetString("DefaultSearch", resourceCulture);
             }
         }
         
@@ -192,6 +228,15 @@ namespace Resources {
         public static string EmailTaken {
             get {
                 return ResourceManager.GetString("EmailTaken", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You have to enter a value to filter with.
+        /// </summary>
+        public static string EmptyFilterValue {
+            get {
+                return ResourceManager.GetString("EmptyFilterValue", resourceCulture);
             }
         }
         
@@ -493,11 +538,38 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Search by Email.
+        /// </summary>
+        public static string SearchByEmail {
+            get {
+                return ResourceManager.GetString("SearchByEmail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Search By ID.
         /// </summary>
         public static string SearchByID {
             get {
                 return ResourceManager.GetString("SearchByID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Search by Status: Blocked/Activated.
+        /// </summary>
+        public static string SearchByStatus {
+            get {
+                return ResourceManager.GetString("SearchByStatus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Search by Username.
+        /// </summary>
+        public static string SearchByUsername {
+            get {
+                return ResourceManager.GetString("SearchByUsername", resourceCulture);
             }
         }
         

@@ -154,7 +154,7 @@ namespace UTW_Project.Classes
             User user = getUserByID(id);
             Order order = Search(id);
 
-            user.Wallet -= (quantity - order.Quantity) * order.Price; //Casting
+            user.Wallet -= (Convert.ToDecimal(quantity) - order.Quantity) * order.Price; //Casting
             order.Quantity = quantity;
             Db.SaveChanges();
 
@@ -214,15 +214,17 @@ namespace UTW_Project.Classes
 
             if (type == "Buy")
             {
-                if (user.Wallet < (quantity * stock.Price))
+                if (user.Wallet < (Convert.ToDecimal(quantity) * stock.Price))
                 {
                     return false;
                 }
                 else
                 {
-                    user.Wallet -= quantity * stock.Price;
                     order.U_Ballance = user.Wallet;
                     Db.Orders.Add(order);
+          
+                    Db.SaveChanges();
+                    user.Wallet -= Convert.ToDecimal(quantity) * stock.Price;
                     Db.SaveChanges();
                     return true;
                 }
@@ -231,9 +233,10 @@ namespace UTW_Project.Classes
             {
                 if (hasStocks(username, stock, quantity))
                 {
-                    user.Wallet += quantity * stock.Price;
                     order.U_Ballance = user.Wallet;
                     Db.Orders.Add(order);
+                    Db.SaveChanges();
+                    user.Wallet += Convert.ToDecimal(quantity) * stock.Price;
                     Db.SaveChanges();
                 }
                 else

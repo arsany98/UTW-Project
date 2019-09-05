@@ -8,7 +8,7 @@ using UTW_Project.Classes;
 using CaptchaMvc.HtmlHelpers;
 using System.Data.Entity.Validation;
 using System.Web.Security;
-
+using System.Web;
 namespace UTW_Project.Controllers
 {
     public class HomeController : BaseController
@@ -513,27 +513,9 @@ namespace UTW_Project.Controllers
             return View(Valid);
         }
         
-        [Authorize]
-        [HttpPost]
-        public ActionResult Order(string username, string type, string stockName, int quantity)
-        {
-            
-                var stock = db.GetStock(stockName);
-                if (!db.AddOrder(username, type, stock, quantity))
-                {
-                    ViewBag.error = "You don't have enough money or stocks to complete the current transaction!";
-                }
-                if(type == "Buy") { ViewBag.Message = "You'll be charged " + stock.Price * quantity + " EGP"; }
-                var user = Session["User"] as User;
-                if (user.Admin) { RedirectToAction("Monitor"); }
-                List<Order> Valid = db.ValidToUpdate(user);
-                return View(Valid);
-            
-        }
 
-        [Authorize]
         [HttpPost]
-        public ActionResult Order(int orderID)
+        public ActionResult Order(string username, string type, string stockName, int quantity,  int orderID = 0)
         {
             if (orderID != 0)
             {
@@ -544,6 +526,12 @@ namespace UTW_Project.Controllers
             }
             else
             {
+                var stock = db.GetStock(stockName);
+                if (!db.AddOrder(username, type, stock, quantity))
+                {
+                    ViewBag.error = "You don't have enough money or stocks to complete the current transaction!";
+                }
+                if(type == "Buy") { ViewBag.Message = "You'll be charged " + stock.Price * quantity + " EGP"; }
                 var user = Session["User"] as User;
                 if (user.Admin) { RedirectToAction("Monitor"); }
                 List<Order> Valid = db.ValidToUpdate(user);

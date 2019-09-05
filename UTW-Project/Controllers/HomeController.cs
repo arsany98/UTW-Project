@@ -8,7 +8,7 @@ using UTW_Project.Classes;
 using CaptchaMvc.HtmlHelpers;
 using System.Data.Entity.Validation;
 using System.Web.Security;
-using System.Web;
+
 namespace UTW_Project.Controllers
 {
     public class HomeController : BaseController
@@ -535,18 +535,20 @@ namespace UTW_Project.Controllers
         }
 
         [Authorize]
-        public ActionResult UpdateOrder(Order order)
+        public ActionResult UpdateOrder(int id)
         {
             var user = Session["User"] as User;
             if (user.Admin) { RedirectToAction("Monitor"); }
+            Order order = db.GetOrder(id);
             return View(order);
         }
 
         [HttpPost]
         [Authorize]
-        public ActionResult UpdateOrder(int orderID, int quantity)
+        public ActionResult UpdateOrder(int ID, int Quantity)
         {
-            if(!db.updateOrder(orderID, quantity)) { ViewBag.error = Resources.Resources.ActionNotAllowed; }
+            User user = Session["User"] as User;
+            if(!db.updateOrder(user, ID, Quantity)) { ViewBag.error = Resources.Resources.ActionNotAllowed; }
             else { RedirectToAction("Monitor"); }
             return View();
         }

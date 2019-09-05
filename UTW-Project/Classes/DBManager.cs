@@ -185,9 +185,8 @@ namespace UTW_Project.Classes
         }
 
 
-        public bool updateOrder(int id, int quantity)
+        public bool updateOrder(User user, int id, int quantity)
         {
-            User user = getUserByID(id);
             Order order = Search(id);
 
             if(order.TypeEN == "Buy")
@@ -510,7 +509,10 @@ namespace UTW_Project.Classes
             return Db.Stocks.Find(ID);
         }
 
-
+        public Order GetOrder(int ID)
+        {
+            return Db.Orders.Find(ID);
+        }
 
     }
 }

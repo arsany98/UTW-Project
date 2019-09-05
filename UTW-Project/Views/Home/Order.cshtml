@@ -24,6 +24,7 @@
     TType.Add("Sell");
 }
 
+<label>@user.Wallet.ToString("0.00")</label>
 @using (Html.BeginForm("Order", "Home"))
 {
 
@@ -45,7 +46,7 @@
                                     stocks.Select(item => new SelectListItem
                                     {
                                         Value = item.ID.ToString(),
-                                        Text = System.Threading.Thread.CurrentThread.CurrentCulture.Name == "en"? item.CompanyEN:item.CompanyAR,
+                                        Text = System.Threading.Thread.CurrentThread.CurrentCulture.Name == "en" ? item.CompanyEN : item.CompanyAR,
                                     }),
                                     null,
                                     new { @class = "form-control" })
@@ -59,7 +60,7 @@
                                     TType.Select(item => new SelectListItem
                                     {
                                         Value = item,
-                                        Text = System.Threading.Thread.CurrentThread.CurrentCulture.Name == "en"? item:(item == "Buy"?"شراء":"بيع"),
+                                        Text = System.Threading.Thread.CurrentThread.CurrentCulture.Name == "en" ? item : (item == "Buy" ? "شراء" : "بيع"),
                                     }),
                                     null,
                                     new { @class = "form-control" })
@@ -98,103 +99,109 @@
                 @Resources.Resources.OrderID
             </label>
             <div class="form-group">
-                @Html.TextBox("orderID", 0 , new { @class = "form-control" })
+                @Html.TextBox("orderID", 0, new { @class = "form-control" })
             </div>
             <button type="submit" id="btn-submit" class="btn btn-send-message btn-md button">
                 @Resources.Resources.Search
             </button>
         </div>
     </div>
-          
 
- }
-        <table class="table">
-            <tr>
-                <th>
-                    @Resources.Resources.Username
-                </th>
-                <th>
-                    @Resources.Resources.Stock
-                </th>
-                <th>
-                    @Resources.Resources.Quantity
-                </th>
-                <th>
-                    @Resources.Resources.Date
-                </th>
-                <th>
-                    @Resources.Resources.StockPrice
-                </th>
-                <th>
-                    @Resources.Resources.TransactionType
-                </th>
-                <th>
-                    @Resources.Resources.State
-                </th>
-                <th>
 
-                </th>
+}
+<table class="table">
+    <tr>
+        <th>
+            @Resources.Resources.OrderID
+        </th>
+        <th>
+            @Resources.Resources.Username
+        </th>
+        <th>
+            @Resources.Resources.Stock
+        </th>
+        <th>
+            @Resources.Resources.Quantity
+        </th>
+        <th>
+            @Resources.Resources.Date
+        </th>
+        <th>
+            @Resources.Resources.StockPrice
+        </th>
+        <th>
+            @Resources.Resources.TransactionType
+        </th>
+        <th>
+            @Resources.Resources.State
+        </th>
+        <th>
 
-                <th></th>
-            </tr>
+        </th>
 
-            @foreach (var item in Model)
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.User.Username)
+            </td>
+            @if (System.Threading.Thread.CurrentThread.CurrentCulture.Name == "en")
             {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.User.Username)
-                    </td>
-                    @if(System.Threading.Thread.CurrentThread.CurrentCulture.Name == "en")
-                    {
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Stock.CompanyEN)
-                        </td>
-                    }
-                    else
-                    {
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Stock.CompanyAR)
-                        </td>
-                    }
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Quantity)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Date)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Price)
-                    </td>
-                    @if(System.Threading.Thread.CurrentThread.CurrentCulture.Name == "en")
-                    {
-                        <td>
-                            @Html.DisplayFor(modelItem => item.TypeEN)
-                        </td>
-                    }
-                    else
-                    {
-                        <td>
-                            @Html.DisplayFor(modelItem => item.TypeAR)
-                        </td>
-                    }
-                    @if(System.Threading.Thread.CurrentThread.CurrentCulture.Name == "en")
-                    {
-                        <td>
-                            @Html.DisplayFor(modelItem => item.StateEN)
-                        </td>
-                    }
-                    else
-                    {
-                        <td>
-                            @Html.DisplayFor(modelItem => item.StateAR)
-                        </td>
-                    }
-                    <td>
-                        @Html.ActionLink(Resources.Resources.Edit, "UpdateOrder", "Home", new { order = item }, null)
-                    </td>
-
-
-                </tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Stock.CompanyEN)
+                </td>
             }
+            else
+            {
+                <td>
+                    @Html.DisplayFor(modelItem => item.Stock.CompanyAR)
+                </td>
+            }
+            <td>
+                @Html.DisplayFor(modelItem => item.Quantity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            @if (System.Threading.Thread.CurrentThread.CurrentCulture.Name == "en")
+            {
+                <td>
+                    @Html.DisplayFor(modelItem => item.TypeEN)
+                </td>
+            }
+            else
+            {
+                <td>
+                    @Html.DisplayFor(modelItem => item.TypeAR)
+                </td>
+            }
+            @if (System.Threading.Thread.CurrentThread.CurrentCulture.Name == "en")
+            {
+                <td>
+                    @Html.DisplayFor(modelItem => item.StateEN)
+                </td>
+            }
+            else
+            {
+                <td>
+                    @Html.DisplayFor(modelItem => item.StateAR)
+                </td>
+            }
+            <td>
+                @Html.ActionLink(Resources.Resources.Edit, "UpdateOrder", "Home", new { id = item.ID }, null)
+            </td>
 
-        </table>
+
+        </tr>
+    }
+
+</table>

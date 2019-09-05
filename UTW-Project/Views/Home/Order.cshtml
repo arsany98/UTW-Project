@@ -15,8 +15,7 @@
 @{
     // will be edited after adding dll
     var db = new UTW_Project.Classes.DBManager();
-    List<string> stokeNames = db.getStockNamesen();
-
+    List<UTW_Project.Models.Stock> stocks = db.GetStocks();
 }
 
 @{
@@ -29,9 +28,9 @@
 {
 
     <div class="col-md-4 animate-box fadeInUp animated-fast" style="background-color:#41444B;padding:20px;margin-bottom:20px">
-        <h3 class="section-title whitelabel">Order</h3>
+        <h3 class="section-title whitelabel">@Resources.Resources.Order</h3>
         <div>
-            <label> Username </label> <br />
+            <label> @Resources.Resources.Username </label> <br />
 
             <div class="form-group">
                 @Html.TextBox("username", Name, new { @class = "form-control", @readonly = "readonly" })
@@ -42,25 +41,33 @@
         <div>
             <label>@Resources.Resources.Stock</label> <br />
             <div class="form-group">
-                @Html.DropDownList("stockName",
-                                  new SelectList(stokeNames),
-                                  null,
-                                  new { @class = "form-control" })
+                @Html.DropDownList("stockID",
+                                    stocks.Select(item => new SelectListItem
+                                    {
+                                        Value = item.ID.ToString(),
+                                        Text = System.Threading.Thread.CurrentThread.CurrentCulture.Name == "en"? item.CompanyEN:item.CompanyAR,
+                                    }),
+                                    null,
+                                    new { @class = "form-control" })
             </div>
         </div>
 
         <div>
-            <label>@Resources.Resources.Stock</label> <br />
+            <label>@Resources.Resources.TransactionType</label> <br />
             <div class="form-group">
                 @Html.DropDownList("type",
-                                  new SelectList(TType),
-                                  null,
-                                  new { @class = "form-control" })
+                                    TType.Select(item => new SelectListItem
+                                    {
+                                        Value = item,
+                                        Text = System.Threading.Thread.CurrentThread.CurrentCulture.Name == "en"? item:(item == "Buy"?"شراء":"بيع"),
+                                    }),
+                                    null,
+                                    new { @class = "form-control" })
             </div>
         </div>
 
         <div>
-            <label>Quantity</label> <br />
+            <label>@Resources.Resources.Quantity</label> <br />
             <div class="form-group">
                 @Html.TextBox("quantity", 0, new { @class = "form-control" })
             </div>
@@ -69,7 +76,7 @@
         <div>
             <br />
             <button type="submit" id="btn-submit" class="btn btn-send-message btn-md button">
-                Order
+                @Resources.Resources.Order
             </button>
         </div>
         <div>
@@ -85,19 +92,19 @@
 @using (Html.BeginForm("Order", "Home"))
 {
     <div class="col-md-4 animate-box fadeInUp animated-fast" style="background-color:#41444B;padding:20px;margin-bottom:20px">
-        <h3 class="section-title whitelabel">Search by ID</h3><div>
-    <header>
-        Search orders by ID
-    </header>
-    <br />
-    <div class="form-group">
-        @Html.TextBox("orderID", 0 , new { @class = "form-control" })
-    </div>
-    <button type="submit" id="btn-submit" class="btn btn-send-message btn-md button">
-        Search
-    </button>
+        <h3 class="section-title whitelabel">@Resources.Resources.SearchByID</h3>
+        <div>
+            <label>
+                @Resources.Resources.OrderID
+            </label>
+            <div class="form-group">
+                @Html.TextBox("orderID", 0 , new { @class = "form-control" })
+            </div>
+            <button type="submit" id="btn-submit" class="btn btn-send-message btn-md button">
+                @Resources.Resources.Search
+            </button>
         </div>
-</div>
+    </div>
           
 
  }
@@ -137,9 +144,18 @@
                     <td>
                         @Html.DisplayFor(modelItem => item.User.Username)
                     </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Stock.CompanyEN)
-                    </td>
+                    @if(System.Threading.Thread.CurrentThread.CurrentCulture.Name == "en")
+                    {
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Stock.CompanyEN)
+                        </td>
+                    }
+                    else
+                    {
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Stock.CompanyAR)
+                        </td>
+                    }
                     <td>
                         @Html.DisplayFor(modelItem => item.Quantity)
                     </td>
@@ -149,14 +165,32 @@
                     <td>
                         @Html.DisplayFor(modelItem => item.Price)
                     </td>
+                    @if(System.Threading.Thread.CurrentThread.CurrentCulture.Name == "en")
+                    {
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TypeEN)
+                        </td>
+                    }
+                    else
+                    {
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TypeAR)
+                        </td>
+                    }
+                    @if(System.Threading.Thread.CurrentThread.CurrentCulture.Name == "en")
+                    {
+                        <td>
+                            @Html.DisplayFor(modelItem => item.StateEN)
+                        </td>
+                    }
+                    else
+                    {
+                        <td>
+                            @Html.DisplayFor(modelItem => item.StateAR)
+                        </td>
+                    }
                     <td>
-                        @Html.DisplayFor(modelItem => item.TypeEN)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.StateEN)
-                    </td>
-                    <td>
-                        @Html.ActionLink("Edit", "UpdateOrder", "Home", new { order = item }, null)
+                        @Html.ActionLink(Resources.Resources.Edit, "UpdateOrder", "Home", new { order = item }, null)
                     </td>
 
 

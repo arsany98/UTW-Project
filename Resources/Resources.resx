@@ -117,11 +117,23 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="ActionNotAllowed" xml:space="preserve">
+    <value>Action not allowed</value>
+  </data>
+  <data name="AddOrderError" xml:space="preserve">
+    <value>You don't have enough money or stocks to complete the current transaction!</value>
+  </data>
   <data name="Answer" xml:space="preserve">
     <value>Answer</value>
   </data>
   <data name="AnswerRequired" xml:space="preserve">
     <value>Answer is Required</value>
+  </data>
+  <data name="BackToLogin" xml:space="preserve">
+    <value>Back To Login Page</value>
+  </data>
+  <data name="ConfirmedSuccessfully" xml:space="preserve">
+    <value>Confirmed Successfully</value>
   </data>
   <data name="ConfirmEmail" xml:space="preserve">
     <value>Confirm Email</value>
@@ -132,11 +144,29 @@
   <data name="Date" xml:space="preserve">
     <value>Date</value>
   </data>
+  <data name="Edit" xml:space="preserve">
+    <value>Edit</value>
+  </data>
+  <data name="EGP" xml:space="preserve">
+    <value>EGP</value>
+  </data>
   <data name="Email" xml:space="preserve">
     <value>Email</value>
   </data>
+  <data name="EmailNotConfirmed" xml:space="preserve">
+    <value>You didn't confirm your Email yet</value>
+  </data>
   <data name="EmailRequired" xml:space="preserve">
     <value>Email is Required</value>
+  </data>
+  <data name="EmailTaken" xml:space="preserve">
+    <value>Email has been used to create another account</value>
+  </data>
+  <data name="EmptyLoginFields" xml:space="preserve">
+    <value>You must enter both username and password</value>
+  </data>
+  <data name="ErrorConfirming" xml:space="preserve">
+    <value>Error Confirming</value>
   </data>
   <data name="ExpiredUrl" xml:space="preserve">
     <value>Url is expired.</value>
@@ -189,6 +219,9 @@
   <data name="Order" xml:space="preserve">
     <value>Order</value>
   </data>
+  <data name="OrderID" xml:space="preserve">
+    <value>Order ID</value>
+  </data>
   <data name="Password" xml:space="preserve">
     <value>Password</value>
   </data>
@@ -203,6 +236,9 @@
   </data>
   <data name="PhoneMaxLength" xml:space="preserve">
     <value>Phone must be 11 numbers</value>
+  </data>
+  <data name="Price" xml:space="preserve">
+    <value>Price</value>
   </data>
   <data name="Quantity" xml:space="preserve">
     <value>Quantity</value>
@@ -219,8 +255,14 @@
   <data name="ResetPassword" xml:space="preserve">
     <value>Reset Password</value>
   </data>
+  <data name="ResetPasswordEmailSent" xml:space="preserve">
+    <value>An email has been sent to you to reset your password</value>
+  </data>
   <data name="Search" xml:space="preserve">
     <value>Search</value>
+  </data>
+  <data name="SearchByID" xml:space="preserve">
+    <value>Search By ID</value>
   </data>
   <data name="SignIn" xml:space="preserve">
     <value>Sign In</value>
@@ -243,13 +285,34 @@
   <data name="TransactionType" xml:space="preserve">
     <value>Transaction Type</value>
   </data>
+  <data name="UserID" xml:space="preserve">
+    <value>User ID</value>
+  </data>
   <data name="Username" xml:space="preserve">
     <value>Username</value>
+  </data>
+  <data name="UsernameNotFound" xml:space="preserve">
+    <value>username not found</value>
   </data>
   <data name="UsernameRequired" xml:space="preserve">
     <value>Username is Required</value>
   </data>
+  <data name="UsernameTaken" xml:space="preserve">
+    <value>Username Taken</value>
+  </data>
   <data name="Users" xml:space="preserve">
     <value>Users</value>
+  </data>
+  <data name="WrongAnswer" xml:space="preserve">
+    <value>Wrong answer</value>
+  </data>
+  <data name="WrongUsernameOrPassword" xml:space="preserve">
+    <value>Wrong username or password</value>
+  </data>
+  <data name="You'llBeCharged" xml:space="preserve">
+    <value>You'll be charged</value>
+  </data>
+  <data name="YouAreBlocked" xml:space="preserve">
+    <value>You are blocked</value>
   </data>
 </root>

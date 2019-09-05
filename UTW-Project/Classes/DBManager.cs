@@ -434,7 +434,7 @@ namespace UTW_Project.Classes
             }
             else return getUserTransactions(stock);
         }
-        //Get a list of stock names en
+        /*//Get a list of stock names en
         public List<string> getStockNamesen()
         {
             var query = from u in Db.Stocks select u.CompanyEN;
@@ -448,9 +448,12 @@ namespace UTW_Project.Classes
             var query = from u in Db.Stocks select u.CompanyAR;
             List<string> arabicNames = query.ToList();
             return arabicNames;
+        }*/
+
+        public List<Stock> GetStocks()
+        {
+            return Db.Stocks.ToList();
         }
-
-
         //Dashboard
         //--------------------------------------------------------------------------------------------------------//
 

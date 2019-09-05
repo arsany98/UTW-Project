@@ -15,8 +15,12 @@
 @{
     // will be edited after adding dll
     var db = new UTW_Project.Classes.DBManager();
-    List<string> stokeNames = db.getStockNamesen();
-    stokeNames.Add("all");
+    List<UTW_Project.Models.Stock> stocks = db.GetStocks();
+    var stock = new UTW_Project.Models.Stock();
+    stock.ID = 0;
+    stock.CompanyEN = "all";
+    stock.CompanyAR = "الكل";
+    stocks.Add(stock);
 }
 
 
@@ -25,9 +29,9 @@
 {
 
     <div class="col-md-4 animate-box fadeInUp animated-fast" style="background-color:#41444B;padding:20px;margin-bottom:20px">
-        <h3 class="section-title whitelabel">Monitor</h3>
+        <h3 class="section-title whitelabel">@Resources.Resources.Monitor</h3>
         <div>
-            <label> User ID </label> <br />
+            <label> @Resources.Resources.UserID </label> <br />
             @{
                 string read = "readonly";
                 if (user.Admin) { read = "false"; }
@@ -51,10 +55,14 @@
             <div>
                 <label>@Resources.Resources.Stock</label> <br />
                 <div class="form-group">
-                    @Html.DropDownList("stock",
-                                             new SelectList(stokeNames),
-                                             null,
-                                             new { @class = "form-control" })
+                    @Html.DropDownList("stockID",
+                                        stocks.Select(item => new SelectListItem
+                                        {
+                                            Value = item.ID.ToString(),
+                                            Text = System.Threading.Thread.CurrentThread.CurrentCulture.Name == "en"? item.CompanyEN:item.CompanyAR,
+                                        }),
+                                        null,
+                                        new { @class = "form-control" })
                 </div>
             </div>
 
@@ -104,32 +112,59 @@
 
     @foreach (var item in Model)
     {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.User.Username)
-        </td>
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.User.Username)
+    </td>
+    @if (System.Threading.Thread.CurrentThread.CurrentCulture.Name == "en")
+    {
         <td>
             @Html.DisplayFor(modelItem => item.Stock.CompanyEN)
         </td>
+    }
+    else
+    {
         <td>
-            @Html.DisplayFor(modelItem => item.Quantity)
+            @Html.DisplayFor(modelItem => item.Stock.CompanyAR)
         </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Date)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Price)
-        </td>
+    }
+    <td>
+        @Html.DisplayFor(modelItem => item.Quantity)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Date)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Price)
+    </td>
+    @if (System.Threading.Thread.CurrentThread.CurrentCulture.Name == "en")
+    {
         <td>
             @Html.DisplayFor(modelItem => item.TypeEN)
         </td>
+    }
+    else
+    {
+        <td>
+            @Html.DisplayFor(modelItem => item.TypeAR)
+        </td>
+    }
+    @if (System.Threading.Thread.CurrentThread.CurrentCulture.Name == "en")
+    {
         <td>
             @Html.DisplayFor(modelItem => item.StateEN)
         </td>
+    }
+    else
+    {
+        <td>
+            @Html.DisplayFor(modelItem => item.StateAR)
+        </td>
+    }
 
 
 
-    </tr>
+</tr>
     }
 
 </table>

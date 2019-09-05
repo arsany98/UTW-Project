@@ -27,27 +27,26 @@ namespace UTW_Project.Controllers
         [AllowAnonymous]
         public ActionResult Login(string username, string password)
         {
-
             if (username != "" && password != "")
             {
 
                 User user = db.GetUser(username);
                 if (user == null)
                 {
-                    ViewBag.error = "Wrong username or password";
+                    ViewBag.error = Resources.Resources.WrongUsernameOrPassword;
                 }
                 else
                 {
 
                     if (user.EmailConfirmed == false)
                     {
-                        ViewBag.error = "You didn't confirm your Email yet.";
+                        ViewBag.error = Resources.Resources.EmailNotConfirmed;
                         return View();
                     }
 
                     if (user.Blocked)
                     {
-                        ViewBag.error = "You are blocked";
+                        ViewBag.error = Resources.Resources.YouAreBlocked;
                         return View();
                     }
 
@@ -64,7 +63,7 @@ namespace UTW_Project.Controllers
                     if (user.Admin)
                     {
                         if (EncryptedPassword != user.Password)
-                            ViewBag.error = "Wrong username or password";
+                            ViewBag.error = Resources.Resources.WrongUsernameOrPassword;
                         else
                         {
                             FormsAuthentication.SetAuthCookie(user.Username, false);
@@ -77,7 +76,7 @@ namespace UTW_Project.Controllers
                         
                         if ((EncryptedPassword != user.Password) || (!this.IsCaptchaValid("") && (user.LoginTrials > 3 && user.LoginTrials <= 6)))
                         {
-                            ViewBag.error = "Wrong username or password";
+                            ViewBag.error = Resources.Resources.WrongUsernameOrPassword;
                             if (user.LoginTrials <= 5)
                             {
                                 db.UpdateTrials(username);
@@ -102,7 +101,7 @@ namespace UTW_Project.Controllers
             }
             else
             {
-                ViewBag.error = "You must enter both username and password";
+                ViewBag.error = Resources.Resources.EmptyLoginFields;
             }
 
             return View();
@@ -144,22 +143,10 @@ namespace UTW_Project.Controllers
                         Guid guid = Guid.NewGuid();
                         string url = Url.Action("ConfirmEmail", "Home", new { guid }, Request.Url.Scheme);
                         db.AddURL(url, guid, user);
-                        EmailManager.SendConfirmationEmailEN(user);
-                    }
-                    catch (DbEntityValidationException e)
-                    {
-                        foreach (var eve in e.EntityValidationErrors)
-                        {
-                            ViewBag.error += string.Format("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
-                                eve.Entry.Entity.GetType().Name, eve.Entry.State);
-                            foreach (var ve in eve.ValidationErrors)
-                            {
-                                ViewBag.error += string.Format("- Property: \"{0}\", Error: \"{1}\"",
-                                    ve.PropertyName, ve.ErrorMessage);
-                            }
-                        }
-
-                        return View();
+                        if(System.Threading.Thread.CurrentThread.CurrentCulture.Name == "en")
+                            EmailManager.SendConfirmationEmailEN(user);
+                        else
+                            EmailManager.SendConfirmationEmailAR(user);
                     }
                     catch (Exception e)
                     {
@@ -170,12 +157,12 @@ namespace UTW_Project.Controllers
                 }
                 else if (usernameExists)
                 {
-                    ViewBag.error = "Username Taken";
+                    ViewBag.error = Resources.Resources.UsernameTaken;
                     return View();
                 }
                 else if (emailExists)
                 {
-                    ViewBag.error = "Email has been used to create another account";
+                    ViewBag.error = Resources.Resources.EmailTaken;
                     return View();
                 }
             }
@@ -188,15 +175,15 @@ namespace UTW_Project.Controllers
             User user = db.GetUrlUser(guid);
             if (user.URL.Expired)
             {
-                ViewBag.message = "Url is expired.";
+                ViewBag.message = Resources.Resources.ExpiredUrl;
             }
             else if (db.EmailConfirm(user))
             {
-                ViewBag.Message = "Confirmed Successfully";
+                ViewBag.Message = Resources.Resources.ConfirmedSuccessfully;
             }
             else
             {
-                ViewBag.Message = "Error Confirming";
+                ViewBag.Message = Resources.Resources.ErrorConfirming;
             }
             return View();
         }
@@ -217,20 +204,23 @@ namespace UTW_Project.Controllers
                 User user = db.GetUser(username);
                 if (user.EmailConfirmed == false)
                 {
-                    ViewBag.message = "You didn't confirm your Email yet.";
+                    ViewBag.message = Resources.Resources.EmailNotConfirmed;
                 }
                 else
                 {
                     Guid guid = Guid.NewGuid();
                     string url = Url.Action("ResetPassword", "Home", new { guid }, Request.Url.Scheme);
                     db.AddURL(url, guid, user);
-                    EmailManager.SendResetPasswordEmailEN(user);
-                    ViewBag.message = "An email has been sent to you to reset your password.";
+                    if (System.Threading.Thread.CurrentThread.CurrentCulture.Name == "en")
+                        EmailManager.SendResetPasswordEmailEN(user);
+                    else
+                        EmailManager.SendResetPasswordEmailAR(user);
+                    ViewBag.message = Resources.Resources.ResetPasswordEmailSent;
                 }
             }
             else
             {
-                ViewBag.message = "username not found.";
+                ViewBag.message = Resources.Resources.UsernameNotFound;
             }
             return View();
         }
@@ -255,7 +245,7 @@ namespace UTW_Project.Controllers
             }
             else
             {
-                ViewBag.error = "Wrong answer.";
+                ViewBag.error = Resources.Resources.WrongAnswer;
             }
             return View(user);
         }
@@ -275,11 +265,18 @@ namespace UTW_Project.Controllers
 
         [Authorize]
         [HttpPost]
-        public ActionResult Monitor(int userID, DateTime? startDate, DateTime? endDate, string stock)
+        public ActionResult Monitor(int userID, DateTime? startDate, DateTime? endDate, int stockID)
         {
             var user = Session["User"] as User;
-
-
+            string stock;
+            if (stockID == 0)
+            {
+                stock = "all";
+            }
+            else
+            {
+                stock = db.GetStock(stockID).CompanyEN;
+            }
             if (user.Admin == true)
             {
                 //no nulls
@@ -407,7 +404,7 @@ namespace UTW_Project.Controllers
             List<PieChartElement> pieChartElements = new List<PieChartElement>();
             
 
-            if (user!=null && !user.Admin)
+            if (!user.Admin)
             {
                 TodaysOrders = db.GetTodayOrdersForUser(user);
 
@@ -428,13 +425,9 @@ namespace UTW_Project.Controllers
                 ViewBag.pieChartElements = pieChartElements;
  
             }
-            else if (user != null && user.Admin)
-            {
-               return RedirectToAction("Users", "Home");
-            }
             else
             {
-                return RedirectToAction("Login", "Home");
+               return RedirectToAction("Users", "Home");
             }
             
             return View();
@@ -517,7 +510,7 @@ namespace UTW_Project.Controllers
         
         [Authorize]
         [HttpPost]
-        public ActionResult Order(string username, string type, string stockName, int quantity = 0,  int orderID = 0)
+        public ActionResult Order(string username, string type, int stockID, int quantity = 0,  int orderID = 0)
         {
             if (orderID != 0)
             {
@@ -528,12 +521,12 @@ namespace UTW_Project.Controllers
             }
             else
             {
-                var stock = db.GetStock(stockName);
+                var stock = db.GetStock(stockID);
                 if (!db.AddOrder(username, type, stock, quantity))
                 {
-                    ViewBag.error = "You don't have enough money or stocks to complete the current transaction!";
+                    ViewBag.error = Resources.Resources.AddOrderError;
                 }
-                if(type == "Buy") { ViewBag.Message = "You'll be charged " + stock.Price * quantity + " EGP"; }
+                if(type == "Buy") { ViewBag.Message = Resources.Resources.You_llBeCharged + " " + stock.Price * quantity + " " + Resources.Resources.EGP; }
                 var user = Session["User"] as User;
                 if (user.Admin) { RedirectToAction("Monitor"); }
                 List<Order> Valid = db.ValidToUpdate(user);
@@ -553,7 +546,7 @@ namespace UTW_Project.Controllers
         [Authorize]
         public ActionResult UpdateOrder(int orderID, int quantity)
         {
-            if(!db.updateOrder(orderID, quantity)) { ViewBag.error = "Action not allowed"; }
+            if(!db.updateOrder(orderID, quantity)) { ViewBag.error = Resources.Resources.ActionNotAllowed; }
             else { RedirectToAction("Monitor"); }
             return View();
         }

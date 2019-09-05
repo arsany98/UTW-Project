@@ -117,11 +117,23 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="ActionNotAllowed" xml:space="preserve">
+    <value>غير مسموح</value>
+  </data>
+  <data name="AddOrderError" xml:space="preserve">
+    <value>ليس لديك المال الكافي او الأسهم لإتمام هذه العملية</value>
+  </data>
   <data name="Answer" xml:space="preserve">
     <value>الإجابة</value>
   </data>
   <data name="AnswerRequired" xml:space="preserve">
     <value>ادخل الإجابة</value>
+  </data>
+  <data name="BackToLogin" xml:space="preserve">
+    <value>الرجوع لصفحة تسجيل الدخول</value>
+  </data>
+  <data name="ConfirmedSuccessfully" xml:space="preserve">
+    <value>تم التأكيد بنجاح</value>
   </data>
   <data name="ConfirmEmail" xml:space="preserve">
     <value>تأكيد البريد الالكتروني</value>
@@ -132,11 +144,29 @@
   <data name="Date" xml:space="preserve">
     <value>تاريخ</value>
   </data>
+  <data name="Edit" xml:space="preserve">
+    <value>تعديل</value>
+  </data>
+  <data name="EGP" xml:space="preserve">
+    <value>جنيه</value>
+  </data>
   <data name="Email" xml:space="preserve">
     <value>البريد الالكتروني</value>
   </data>
+  <data name="EmailNotConfirmed" xml:space="preserve">
+    <value>لم يتم تأكيد البريد الالكتروني بعد</value>
+  </data>
   <data name="EmailRequired" xml:space="preserve">
     <value>ادخل البريد الالكتروني</value>
+  </data>
+  <data name="EmailTaken" xml:space="preserve">
+    <value>البريد الالكتروني مستخدم لعمل حساب من قبل</value>
+  </data>
+  <data name="EmptyLoginFields" xml:space="preserve">
+    <value>يجب عليك ادخال اسم المستخدم وكلمة المرور</value>
+  </data>
+  <data name="ErrorConfirming" xml:space="preserve">
+    <value>خطأ في التأكيد</value>
   </data>
   <data name="ExpiredUrl" xml:space="preserve">
     <value>هذا الرايط منتهي</value>
@@ -189,6 +219,9 @@
   <data name="Order" xml:space="preserve">
     <value>طلب</value>
   </data>
+  <data name="OrderID" xml:space="preserve">
+    <value>رقم الطلب</value>
+  </data>
   <data name="Password" xml:space="preserve">
     <value>كلمة المرور</value>
   </data>
@@ -203,6 +236,9 @@
   </data>
   <data name="PhoneMaxLength" xml:space="preserve">
     <value>يجب ان يكون الهاتف 11 رقم </value>
+  </data>
+  <data name="Price" xml:space="preserve">
+    <value>السعر</value>
   </data>
   <data name="Quantity" xml:space="preserve">
     <value>كمية</value>
@@ -219,8 +255,14 @@
   <data name="ResetPassword" xml:space="preserve">
     <value>اعادة ضبط كلمة المرور</value>
   </data>
+  <data name="ResetPasswordEmailSent" xml:space="preserve">
+    <value>ارسلنا لك على بريدك الالكتروني لإعادة الضبط</value>
+  </data>
   <data name="Search" xml:space="preserve">
     <value>بحث</value>
+  </data>
+  <data name="SearchByID" xml:space="preserve">
+    <value>ابحث برقم الطلب</value>
   </data>
   <data name="SignIn" xml:space="preserve">
     <value>تسجيل الدخول</value>
@@ -243,13 +285,34 @@
   <data name="TransactionType" xml:space="preserve">
     <value>نوع العملية</value>
   </data>
+  <data name="UserID" xml:space="preserve">
+    <value>رقم المستخدم</value>
+  </data>
   <data name="Username" xml:space="preserve">
     <value>اسم المستخدم</value>
+  </data>
+  <data name="UsernameNotFound" xml:space="preserve">
+    <value>اسم المستخدم غير موجود</value>
   </data>
   <data name="UsernameRequired" xml:space="preserve">
     <value>ادخل اسم المستخدم</value>
   </data>
+  <data name="UsernameTaken" xml:space="preserve">
+    <value>اسم المستخدم مأخوذ</value>
+  </data>
   <data name="Users" xml:space="preserve">
     <value>المستخدمين</value>
+  </data>
+  <data name="WrongAnswer" xml:space="preserve">
+    <value>إجابة خاطئة</value>
+  </data>
+  <data name="WrongUsernameOrPassword" xml:space="preserve">
+    <value>خطأ في اسم المستخدم أو كلمة المرور</value>
+  </data>
+  <data name="You'llBeCharged" xml:space="preserve">
+    <value>سيتم خصم مبلغ</value>
+  </data>
+  <data name="YouAreBlocked" xml:space="preserve">
+    <value>انت محظور</value>
   </data>
 </root>

@@ -42,11 +42,12 @@ public class EmailManager
         user.EmailConfirmed = false;
 
         MailMessage m = new MailMessage(companyEmail, user.Email);
-        m.Subject = "Verification";
-        m.Body = string.Format("Hi {0}" +
-            "<BR/> Thank you for your registration, please click on the " +
-            "below link to complete your registration:<BR/><a href =\"{1}\"" +
-            "title =\"User Email Confirm\">{1}</a>",
+        m.Subject = "تأكيد";
+        m.Body = string.Format("أهلًا" +
+            " {0}" +
+            "<BR/>" +
+            " شكرًا لتسجيلك, من فضلك اضغط على الرابط لنأكيد بريدك الالكتروني واكمال تسجيلك" +
+            "<BR/><a href =\"{1}\" title =\"تأكيد البريد الالكتروني\">{1}</a>",
             user.FirstNameAR, user.URL.URL1);
         m.IsBodyHtml = true;
 
@@ -87,13 +88,15 @@ public class EmailManager
         string companyPassword = section.Network.Password;
 
         MailMessage m = new MailMessage(companyEmail, user.Email);
-        m.Subject = "Reset Password";
-        m.Body = string.Format("Hi {0}" +
-            "<BR/> You recently requested to reset your password, please " +
-            "click on the link below to reset it:<BR/><a href =\"{1}\"" +
-            "title =\"User Reset Password\">{1}</a>" +
-            "<BR/> If you didn't make this request then you can safely ignore this email.",
-            user.FirstNameEN, user.URL.URL1);
+        m.Subject = "إعادة ضبط كلمة المرور";
+        m.Body = string.Format("أهلًا" +
+            " {0}" +
+            "<BR/>" +
+            "لقد طلبت إعادة ضبط كلمة مرورك, من فضلك اضغط على الرابط لإعادة الضبط" +
+            "<BR/><a href =\"{1}\" title =\"إعادة ضبط كلمة مرور المستخدم\">{1}</a>" +
+            "<BR/>" +
+            "إذا لم تقم بهذا الطلب فيمكنك تجاهل هذه الرسالة.",
+            user.FirstNameAR, user.URL.URL1);
         m.IsBodyHtml = true;
         SmtpClient smcl = new SmtpClient();
         smcl.Host = section.Network.Host;

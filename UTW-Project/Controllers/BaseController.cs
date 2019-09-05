@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 using UTW_Project.Classes;
 
 namespace UTW_Project.Controllers
@@ -22,6 +23,11 @@ namespace UTW_Project.Controllers
             else
             {
                 culture = Session["CurrentCulture"] as string;
+            }
+            if(this.Session["User"] == null)
+            {
+                DBManager db = new DBManager();
+                this.Session["User"] = db.GetUser(User.Identity.Name);
             }
             CultureManager.CurrentCulture = culture;
             return base.BeginExecuteCore(callback, state);

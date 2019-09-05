@@ -43,23 +43,31 @@
     <!-- Simple Line Icons -->
     <link rel="stylesheet" href="~/Template/css/simple-line-icons.css">
     <!-- Bootstrap  -->
-    <link rel="stylesheet" href="~/Template/css/bootstrap.css">
+    @if (System.Threading.Thread.CurrentThread.CurrentCulture.Name == "en")
+    {
+        <link rel="stylesheet" href="~/Template/css/bootstrap.css">
+    }
+    else
+    {
+        <link rel="stylesheet" href="~/Template/css/bootstrap-rtl.css">
+    }
+
     <!-- Style -->
     <link rel="stylesheet" href="~/Template/css/style.css">
 
     <link rel="stylesheet" type="text/css" href="~/Template/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
 
     <link rel="icon" type="image/png" href="~/Template/images/favicon.ico" />
-    
+
     <link href="~/Template/Modifications.css" rel="stylesheet" />
-   
+
     <!-- Modernizr JS -->
     <script src="~/Template/js/modernizr-2.6.2.min.js"></script>
     <!-- FOR IE9 below -->
     <!--[if lt IE 9]>
     <script src="~/Template/js/respond.min.js"></script>
     <![endif]-->
-    @RenderSection("JavaScript", required:false)
+    @RenderSection("JavaScript", required: false)
 </head>
 <body>
     <header role="banner" id="fh5co-header">

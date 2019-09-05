@@ -17,19 +17,19 @@
         <tr class="row header btn-dark">
 
             <th class="cell">
-                @Html.DisplayName("Stock")
+                @Html.DisplayName(@Resources.Resources.Stock)
             </th>
             <th class="cell">
-                @Html.DisplayName("Quantity")
+                @Html.DisplayName(@Resources.Resources.Quantity)
             </th>
             <th class="cell">
-                @Html.DisplayName("Date(Day/Month/Year)")
+                @Html.DisplayName(@Resources.Resources.Date)
             </th>
             <th class="cell">
-                @Html.DisplayName("State")
+                @Html.DisplayName(@Resources.Resources.State)
             </th>
             <th class="cell">
-                @Html.DisplayName("Type")
+                @Html.DisplayName(@Resources.Resources.TransactionType)
             </th>
 
         </tr>
@@ -38,9 +38,18 @@
         {
             <tr class="row">
 
-                <td class="cell">
-                    @item.Stock.CompanyEN
-                </td>
+                @if(System.Threading.Thread.CurrentThread.CurrentCulture.Name == "en")
+                {
+                    <td class="cell">
+                        item.Stock.CompanyEN
+                    </td>
+                }
+                else
+                {
+                    <td class="cell">
+                        item.Stock.CompanyAR
+                    </td>
+                }
                 <td class="cell">
                     @item.Quantity
                 </td>
@@ -67,10 +76,10 @@
         <tr class="row header btn-dark">
 
             <th class="cell">
-                @Html.DisplayName("Stock")
+                @Html.DisplayName(Resources.Resources.Stock)
             </th>
             <th class="cell">
-                @Html.DisplayName("Price")
+                @Html.DisplayName(Resources.Resources.Price)
             </th>
 
         </tr>
@@ -80,9 +89,18 @@
 
             <tr class="row">
 
-                <td class="cell">
-                    @item.Stock.CompanyEN
-                </td>
+                @if(System.Threading.Thread.CurrentThread.CurrentCulture.Name == "en")
+                {
+                    <td class="cell">
+                        item.Stock.CompanyEN
+                    </td>
+                }
+                else
+                {
+                    <td class="cell">
+                        item.Stock.CompanyAR
+                    </td>
+                }
                 <td class="cell">
                     @item.Stock.Price
                 </td>

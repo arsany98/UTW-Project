@@ -515,7 +515,7 @@ namespace UTW_Project.Controllers
         
 
         [HttpPost]
-        public ActionResult Order(string username, string type, string stockName, int quantity,  int orderID = 0)
+        public ActionResult Order(string username, string type, string stockName, int quantity = 0,  int orderID = 0)
         {
             if (orderID != 0)
             {

@@ -200,7 +200,16 @@ namespace UTW_Project.Classes
                 var toBePaid = Convert.ToDecimal(quantity) * order.Price;
                 if(balanceBefore >= toBePaid)
                 {
-                    if(prePaid >= toBePaid) { ConfirmEdit(order, user, quantity); return true; }
+                    if(prePaid >= toBePaid)
+                    {
+                        if (hasStocks(user.Username, order.Stock, order.Quantity - quantity))
+                        {
+                            ConfirmEdit(order, user, quantity);
+                            return true;
+                        }
+                        else
+                            return false;
+                    }
                     else
                     {
                         var PayDiff = toBePaid - prePaid;
@@ -310,6 +319,7 @@ namespace UTW_Project.Classes
                     Db.Orders.Add(order);
                     
                     Db.SaveChanges();
+                    return true;
                 }
                 else
                 {

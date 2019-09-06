@@ -506,7 +506,12 @@ namespace UTW_Project.Controllers
             
             return View(users);
         }
-
+        [Authorize]
+        public ActionResult OrderDetails(int id)
+        {
+            var order = db.GetOrder(id);
+            return PartialView("OrderDetails", order);
+        }
         [Authorize]
         public ActionResult Activate(string username)
         {

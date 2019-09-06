@@ -126,14 +126,6 @@
       <DependentUpon>UTWProjectModel.edmx</DependentUpon>
       <LastGenOutput>UTWProjectModel.cs</LastGenOutput>
     </Content>
-    <None Include="Scripts\jquery-1.10.2.intellisense.js" />
-    <Content Include="Scripts\jquery-1.10.2.js" />
-    <Content Include="Scripts\jquery-1.10.2.min.js" />
-    <None Include="Scripts\jquery.validate-vsdoc.js" />
-    <Content Include="Scripts\jquery.validate.js" />
-    <Content Include="Scripts\jquery.validate.min.js" />
-    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
-    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Template\css\animate.css" />
     <Content Include="Template\css\bootstrap-rtl.css" />
     <Content Include="Template\css\bootstrap.css" />
@@ -199,6 +191,7 @@
     <Content Include="Template\js\login-main.js" />
     <Content Include="Template\js\main.js" />
     <Content Include="Template\js\modernizr-2.6.2.min.js" />
+    <Content Include="Template\js\Popup.js" />
     <Content Include="Template\js\register-main.js" />
     <Content Include="Template\js\respond.min.js" />
     <Content Include="Template\Modifications.css" />
@@ -291,7 +284,6 @@
     <Content Include="Template\images\.DS_Store" />
     <Content Include="Template\js\.DS_Store" />
     <Content Include="Views\Home\Monitor.cshtml" />
-    <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\Home\Dashboard.cshtml" />
     <Content Include="Template\fonts\font-awesome-4.7.0\fonts\fontawesome-webfont.eot" />
     <Content Include="Template\fonts\font-awesome-4.7.0\fonts\fontawesome-webfont.ttf" />
@@ -452,6 +444,7 @@
     <Content Include="Template\sass\_bootstrap-mincer.scss" />
     <Content Include="Template\sass\_bootstrap-sprockets.scss" />
     <Content Include="Views\Home\UpdateOrder.cshtml" />
+    <Content Include="Views\Home\OrderDetails.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

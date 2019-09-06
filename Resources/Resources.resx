@@ -138,8 +138,17 @@
   <data name="BackToLogin" xml:space="preserve">
     <value>Back To Login Page</value>
   </data>
+  <data name="BallanceAfter" xml:space="preserve">
+    <value>Ballance After Order</value>
+  </data>
+  <data name="BallanceBefore" xml:space="preserve">
+    <value>Ballance Before Order</value>
+  </data>
   <data name="Blocked" xml:space="preserve">
     <value>Blocked</value>
+  </data>
+  <data name="Close" xml:space="preserve">
+    <value>Close</value>
   </data>
   <data name="ConfirmedSuccessfully" xml:space="preserve">
     <value>Confirmed Successfully</value>
@@ -155,6 +164,9 @@
   </data>
   <data name="DefaultSearch" xml:space="preserve">
     <value>Default Search</value>
+  </data>
+  <data name="Details" xml:space="preserve">
+    <value>Details</value>
   </data>
   <data name="Edit" xml:space="preserve">
     <value>Edit</value>
@@ -311,6 +323,9 @@
   </data>
   <data name="To" xml:space="preserve">
     <value>To</value>
+  </data>
+  <data name="Total" xml:space="preserve">
+    <value>Total</value>
   </data>
   <data name="TotalTransactionValue" xml:space="preserve">
     <value>Total Transaction Value</value>

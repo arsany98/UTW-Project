@@ -1,0 +1,137 @@
+﻿@model UTW_Project.Models.Order
+
+@if(System.Threading.Thread.CurrentThread.CurrentCulture.Name == "en")
+{
+    <style>
+        .dl-horizontal dt{
+            width: 300px;
+            }
+        .dl-horizontal dd{
+            margin-left: 320px;
+        }
+    </style>
+}
+<div>
+    <dl class="dl-horizontal">
+        <dt>
+            @Resources.Resources.UserID
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.U_ID)
+        </dd>
+
+        <dt>
+            @Resources.Resources.Username
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.User.Username)
+        </dd>
+
+        <dt>
+            @Resources.Resources.OrderID
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ID)
+        </dd>
+
+        <dt>
+            @Resources.Resources.Stock
+        </dt>
+        @if (System.Threading.Thread.CurrentThread.CurrentCulture.Name == "en")
+        {
+            <dd>
+                @Html.DisplayFor(model => model.Stock.CompanyEN)
+            </dd>
+        }
+        else
+        {
+            <dd>
+                @Html.DisplayFor(model => model.Stock.CompanyAR)
+            </dd>
+        }
+
+        <dt>
+            @Resources.Resources.Date
+        </dt>
+
+        <dd>
+            @Model.Date.Day/@Model.Date.Month/@Model.Date.Year
+        </dd>
+
+        <dt>
+            @Resources.Resources.Quantity
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Quantity)
+        </dd>
+
+        <dt>
+            @Resources.Resources.Price
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+
+        <dt>
+            @Resources.Resources.Total
+        </dt>
+
+        <dd>
+            @(Model.Quantity * Model.Price)
+        </dd>
+
+        <dt>
+            @Resources.Resources.BallanceBefore
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.U_Ballance)
+        </dd>
+
+        <dt>
+            @Resources.Resources.BallanceAfter
+        </dt>
+
+        <dd>
+            @(Model.U_Ballance - (Model.Quantity * Model.Price))
+        </dd>
+
+        <dt>
+            @Resources.Resources.TransactionType
+        </dt>
+        @if (System.Threading.Thread.CurrentThread.CurrentCulture.Name == "en")
+        {
+
+            <dd>
+                @Html.DisplayFor(model => model.TypeEN)
+            </dd>
+        }
+        else
+        {
+            <dd>
+                @Html.DisplayFor(model => model.TypeAR)
+            </dd>
+        }
+        <dt>
+            @Resources.Resources.State
+        </dt>
+        @if (System.Threading.Thread.CurrentThread.CurrentCulture.Name == "en")
+        {
+            <dd>
+                @Html.DisplayFor(model => model.StateEN)
+            </dd>
+        }
+        else
+        {
+            <dd>
+                @Html.DisplayFor(model => model.StateAR)
+            </dd>
+        }
+
+    </dl>
+</div>

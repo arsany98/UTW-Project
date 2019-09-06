@@ -18,6 +18,9 @@
         <div class="form-group">
             @Html.EditorFor(model => model.Quantity, new { htmlAttributes = new { @class = "form-control" } })
         </div>
+        <div>
+            @ViewBag.error
+        </div>
     </div>
     <div>
         <br />

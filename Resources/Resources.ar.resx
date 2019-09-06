@@ -138,8 +138,17 @@
   <data name="BackToLogin" xml:space="preserve">
     <value>الرجوع لصفحة تسجيل الدخول</value>
   </data>
+  <data name="BallanceAfter" xml:space="preserve">
+    <value>الحساب بعد الطلب</value>
+  </data>
+  <data name="BallanceBefore" xml:space="preserve">
+    <value>الحساب قبل الطلب</value>
+  </data>
   <data name="Blocked" xml:space="preserve">
     <value>محظور</value>
+  </data>
+  <data name="Close" xml:space="preserve">
+    <value>اغلاق</value>
   </data>
   <data name="ConfirmedSuccessfully" xml:space="preserve">
     <value>تم التأكيد بنجاح</value>
@@ -155,6 +164,9 @@
   </data>
   <data name="DefaultSearch" xml:space="preserve">
     <value>البحث الافتراضي</value>
+  </data>
+  <data name="Details" xml:space="preserve">
+    <value>تفاصيل</value>
   </data>
   <data name="Edit" xml:space="preserve">
     <value>تعديل</value>
@@ -311,6 +323,9 @@
   </data>
   <data name="To" xml:space="preserve">
     <value>إلى</value>
+  </data>
+  <data name="Total" xml:space="preserve">
+    <value>المجموع</value>
   </data>
   <data name="TotalTransactionValue" xml:space="preserve">
     <value>قيمة المعاملات</value>

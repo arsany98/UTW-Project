@@ -27,6 +27,7 @@
 }
 
 
+<div class="container">
 
 @using (Html.BeginForm("Monitor", "Home"))
 {
@@ -96,6 +97,7 @@
 
             </div>
 }
+</div>
 
 <table class="table">
     <tr>
@@ -177,7 +179,7 @@
     }
 
     <td>
-        <a href="javascript:void(0);" class="anchorDetail" data-id="@item.ID">@Resources.Resources.Details</a>
+        <a href="javascript:void(0);" class="anchorDetail" data-id="@item.ID" data-url="/Home/OrderDetails">@Resources.Resources.Details</a>
 
     </td>
 

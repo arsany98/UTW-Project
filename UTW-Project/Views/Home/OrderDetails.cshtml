@@ -82,7 +82,7 @@
         </dt>
 
         <dd>
-            @(Model.Quantity * Model.Price)
+            @((Model.Quantity * Model.Price).ToString("0.00"))
         </dd>
 
         <dt>
@@ -97,9 +97,18 @@
             @Resources.Resources.BallanceAfter
         </dt>
 
-        <dd>
-            @(Model.U_Ballance - (Model.Quantity * Model.Price))
-        </dd>
+        @if (Model.TypeEN == "Buy")
+        {
+            <dd>
+                @((Model.U_Ballance - (Model.Quantity * Model.Price)).ToString("0.00"))
+            </dd>
+        }
+        else
+        {
+            <dd>
+                @((Model.U_Ballance + (Model.Quantity * Model.Price)).ToString("0.00"))
+            </dd>
+        }
 
         <dt>
             @Resources.Resources.TransactionType

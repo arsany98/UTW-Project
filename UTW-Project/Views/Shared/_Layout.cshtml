@@ -87,8 +87,8 @@
                                 if (!user.Admin)
                                 {
                                     <li><a class="external" href="@Url.Action("Dashboard", "Home")">@Resources.Resources.Dashboard</a></li>
+                                    <li><a class="external" href="@Url.Action("Order", "Home")">@Resources.Resources.Order</a></li>
                                 }
-                                <li><a class="external" href="@Url.Action("Order", "Home")">@Resources.Resources.Order</a></li>
                                 <li><a class="external" href="@Url.Action("Monitor", "Home")">@Resources.Resources.Monitor</a></li>
                                 if (user.Admin)
                                 {
@@ -114,10 +114,8 @@
     </header>
 
     <br /><br />
-          <div style="padding:40px">
 
               @RenderBody()
-          </div>
 
             <div id="fh5co-footer" role="contentinfo">
                 <div class="container">

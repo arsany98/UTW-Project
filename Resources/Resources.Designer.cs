@@ -322,6 +322,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to First Name.
+        /// </summary>
+        public static string FirstName {
+            get {
+                return ResourceManager.GetString("FirstName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to First Name in Arabic.
         /// </summary>
         public static string FirstNameAR {
@@ -372,6 +381,15 @@ namespace Resources {
         public static string From {
             get {
                 return ResourceManager.GetString("From", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Last Name.
+        /// </summary>
+        public static string LastName {
+            get {
+                return ResourceManager.GetString("LastName", resourceCulture);
             }
         }
         
@@ -795,6 +813,15 @@ namespace Resources {
         public static string You_llBeCharged {
             get {
                 return ResourceManager.GetString("You\'llBeCharged", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You&apos;ll Get.
+        /// </summary>
+        public static string You_llGet {
+            get {
+                return ResourceManager.GetString("You\'llGet", resourceCulture);
             }
         }
         

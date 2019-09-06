@@ -1,39 +1,32 @@
 ﻿@model UTW_Project.Models.Order
 
-@{
-    ViewBag.Title = "UpdateOrder";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
+<div class="container">
 
 @using (Html.BeginForm("UpdateOrder", "Home"))
 {
-
-<div class="col-md-4 animate-box fadeInUp animated-fast" style="background-color:#41444B;padding:20px;margin-bottom:20px">
-    <h3 class="section-title whitelabel">@Resources.Resources.UpdateOrder</h3>
-    @Html.HiddenFor(model => model.ID)
-    <div>
-        <label>
-            @Resources.Resources.Quantity
-        </label><br />
-        <div class="form-group">
-            @Html.EditorFor(model => model.Quantity, new { htmlAttributes = new { @class = "form-control" } })
+    <div class="col-md-4 animate-box fadeInUp animated-fast" style="background-color:#41444B;padding:20px;margin-bottom:20px">
+        @Html.HiddenFor(model => model.ID)
+        <div>
+            <label>
+                @Resources.Resources.Quantity
+            </label><br />
+            <div class="form-group">
+                @Html.EditorFor(model => model.Quantity, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
         </div>
         <div>
-            @ViewBag.error
+            <br />
+            <button type="submit" id="btn-submit" class="btn btn-send-message btn-md button">
+                @Resources.Resources.Edit
+            </button>
         </div>
-    </div>
-    <div>
-        <br />
-        <button type="submit" id="btn-submit" class="btn btn-send-message btn-md button">
-            @Resources.Resources.Edit
-        </button>
-    </div>
-    <div>
-        @if (ViewBag.error != null)
-        {
-            <label style="font-size:15px;color:white;border-bottom:double;border-color:red">@ViewBag.error</label>
-        }
-    </div>
+        <div>
+            @if (ViewBag.error != null)
+            {
+                <label style="font-size:15px;color:white;border-bottom:double;border-color:red">@ViewBag.error</label>
+            }
+        </div>
 
-</div>
+    </div>
 }
+</div>

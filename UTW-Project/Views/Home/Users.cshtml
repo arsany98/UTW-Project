@@ -70,23 +70,17 @@
                             @Html.DisplayNameFor(model => model.Email)
                         </th>
                         <th class="cell">
-                            @Html.DisplayNameFor(model => model.FirstNameEN)
+                            @Resources.Resources.FirstName
                         </th>
                         <th class="cell">
-                            @Html.DisplayNameFor(model => model.LastNameEN)
-                        </th>
-                        <th class="cell">
-                            @Html.DisplayNameFor(model => model.FirstNameAR)
-                        </th>
-                        <th class="cell">
-                            @Html.DisplayNameFor(model => model.LastNameAR)
-                        </th>
+                            @Resources.Resources.LastName
+                        </th>                        
 
                         <th class="cell">
                             @Html.DisplayNameFor(model => model.Blocked)
                         </th>
 
-
+                        <th></th>
                     </tr>
 
                     @foreach (var item in Model)
@@ -98,18 +92,24 @@
                             <td class="cell">
                                 @Html.DisplayFor(modelItem => item.Email)
                             </td>
-                            <td class="cell">
-                                @Html.DisplayFor(modelItem => item.FirstNameEN)
-                            </td>
-                            <td class="cell">
-                                @Html.DisplayFor(modelItem => item.LastNameEN)
-                            </td>
-                            <td class="cell">
-                                @Html.DisplayFor(modelItem => item.FirstNameAR)
-                            </td>
-                            <td class="cell">
-                                @Html.DisplayFor(modelItem => item.LastNameAR)
-                            </td>
+                            @if(System.Threading.Thread.CurrentThread.CurrentCulture.Name == "en")
+                            {
+                                <td class="cell">
+                                    @Html.DisplayFor(modelItem => item.FirstNameEN)
+                                </td>
+                                <td class="cell">
+                                    @Html.DisplayFor(modelItem => item.LastNameEN)
+                                </td>
+                            }
+                            else
+                            {
+                                <td class="cell">
+                                    @Html.DisplayFor(modelItem => item.FirstNameAR)
+                                </td>
+                                <td class="cell">
+                                    @Html.DisplayFor(modelItem => item.LastNameAR)
+                                </td>
+                            }
                             <td class="cell">
                                 @if (item.Blocked == true)
                                 {

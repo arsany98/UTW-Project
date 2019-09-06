@@ -515,7 +515,9 @@ namespace UTW_Project.Controllers
         [Authorize]
         public ActionResult Activate(string username)
         {
-            db.ActivateUser(username);
+            var user = Session["User"] as User;
+            if(user.Admin)
+                db.ActivateUser(username);
             return RedirectToAction("Users");
         }
 
@@ -523,7 +525,7 @@ namespace UTW_Project.Controllers
         public ActionResult Order()
         {
             var user = Session["User"] as User;
-            if (user.Admin) { RedirectToAction("Monitor"); }
+            if (user.Admin) { return RedirectToAction("Monitor"); }
             List<Order> Valid = db.ValidToUpdate(user);
             return View(Valid);
         }
@@ -533,6 +535,7 @@ namespace UTW_Project.Controllers
         public ActionResult Order(string type, int stockID = 0, int quantity = 0,  int orderID = 0)
         {
             var user = Session["User"] as User;
+            if (user.Admin) { return RedirectToAction("Monitor"); }
             if (orderID != 0)
             {
                 Order order = db.SearchUserOrders(user.Username, orderID);
@@ -548,8 +551,11 @@ namespace UTW_Project.Controllers
                 {
                     ViewBag.error = Resources.Resources.AddOrderError;
                 }
-                else if(type == "Buy") { ViewBag.Message = Resources.Resources.You_llBeCharged + " " + stock.Price * quantity + " " + Resources.Resources.EGP; }
-                if (user.Admin) { RedirectToAction("Monitor"); }
+                else
+                {
+                    if (type == "Buy") { ViewBag.Message = Resources.Resources.You_llBeCharged + " " + stock.Price * quantity + " " + Resources.Resources.EGP; }
+                    else { ViewBag.Message = Resources.Resources.You_llGet + " " + stock.Price * quantity + " " + Resources.Resources.EGP; }
+                }
                 List<Order> Valid = db.ValidToUpdate(user);
                 return View(Valid);
             }
@@ -565,7 +571,7 @@ namespace UTW_Project.Controllers
             var user = Session["User"] as User;
             if (user.Admin) { return RedirectToAction("Monitor"); }
             Order order = db.GetOrder(id);
-            return View(order);
+            return PartialView(order);
         }
 
         [HttpPost]
@@ -573,22 +579,11 @@ namespace UTW_Project.Controllers
         public ActionResult UpdateOrder(int ID, int Quantity)
         {
             User user = Session["User"] as User;
-            if(!db.updateOrder(user, ID, Quantity)) { ViewBag.error = Resources.Resources.ActionNotAllowed; }
-            else { return RedirectToAction("Monitor"); }
-            return View();
+            if (user.Admin) { return RedirectToAction("Monitor"); }
+            if (!db.updateOrder(user, ID, Quantity)) { ViewBag.error = Resources.Resources.ActionNotAllowed; }
+            else { return RedirectToAction("Order"); }
+            return PartialView();
         }
-    
-        //[Authorize]
-        //public ActionResult Order(string username, string type, string stockName, int quantity)
-        //{
-        //    if (!db.AddOrder(username, type, stockName, quantity))
-        //    {
-        //        ViewBag.error = "You don't have enough money!";
-        //    }
-        //    return View();
-        //}
-
-
 
         [Authorize]
         public ActionResult Logout()

@@ -1,15 +1,11 @@
 ﻿@model UTW_Project.Models.Order
 
-@{
-    ViewBag.Title = "UpdateOrder";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
+<div class="container">
 
 @using (Html.BeginForm("UpdateOrder", "Home"))
 {
 
     <div class="col-md-4 animate-box fadeInUp animated-fast" style="background-color:#41444B;padding:20px;margin-bottom:20px">
-        <h3 class="section-title whitelabel">@Resources.Resources.UpdateOrder</h3>
         @Html.HiddenFor(model => model.ID)
         <div>
             <label>
@@ -30,3 +26,4 @@
         </div>
     </div>
 }
+</div>

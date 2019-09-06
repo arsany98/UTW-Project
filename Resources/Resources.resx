@@ -204,6 +204,9 @@
   <data name="FindAcc" xml:space="preserve">
     <value>Find your account!</value>
   </data>
+  <data name="FirstName" xml:space="preserve">
+    <value>First Name</value>
+  </data>
   <data name="FirstNameAR" xml:space="preserve">
     <value>First Name in Arabic</value>
   </data>
@@ -221,6 +224,9 @@
   </data>
   <data name="From" xml:space="preserve">
     <value>From</value>
+  </data>
+  <data name="LastName" xml:space="preserve">
+    <value>Last Name</value>
   </data>
   <data name="LastNameAR" xml:space="preserve">
     <value>Last Name in Arabic</value>
@@ -362,6 +368,9 @@
   </data>
   <data name="You'llBeCharged" xml:space="preserve">
     <value>You'll be charged</value>
+  </data>
+  <data name="You'llGet" xml:space="preserve">
+    <value>You'll Get</value>
   </data>
   <data name="YouAreBlocked" xml:space="preserve">
     <value>You are blocked</value>

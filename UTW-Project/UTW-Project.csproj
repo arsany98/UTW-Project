@@ -182,17 +182,14 @@
     <Content Include="Template\images\user-6.jpg" />
     <Content Include="Template\index.html" />
     <Content Include="Template\js\bootstrap.min.js" />
-    <Content Include="Template\js\jquery-3.2.1.min.js" />
     <Content Include="Template\js\jquery.countTo.js" />
     <Content Include="Template\js\jquery.easing.1.3.js" />
     <Content Include="Template\js\jquery.min.js" />
     <Content Include="Template\js\jquery.stellar.min.js" />
     <Content Include="Template\js\jquery.waypoints.min.js" />
-    <Content Include="Template\js\login-main.js" />
     <Content Include="Template\js\main.js" />
     <Content Include="Template\js\modernizr-2.6.2.min.js" />
     <Content Include="Template\js\Popup.js" />
-    <Content Include="Template\js\register-main.js" />
     <Content Include="Template\js\respond.min.js" />
     <Content Include="Template\Modifications.css" />
     <Content Include="Web.config" />

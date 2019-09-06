@@ -1,13 +1,13 @@
-﻿var TeamDetailPostBackURL = '/Home/OrderDetails';
-    $(function () {
+﻿    $(function () {
     $(".anchorDetail").click(function () {
         debugger;
         var $buttonClicked = $(this);
+        var PostBackURL = $buttonClicked.attr('data-url');
         var id = $buttonClicked.attr('data-id');
         var options = { "backdrop": "static", keyboard: true };
         $.ajax({
             type: "GET",
-            url: TeamDetailPostBackURL,
+            url: PostBackURL,
             contentType: "application/json; charset=utf-8",
             data: { "id": id },
             datatype: "json",

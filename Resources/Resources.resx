@@ -237,6 +237,9 @@
   <data name="OrderID" xml:space="preserve">
     <value>Order ID</value>
   </data>
+  <data name="OrdersOfToday" xml:space="preserve">
+    <value>Orders of Today</value>
+  </data>
   <data name="Password" xml:space="preserve">
     <value>Password</value>
   </data>
@@ -303,8 +306,14 @@
   <data name="StockPrice" xml:space="preserve">
     <value>Stock Price</value>
   </data>
+  <data name="StocksAndTheirPrices" xml:space="preserve">
+    <value>Stocks and their prices</value>
+  </data>
   <data name="To" xml:space="preserve">
     <value>To</value>
+  </data>
+  <data name="TotalTransactionValue" xml:space="preserve">
+    <value>Total Transaction Value</value>
   </data>
   <data name="TransactionType" xml:space="preserve">
     <value>Transaction Type</value>

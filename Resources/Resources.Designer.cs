@@ -421,6 +421,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Orders of Today.
+        /// </summary>
+        public static string OrdersOfToday {
+            get {
+                return ResourceManager.GetString("OrdersOfToday", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Password.
         /// </summary>
         public static string Password {
@@ -619,11 +628,29 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Stocks and their prices.
+        /// </summary>
+        public static string StocksAndTheirPrices {
+            get {
+                return ResourceManager.GetString("StocksAndTheirPrices", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to To.
         /// </summary>
         public static string To {
             get {
                 return ResourceManager.GetString("To", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Total Transaction Value.
+        /// </summary>
+        public static string TotalTransactionValue {
+            get {
+                return ResourceManager.GetString("TotalTransactionValue", resourceCulture);
             }
         }
         

@@ -16,6 +16,10 @@
     // will be edited after adding dll
     var db = new UTW_Project.Classes.DBManager();
     List<UTW_Project.Models.Stock> stocks = db.GetStocks();
+    List<UTW_Project.Models.Order> orders = db.ValidToUpdate(user);
+    var order = new UTW_Project.Models.Order();
+    order.ID = 0;
+    orders.Insert(0, order);
 }
 
 @{
@@ -99,7 +103,14 @@
                 @Resources.Resources.OrderID
             </label>
             <div class="form-group">
-                @Html.TextBox("orderID", 0, new { @class = "form-control" })
+                @Html.DropDownList("orderID",
+                                    orders.Select(item => new SelectListItem
+                                    {
+                                        Value = item.ID.ToString(),
+                                        Text = item.ID == 0?(System.Threading.Thread.CurrentThread.CurrentCulture.Name == "en"?"all":"الكل"):item.ID.ToString(),
+                                    }),
+                                    null,
+                                    new { @class = "form-control" })
             </div>
             <button type="submit" id="btn-submit" class="btn btn-send-message btn-md button">
                 @Resources.Resources.Search

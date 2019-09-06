@@ -543,7 +543,7 @@ namespace UTW_Project.Controllers
                 {
                     ViewBag.error = Resources.Resources.AddOrderError;
                 }
-                if(type == "Buy") { ViewBag.Message = Resources.Resources.You_llBeCharged + " " + stock.Price * quantity + " " + Resources.Resources.EGP; }
+                else if(type == "Buy") { ViewBag.Message = Resources.Resources.You_llBeCharged + " " + stock.Price * quantity + " " + Resources.Resources.EGP; }
                 if (user.Admin) { RedirectToAction("Monitor"); }
                 List<Order> Valid = db.ValidToUpdate(user);
                 return View(Valid);

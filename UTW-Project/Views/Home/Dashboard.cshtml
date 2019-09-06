@@ -12,15 +12,9 @@
 {
     @Html.AntiForgeryToken()
 
-    //todaysOrders
-    if (System.Threading.Thread.CurrentThread.CurrentCulture.Name == "en")
-    {
-        <h3 class="section-title">Orders of Today</h3>
-    }
-    else
-    {
-        <h3 class="section-title">معاملات اليوم</h3>
-    }
+    //todaysOrders    
+    <h3 class="section-title">@Resources.Resources.OrdersOfToday</h3>
+    
     <table class="table">
         <tr style="background-color:grey;color:white" class="row header btn-dark">
 
@@ -98,14 +92,9 @@
     <br /><br />
 
     //UserStocks
-    if (System.Threading.Thread.CurrentThread.CurrentCulture.Name == "en")
-    {
-        <h3 class="section-title">Stocks and their prices</h3>
-    }
-    else
-    {
-        <h3 class="section-title">الاسهم و اسعارها</h3>
-    }
+
+    <h3 class="section-title">@Resources.Resources.StocksAndTheirPrices</h3>
+    
     <table class="table">
         <tr style="background-color:grey;color:white" class="row header btn-dark">
 
@@ -151,17 +140,9 @@
     //pieChart
 
 
-    <!--Div that will hold the pie chart-->
-    if (System.Threading.Thread.CurrentThread.CurrentCulture.Name == "en")
-    {
-
-        <h3 class="section-title">Total Transaction Value</h3>
-    }
-    else
-    {
-        <h3 class="section-title">قيمة المعاملات</h3>
-    }
-    <div id="chart_div"></div>
+    <!--Div that will hold the pie chart-->    
+    <h3 class="section-title">@Resources.Resources.TotalTransactionValue</h3>
+    
 
 
 

@@ -7,9 +7,7 @@
 
 
 @{
-    bool enableID = false;
     var user = Session["User"] as UTW_Project.Models.User;
-    enableID = user.Admin;
 }
 
 @{
@@ -21,6 +19,11 @@
     stock.CompanyEN = "all";
     stock.CompanyAR = "الكل";
     stocks.Insert(0, stock);
+
+    List<UTW_Project.Models.User> users = db.GetUsersList();
+    var temp = new UTW_Project.Models.User();
+    temp.ID = 0;
+    users.Insert(0, temp);
 }
 
 
@@ -31,26 +34,37 @@
     <div class="col-md-4 animate-box fadeInUp animated-fast" style="background-color:#41444B;padding:20px;margin-bottom:20px">
         <h3 class="section-title whitelabel">@Resources.Resources.Monitor</h3>
         <div>
-            <label> @Resources.Resources.UserID </label> <br />
-            @{
-                string read = "readonly";
-                if (user.Admin) { read = "false"; }
-
+            @if(user.Admin)
+            {
+                <label> @Resources.Resources.UserID </label> <br />
+                <div class="form-group">
+                    @Html.DropDownList("userID",
+                                            users.Select(item => new SelectListItem
+                                            {
+                                                Value = item.ID.ToString(),
+                                                Text = item.ID == 0?(System.Threading.Thread.CurrentThread.CurrentCulture.Name == "en"?"all":"الكل"):item.Username,
+                                            }),
+                                            null,
+                                            new { @class = "form-control" })
+                </div>
             }
-            <div class="form-group">
-                @Html.TextBox("userID", user.ID, new { @class = "form-control", @readonly = read })
-            </div>
+            else
+            {
+                @Html.Hidden("userID", user.ID);
+            }
         </div>
             
             <div>
                 <label> @Resources.Resources.From </label> <br />
-                <div class="form-group">
-                     <input type="date" name="startDate" value="1-1-1850">
+                <div class="form-group date">                    
+                     <input type="date" name="startDate">
                 </div>
             </div>
             <div>
                 <label> @Resources.Resources.To </label> <br />
-                <input type="date" name="endDate" value="@DateTime.Now">
+                <div class="form-group">                    
+                    <input type="date" name="endDate">
+                </div>
             </div>
             <div>
                 <label>@Resources.Resources.Stock</label> <br />

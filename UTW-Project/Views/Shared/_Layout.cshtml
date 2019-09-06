@@ -96,13 +96,13 @@
                                 }
                                 <li><a class="external" href="@Url.Action("Logout", "Home")">@Resources.Resources.Logout</a></li>
                             }
-                            @if (System.Threading.Thread.CurrentThread.CurrentCulture.Name == "ar")
+                            @if (System.Threading.Thread.CurrentThread.CurrentCulture.Name == "ar-EG")
                             {
                                 <li><a class="external" href="@Url.Action("SetCulture", "Home", new { culture = "en" }, Request.Url.Scheme)">English</a></li>
                             }
                             else
                             {
-                                <li><a class="external" href="@Url.Action("SetCulture", "Home", new { culture = "ar" }, Request.Url.Scheme)">العربية</a></li>
+                                <li><a class="external" href="@Url.Action("SetCulture", "Home", new { culture = "ar-EG" }, Request.Url.Scheme)">العربية</a></li>
                             }
 
 

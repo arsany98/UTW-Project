@@ -237,6 +237,9 @@
   <data name="OrderID" xml:space="preserve">
     <value>رقم الطلب</value>
   </data>
+  <data name="OrdersOfToday" xml:space="preserve">
+    <value>معاملات اليوم</value>
+  </data>
   <data name="Password" xml:space="preserve">
     <value>كلمة المرور</value>
   </data>
@@ -303,8 +306,14 @@
   <data name="StockPrice" xml:space="preserve">
     <value>سعر السهم</value>
   </data>
+  <data name="StocksAndTheirPrices" xml:space="preserve">
+    <value>الاسهم و اسعارها</value>
+  </data>
   <data name="To" xml:space="preserve">
     <value>إلى</value>
+  </data>
+  <data name="TotalTransactionValue" xml:space="preserve">
+    <value>قيمة المعاملات</value>
   </data>
   <data name="TransactionType" xml:space="preserve">
     <value>نوع العملية</value>

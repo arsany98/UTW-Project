@@ -497,15 +497,17 @@ namespace UTW_Project.Classes
             return stockOrders;
 
         }
-
+        ////////////////////////////////////////
         public List<PieChartElement> GetChartDataForUser(User user)
         {
 
+            List<PieChartElement> pieChartElements1 = new List<PieChartElement>();
+            List<PieChartElement> pieChartElements2 = new List<PieChartElement>();
             List<PieChartElement> pieChartElements = new List<PieChartElement>();
 
 
             var query = from o in Db.Orders
-                        where o.U_ID == user.ID
+                        where o.U_ID == user.ID && o.TypeEN == "Buy"
                         group o by o.S_ID into x
                         select new PieChartElement
                         {
@@ -514,7 +516,44 @@ namespace UTW_Project.Classes
 
                         };
 
-            pieChartElements = query.ToList();
+            var query2 = from o in Db.Orders
+                         where o.U_ID == user.ID && o.TypeEN == "Sell"
+                         group o by o.S_ID into x
+                         select new PieChartElement
+                         {
+                             ID = x.Key,
+                             TotalQuantity = x.Select(f => f.Quantity).Sum()
+
+                         };
+
+            pieChartElements1 = query.ToList();
+            pieChartElements2 = query2.ToList();
+
+
+            for (int i = 0; i < pieChartElements1.Count; i++)
+            {
+                decimal diff = 0;
+                bool isFound = true;
+                for (int j = 0; j < pieChartElements2.Count; j++)
+                {
+                    if (pieChartElements2[j].ID == pieChartElements1[i].ID)
+                    {
+                        diff = pieChartElements1[i].TotalQuantity - pieChartElements2[j].TotalQuantity;
+
+                        PieChartElement e = new PieChartElement();
+                        e.ID = pieChartElements2[j].ID;
+                        e.TotalQuantity = diff;
+                        pieChartElements.Add(e);
+                        isFound = false;
+
+                    }
+                }
+                if (isFound)
+                {
+                    pieChartElements.Add(pieChartElements1[i]);
+                }
+
+            }
 
 
             return pieChartElements;

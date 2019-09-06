@@ -1,4 +1,4 @@
-﻿@model IEnumerable<UTW_Project.Models.Order>
+﻿@model IEnumerable<DataAccessLayer.Order>
 
 @{
     ViewBag.Title = "Order";
@@ -7,17 +7,17 @@
 
 @{
 
-    var user = Session["User"] as UTW_Project.Models.User;
+    var user = Session["User"] as DataAccessLayer.User;
     string Name = user.Username;
 
 }
 
 @{
     // will be edited after adding dll
-    var db = new UTW_Project.Classes.DBManager();
-    List<UTW_Project.Models.Stock> stocks = db.GetStocks();
-    List<UTW_Project.Models.Order> orders = db.ValidToUpdate(user);
-    var order = new UTW_Project.Models.Order();
+    var db = new BusinessLayer.DBManager();
+    List<DataAccessLayer.Stock> stocks = db.GetStocks();
+    List<DataAccessLayer.Order> orders = db.ValidToUpdate(user);
+    var order = new DataAccessLayer.Order();
     order.ID = 0;
     orders.Insert(0, order);
 }
@@ -28,7 +28,7 @@
     TType.Add("Sell");
 }
 
-@*<label>@user.Wallet.ToString("0.00")</label>*@
+<label>@user.Wallet.ToString("0.00")</label>
 <div class="container">
 
 @using (Html.BeginForm("Order", "Home"))

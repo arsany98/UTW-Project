@@ -13,7 +13,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>UTW_Project</RootNamespace>
     <AssemblyName>UTW-Project</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <UseIISExpress>true</UseIISExpress>
     <Use64BitIISExpress />
     <IISExpressSSLPort>44308</IISExpressSSLPort>
@@ -44,11 +44,16 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="BussinessLayer">
-      <HintPath>..\BussinessLayer.dll</HintPath>
+    <Reference Include="BusinessLayer, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\BusinessLayer.dll</HintPath>
     </Reference>
     <Reference Include="CaptchaMvc, Version=2.5.0.0, Culture=neutral, PublicKeyToken=fe46ad421dd3b0e6, processorArchitecture=MSIL">
       <HintPath>..\packages\CaptchaMvc.Mvc5.1.5.0\lib\net45-full\CaptchaMvc.dll</HintPath>
+    </Reference>
+    <Reference Include="DataAccessLayer, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\DataAccessLayer.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
@@ -59,6 +64,13 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.11.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Resources, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Resources.dll</HintPath>
+    </Reference>
+    <Reference Include="Resources.resources">
+      <HintPath>..\ar\Resources.resources.dll</HintPath>
     </Reference>
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Net.Http, Version=4.2.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
@@ -73,9 +85,9 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web.Http, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.7\lib\net45\System.Web.Http.dll</HintPath>
     </Reference>
@@ -116,16 +128,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
-    <Content Include="Models\UTWProjectModel.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>UTWProjectModel.Context.cs</LastGenOutput>
-      <DependentUpon>UTWProjectModel.edmx</DependentUpon>
-    </Content>
-    <Content Include="Models\UTWProjectModel.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>UTWProjectModel.edmx</DependentUpon>
-      <LastGenOutput>UTWProjectModel.cs</LastGenOutput>
-    </Content>
     <Content Include="Template\css\animate.css" />
     <Content Include="Template\css\bootstrap-rtl.css" />
     <Content Include="Template\css\bootstrap.css" />
@@ -192,60 +194,18 @@
     <Content Include="Template\js\Popup.js" />
     <Content Include="Template\js\respond.min.js" />
     <Content Include="Template\Modifications.css" />
-    <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Classes\CultureManager.cs" />
-    <Compile Include="Classes\DBManager.cs" />
-    <Compile Include="Classes\EmailManager.cs" />
-    <Compile Include="Classes\PieChartElement.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\Order.cs">
-      <DependentUpon>UTWProjectModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Question.cs">
-      <DependentUpon>UTWProjectModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Stock.cs">
-      <DependentUpon>UTWProjectModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\URL.cs">
-      <DependentUpon>UTWProjectModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\User.cs">
-      <DependentUpon>UTWProjectModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\UTWProjectModel.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>UTWProjectModel.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\UTWProjectModel.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>UTWProjectModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\UTWProjectModel.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>UTWProjectModel.edmx</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />
-    <EntityDeploy Include="Models\UTWProjectModel.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>UTWProjectModel.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\UTWProjectModel.edmx.diagram">
-      <DependentUpon>UTWProjectModel.edmx</DependentUpon>
-    </Content>
     <None Include="packages.config" />
     <Content Include="Views\Home\ConfirmEmail.cshtml" />
     <Content Include="Views\Home\Login.cshtml" />
@@ -442,6 +402,7 @@
     <Content Include="Template\sass\_bootstrap-sprockets.scss" />
     <Content Include="Views\Home\UpdateOrder.cshtml" />
     <Content Include="Views\Home\OrderDetails.cshtml" />
+    <Content Include="Web.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -454,12 +415,6 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Resources\Resources.csproj">
-      <Project>{C3E6D267-30BA-4AA4-B3C7-5B6922384F4C}</Project>
-      <Name>Resources</Name>
-    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

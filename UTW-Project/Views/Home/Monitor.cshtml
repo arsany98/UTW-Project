@@ -1,4 +1,4 @@
-﻿@model IEnumerable<UTW_Project.Models.Order>
+﻿@model IEnumerable<DataAccessLayer.Order>
 @{
     ViewBag.Title = "Monitor";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -7,21 +7,21 @@
 
 
 @{
-    var user = Session["User"] as UTW_Project.Models.User;
+    var user = Session["User"] as DataAccessLayer.User;
 }
 
 @{
     // will be edited after adding dll
-    var db = new UTW_Project.Classes.DBManager();
-    List<UTW_Project.Models.Stock> stocks = db.GetStocks();
-    var stock = new UTW_Project.Models.Stock();
+    var db = new BusinessLayer.DBManager();
+    List<DataAccessLayer.Stock> stocks = db.GetStocks();
+    var stock = new DataAccessLayer.Stock();
     stock.ID = 0;
     stock.CompanyEN = "all";
     stock.CompanyAR = "الكل";
     stocks.Insert(0, stock);
 
-    List<UTW_Project.Models.User> users = db.GetUsersList();
-    var temp = new UTW_Project.Models.User();
+    List<DataAccessLayer.User> users = db.GetUsersList();
+    var temp = new DataAccessLayer.User();
     temp.ID = 0;
     users.Insert(0, temp);
 }

@@ -1,6 +1,6 @@
 ﻿<!DOCTYPE html>
 
-<html dir="@(UTW_Project.Classes.CultureManager.IsRightToLeft() ? "rtl" : "ltr")">
+<html dir="@(BusinessLayer.CultureManager.IsRightToLeft() ? "rtl" : "ltr")">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -83,7 +83,7 @@
                         <ul class="nav navbar-nav navbar-right">
                             @if (Session["User"] != null)
                             {
-                                UTW_Project.Models.User user = Session["User"] as UTW_Project.Models.User;
+                                DataAccessLayer.User user = Session["User"] as DataAccessLayer.User;
                                 if (!user.Admin)
                                 {
                                     <li><a class="external" href="@Url.Action("Dashboard", "Home")">@Resources.Resources.Dashboard</a></li>

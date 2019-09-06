@@ -6,10 +6,9 @@ using System.Threading;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
-using UTW_Project.Classes;
-
+using BusinessLayer;
 namespace UTW_Project.Controllers
-{
+{ 
     public class BaseController : Controller
     {
         protected override IAsyncResult BeginExecuteCore(AsyncCallback callback, object state)
@@ -24,14 +23,19 @@ namespace UTW_Project.Controllers
             {
                 culture = Session["CurrentCulture"] as string;
             }
-            if(this.Session["User"] == null)
-            {
-                DBManager db = new DBManager();
-                this.Session["User"] = db.GetUser(User.Identity.Name);
-            }
+
+            DBManager db = new DBManager();
+            this.Session["User"] = db.GetUser(User.Identity.Name);
             CultureManager.CurrentCulture = culture;
             return base.BeginExecuteCore(callback, state);
         }
-       
+
+        protected override void OnActionExecuted(ActionExecutedContext filterContext)
+        {
+            DBManager db = new DBManager();
+            this.Session["User"] = db.GetUser(User.Identity.Name);
+            base.OnActionExecuted(filterContext);
+        }
+
     }
 }

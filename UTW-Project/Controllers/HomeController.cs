@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using UTW_Project.Models;
-using UTW_Project.Classes;
+using DataAccessLayer;
+using BusinessLayer;
 using CaptchaMvc.HtmlHelpers;
 using System.Data.Entity.Validation;
 using System.Web.Security;
@@ -406,15 +406,15 @@ namespace UTW_Project.Controllers
                 }
             }
         }
-    
+
         [Authorize]
         public ActionResult Dashboard()
         {
             User user = Session["User"] as User;
             List<Order> TodaysOrders = new List<Order>();
-            List<Order> StockOrders = new List<Order>();
+            List<Stock> StockOrders = new List<Stock>();
             List<PieChartElement> pieChartElements = new List<PieChartElement>();
-            
+
 
             if (!user.Admin)
             {
@@ -429,19 +429,19 @@ namespace UTW_Project.Controllers
 
 
 
-                for(int i=0; i<pieChartElements.Count; i++)
+                for (int i = 0; i < pieChartElements.Count; i++)
                 {
                     pieChartElements[i].Stock = db.GetStock(pieChartElements[i].ID);
                 }
 
                 ViewBag.pieChartElements = pieChartElements;
- 
+
             }
             else
             {
-               return RedirectToAction("Users", "Home");
+                return RedirectToAction("Users", "Home");
             }
-            
+
             return View();
         }
 
@@ -580,7 +580,7 @@ namespace UTW_Project.Controllers
         {
             User user = Session["User"] as User;
             if (user.Admin) { return RedirectToAction("Monitor"); }
-            if (!db.updateOrder(user, ID, Quantity)) { ViewBag.error = Resources.Resources.ActionNotAllowed; }
+            if (!db.updateOrder(user.Username, ID, Quantity)) { ViewBag.error = Resources.Resources.ActionNotAllowed; }
             else { return RedirectToAction("Order"); }
             return RedirectToAction("Order");
         }

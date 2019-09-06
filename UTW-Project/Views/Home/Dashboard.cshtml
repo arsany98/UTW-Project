@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     /**/
 
     ViewBag.Title = "Dashboard";
@@ -12,9 +11,9 @@
 {
     @Html.AntiForgeryToken()
 
-    //todaysOrders    
+    //todaysOrders
     <h3 class="section-title">@Resources.Resources.OrdersOfToday</h3>
-    
+
     <table class="table">
         <tr style="background-color:grey;color:white" class="row header btn-dark">
 
@@ -89,12 +88,13 @@
 
     </table>
 
-    <br /><br />
+    <br />
+    <br />
 
     //UserStocks
 
     <h3 class="section-title">@Resources.Resources.StocksAndTheirPrices</h3>
-    
+
     <table class="table">
         <tr style="background-color:grey;color:white" class="row header btn-dark">
 
@@ -115,17 +115,17 @@
                 @if (System.Threading.Thread.CurrentThread.CurrentCulture.Name == "en")
                 {
                     <td class="cell">
-                        @item.Stock.CompanyEN
+                        @item.CompanyEN
                     </td>
                 }
                 else
                 {
                     <td class="cell">
-                        @item.Stock.CompanyAR
+                        @item.CompanyAR
                     </td>
                 }
                 <td class="cell">
-                    @item.Stock.Price
+                    @item.Price
                 </td>
 
             </tr>
@@ -136,13 +136,14 @@
 
 
     </table>
-    <br /><br />
+    <br />
+    <br />
     //pieChart
 
 
-    <!--Div that will hold the pie chart-->    
+    <!--Div that will hold the pie chart-->
     <h3 class="section-title">@Resources.Resources.TotalTransactionValue</h3>
-    
+
 
 
 
@@ -276,6 +277,3 @@
         chart.draw(data, options);
     }
 </script>
-
-
-

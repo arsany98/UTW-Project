@@ -1,4 +1,4 @@
-﻿@model UTW_Project.Models.User
+﻿@model DataAccessLayer.User
 
 @{
     ViewBag.Title = "Register";
@@ -87,7 +87,7 @@
                     <div class="wrap-input100 ">
                         @Html.LabelFor(model => model.Q_ID, new { htmlAttributes = new { @class = "label-input100" } })
                         @Html.ValidationMessageFor(model => model.Q_ID, "", new { @class = "text-danger" })
-                        @Html.DropDownListFor(model => model.Q_ID, (ViewBag.QuestionID as List<UTW_Project.Models.Question>).Select(item => new SelectListItem
+                        @Html.DropDownListFor(model => model.Q_ID, (ViewBag.QuestionID as List<DataAccessLayer.Question>).Select(item => new SelectListItem
                         {
                             Value = item.ID.ToString(),
                             Text = System.Threading.Thread.CurrentThread.CurrentCulture.Name == "en"? item.QuestionEN:item.QuestionAR,

@@ -283,7 +283,11 @@ namespace UTW_Project.Classes
 
             order.U_ID = UID;
             order.S_ID = SID;
+
+           
             order.Quantity = quantity;
+          
+
             order.Date = DateTime.Now.Date;
             order.StateEN = "Accepted";
             order.TypeEN = type;

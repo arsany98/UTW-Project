@@ -582,7 +582,7 @@ namespace UTW_Project.Controllers
             if (user.Admin) { return RedirectToAction("Monitor"); }
             if (!db.updateOrder(user, ID, Quantity)) { ViewBag.error = Resources.Resources.ActionNotAllowed; }
             else { return RedirectToAction("Order"); }
-            return PartialView();
+            return RedirectToAction("Order");
         }
 
         [Authorize]

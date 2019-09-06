@@ -4,7 +4,6 @@
 
 @using (Html.BeginForm("UpdateOrder", "Home"))
 {
-
     <div class="col-md-4 animate-box fadeInUp animated-fast" style="background-color:#41444B;padding:20px;margin-bottom:20px">
         @Html.HiddenFor(model => model.ID)
         <div>
@@ -22,8 +21,12 @@
             </button>
         </div>
         <div>
-            @ViewBag.error
+            @if (ViewBag.error != null)
+            {
+                <label style="font-size:15px;color:white;border-bottom:double;border-color:red">@ViewBag.error</label>
+            }
         </div>
+
     </div>
 }
 </div>

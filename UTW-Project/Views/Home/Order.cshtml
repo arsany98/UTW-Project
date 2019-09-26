@@ -28,8 +28,8 @@
     TType.Add("Sell");
 }
 
-<label>@user.Wallet.ToString("0.00")</label>
 <div class="container">
+<label>@Resources.Resources.YourWallet:@user.Wallet.ToString("0.00") @Resources.Resources.EGP</label>
 
 @using (Html.BeginForm("Order", "Home"))
 {

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="4ba9094e71c543b8a25ecb0aa3e386da" Name="Diagram1">
+        <EntityTypeShape EntityType="UTWProjectModel.Order" Width="1.5" PointX="5.25" PointY="3.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="UTWProjectModel.Question" Width="1.5" PointX="0.75" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="UTWProjectModel.Stock" Width="1.5" PointX="3" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="UTWProjectModel.URL" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="UTWProjectModel.User" Width="1.5" PointX="3" PointY="2.375" IsExpanded="true" />
+        <AssociationConnector Association="UTWProjectModel.FK_Order_Stock" ManuallyRouted="false" />
+        <AssociationConnector Association="UTWProjectModel.FK_Order_User" ManuallyRouted="false" />
+        <AssociationConnector Association="UTWProjectModel.FK_User_Question" ManuallyRouted="false" />
+        <AssociationConnector Association="UTWProjectModel.FK_User_URL" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -19,6 +19,14 @@ namespace UTW_Project.Controllers
         [AllowAnonymous]
         public ActionResult Login()
         {
+            var user = Session["User"] as User;
+            if (user != null)
+            {
+                if (user.Admin)
+                    return RedirectToAction("Users");
+                else
+                    return RedirectToAction("Dashboard");
+            }
             return View();
         }
 
@@ -27,6 +35,14 @@ namespace UTW_Project.Controllers
         [AllowAnonymous]
         public ActionResult Login(string username, string password)
         {
+            var userSession = Session["User"] as User;
+            if (userSession != null)
+            {
+                if (userSession.Admin)
+                    return RedirectToAction("Users");
+                else
+                    return RedirectToAction("Dashboard");
+            }
             if (username != "" && password != "")
             {
 
@@ -122,6 +138,14 @@ namespace UTW_Project.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
+            var user = Session["User"] as User;
+            if (user != null)
+            {
+                if (user.Admin)
+                    return RedirectToAction("Users");
+                else
+                    return RedirectToAction("Dashboard");
+            }
             ViewBag.QuestionID = db.GetQuestions();
             return View();
         }
@@ -131,7 +155,14 @@ namespace UTW_Project.Controllers
         [AllowAnonymous]
         public ActionResult Register(User user)
         {
-
+            var userSession = Session["User"] as User;
+            if (userSession != null)
+            {
+                if (userSession.Admin)
+                    return RedirectToAction("Users");
+                else
+                    return RedirectToAction("Dashboard");
+            }
             ViewBag.QuestionID = db.GetQuestions();
             if (ModelState.IsValid)
             {
@@ -451,7 +482,7 @@ namespace UTW_Project.Controllers
         {
             if ((Session["User"] as User).Admin == false)
             {
-               return Logout();
+               return RedirectToAction("Dashboard");
             }
             var users = db.GetUsersList();
             return View(users);
@@ -463,7 +494,7 @@ namespace UTW_Project.Controllers
 
             if ((Session["User"] as User).Admin==false)
             {
-                return Logout();
+                return RedirectToAction("Dashboard");
             }
 
             List<User> users = new List<User>();

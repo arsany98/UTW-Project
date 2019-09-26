@@ -6,152 +6,152 @@
 
 }
 
+<div class="container">
 
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
 
-    //todaysOrders
-    <h3 class="section-title">@Resources.Resources.OrdersOfToday</h3>
+        //todaysOrders
+        <h3 class="section-title">@Resources.Resources.OrdersOfToday</h3>
 
-    <table class="table">
-        <tr style="background-color:grey;color:white" class="row header btn-dark">
+        <table class="table">
+            <tr style="background-color:grey;color:white" class="row header btn-dark">
 
-            <th class="cell">
-                @Html.DisplayName(@Resources.Resources.Stock)
-            </th>
-            <th class="cell">
-                @Html.DisplayName(@Resources.Resources.Quantity)
-            </th>
-            <th class="cell">
-                @Html.DisplayName(@Resources.Resources.Date)
-            </th>
-            <th class="cell">
-                @Html.DisplayName(@Resources.Resources.State)
-            </th>
-            <th class="cell">
-                @Html.DisplayName(@Resources.Resources.TransactionType)
-            </th>
-
-        </tr>
-
-        @foreach (var item in ViewBag.TodaysOrders)
-        {
-            <tr class="row">
-
-                @if (System.Threading.Thread.CurrentThread.CurrentCulture.Name == "en")
-                {
-                    <td class="cell">
-                        @item.Stock.CompanyEN
-                    </td>
-                }
-                else
-                {
-                    <td class="cell">
-                        @item.Stock.CompanyAR
-                    </td>
-                }
-                <td class="cell">
-                    @item.Quantity
-                </td>
-                <td class="cell">
-                    @item.Date.Day/@item.Date.Month/@item.Date.Year
-                </td>
-                @if (System.Threading.Thread.CurrentThread.CurrentCulture.Name == "en")
-                {
-                    <td class="cell">
-                        @item.StateEN
-                    </td>
-                }
-                else
-                {
-                    <td class="cell">
-                        @item.StateAR
-                    </td>
-                }
-                @if (System.Threading.Thread.CurrentThread.CurrentCulture.Name == "en")
-                {
-                    <td class="cell">
-                        @item.TypeEN
-                    </td>
-                }
-                else
-                {
-                    <td class="cell">
-                        @item.TypeAR
-                    </td>
-                }
-
+                <th class="cell">
+                    @Html.DisplayName(@Resources.Resources.Stock)
+                </th>
+                <th class="cell">
+                    @Html.DisplayName(@Resources.Resources.Quantity)
+                </th>
+                <th class="cell">
+                    @Html.DisplayName(@Resources.Resources.Date)
+                </th>
+                <th class="cell">
+                    @Html.DisplayName(@Resources.Resources.State)
+                </th>
+                <th class="cell">
+                    @Html.DisplayName(@Resources.Resources.TransactionType)
+                </th>
 
             </tr>
-        }
 
-    </table>
+            @foreach (var item in ViewBag.TodaysOrders)
+            {
+                <tr class="row">
 
-    <br />
-    <br />
-
-    //UserStocks
-
-    <h3 class="section-title">@Resources.Resources.StocksAndTheirPrices</h3>
-
-    <table class="table">
-        <tr style="background-color:grey;color:white" class="row header btn-dark">
-
-            <th class="cell">
-                @Html.DisplayName(Resources.Resources.Stock)
-            </th>
-            <th class="cell">
-                @Html.DisplayName(Resources.Resources.Price)
-            </th>
-
-        </tr>
-
-        @foreach (var item in ViewBag.StockOrders)
-        {
-
-            <tr class="row">
-
-                @if (System.Threading.Thread.CurrentThread.CurrentCulture.Name == "en")
-                {
+                    @if (System.Threading.Thread.CurrentThread.CurrentCulture.Name == "en")
+                    {
+                        <td class="cell">
+                            @item.Stock.CompanyEN
+                        </td>
+                    }
+                    else
+                    {
+                        <td class="cell">
+                            @item.Stock.CompanyAR
+                        </td>
+                    }
                     <td class="cell">
-                        @item.CompanyEN
+                        @item.Quantity
                     </td>
-                }
-                else
-                {
                     <td class="cell">
-                        @item.CompanyAR
+                        @item.Date.Day/@item.Date.Month/@item.Date.Year
                     </td>
-                }
-                <td class="cell">
-                    @item.Price
-                </td>
+                    @if (System.Threading.Thread.CurrentThread.CurrentCulture.Name == "en")
+                    {
+                        <td class="cell">
+                            @item.StateEN
+                        </td>
+                    }
+                    else
+                    {
+                        <td class="cell">
+                            @item.StateAR
+                        </td>
+                    }
+                    @if (System.Threading.Thread.CurrentThread.CurrentCulture.Name == "en")
+                    {
+                        <td class="cell">
+                            @item.TypeEN
+                        </td>
+                    }
+                    else
+                    {
+                        <td class="cell">
+                            @item.TypeAR
+                        </td>
+                    }
+
+
+                </tr>
+            }
+
+        </table>
+
+        <br />
+        <br />
+
+        //UserStocks
+
+        <h3 class="section-title">@Resources.Resources.StocksAndTheirPrices</h3>
+
+        <table class="table">
+            <tr style="background-color:grey;color:white" class="row header btn-dark">
+
+                <th class="cell">
+                    @Html.DisplayName(Resources.Resources.Stock)
+                </th>
+                <th class="cell">
+                    @Html.DisplayName(Resources.Resources.Price)
+                </th>
 
             </tr>
-        }
+
+            @foreach (var item in ViewBag.StockOrders)
+            {
+
+                <tr class="row">
+
+                    @if (System.Threading.Thread.CurrentThread.CurrentCulture.Name == "en")
+                    {
+                        <td class="cell">
+                            @item.CompanyEN
+                        </td>
+                    }
+                    else
+                    {
+                        <td class="cell">
+                            @item.CompanyAR
+                        </td>
+                    }
+                    <td class="cell">
+                        @item.Price
+                    </td>
+
+                </tr>
+            }
 
 
 
 
 
-    </table>
-    <br />
-    <br />
-    //pieChart
+        </table>
+        <br />
+        <br />
+        //pieChart
 
 
-    <!--Div that will hold the pie chart-->
-    <h3 class="section-title">@Resources.Resources.TotalTransactionValue</h3>
-
-
-
+        <!--Div that will hold the pie chart-->
+        <h3 class="section-title">@Resources.Resources.TotalTransactionValue</h3>
 
 
 
-}
 
 
+
+    }
+</div>
 
 
 <div style="width:1230px;height:1200px" id="piechart"></div>
